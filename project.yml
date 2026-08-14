@@ -1,0 +1,127 @@
+name: YPadel
+options:
+  minimumXcodeGenVersion: 2.41.0
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+packages:
+  AppMetrica:
+    url: https://github.com/appmetrica/appmetrica-sdk-ios
+    from: 6.5.0
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 1.0
+    OTHER_LDFLAGS: "$(inherited) -ObjC"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SUPPORTED_PLATFORMS: "iphoneos iphonesimulator"
+    TARGETED_DEVICE_FAMILY: "1"
+    SUPPORTS_MACCATALYST: NO
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD: NO
+configs:
+  Debug: debug
+  Release: release
+targets:
+  YPadel:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - App
+      - Shared
+    entitlements:
+      path: App/YPadel.entitlements
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(APP_BUNDLE_IDENTIFIER)"
+        PRODUCT_NAME: YPadel
+        INFOPLIST_FILE: App/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1"
+    dependencies:
+      - package: AppMetrica
+        product: AppMetricaCore
+      - package: AppMetrica
+        product: AppMetricaAdSupport
+      - target: YPadelWidget
+        embed: true
+      - target: YPadelNotificationService
+        embed: true
+      - target: YPadelNotificationContent
+        embed: true
+  YPadelWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - Widget
+      - Shared
+    entitlements:
+      path: Widget/YPadelWidget.entitlements
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(WIDGET_BUNDLE_IDENTIFIER)"
+        PRODUCT_NAME: YPadelWidget
+        INFOPLIST_FILE: Widget/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+        TARGETED_DEVICE_FAMILY: "1"
+  YPadelNotificationService:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - NotificationService
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER)"
+        PRODUCT_NAME: YPadelNotificationService
+        INFOPLIST_FILE: NotificationService/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+        TARGETED_DEVICE_FAMILY: "1"
+  YPadelNotificationContent:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - NotificationContent
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: "$(NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER)"
+        PRODUCT_NAME: YPadelNotificationContent
+        INFOPLIST_FILE: NotificationContent/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  YPadel:
+    build:
+      targets:
+        YPadel: all
+        YPadelWidget: all
+        YPadelNotificationService: all
+        YPadelNotificationContent: all
+    run:
+      config: Debug
+    archive:
+      config: Release

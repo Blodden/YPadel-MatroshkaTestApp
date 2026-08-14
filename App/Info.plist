@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>ru</string>
+    <key>CFBundleDisplayName</key>
+    <string>$(APP_DISPLAY_NAME)</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UILaunchScreen</key>
+    <dict/>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+    </dict>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsLocalNetworking</key>
+        <true/>
+    </dict>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>Для подключения к устройствам поблизости</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Для съёмки фото, видео и сканирования</string>
+    <key>NSContactsUsageDescription</key>
+    <string>Чтобы находить знакомых и делиться с ними</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Для быстрого и безопасного входа</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Для работы функций, использующих ваше местоположение</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Для записи звука и использования голосовых функций</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Чтобы выбирать фото и видео с устройства</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Чтобы сохранять фото и видео на устройстве</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Чтобы показывать более подходящие предложения и оценивать рекламу</string>
+    <key>AppMetricaAPIKey</key>
+    <string>$(APPMETRICA_API_KEY)</string>
+    <key>APIBaseURL</key>
+    <string>$(API_BASE_URL)</string>
+    <key>AppGroupIdentifier</key>
+    <string>$(APP_GROUP_IDENTIFIER)</string>
+</dict>
+</plist>
