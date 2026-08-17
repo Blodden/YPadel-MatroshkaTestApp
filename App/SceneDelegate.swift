@@ -9,19 +9,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-
-        let configuration = AppConfiguration(bundle: .main)
-        let analytics = AnalyticsReporter(apiKey: configuration.appMetricaAPIKey)
-        let sessionConfiguration = URLSessionConfiguration.ephemeral
-        sessionConfiguration.timeoutIntervalForRequest = 5
-        let apiClient = APIClient(
-            baseURL: configuration.apiBaseURL,
-            session: URLSession(configuration: sessionConfiguration)
-        )
+        guard
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+            let services = appDelegate.services
+        else { return }
         let mainViewController = MainViewController(
-            configuration: configuration,
-            apiClient: apiClient,
-            analytics: analytics
+            configuration: services.configuration,
+            apiClient: services.apiClient,
+            analytics: services.analytics,
+            installationId: services.installationId
         )
         let navigationController = UINavigationController(rootViewController: mainViewController)
 
@@ -29,5 +25,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard URLContexts.contains(where: { $0.url.scheme == "ypoints" }) else { return }
+        let navigationController = window?.rootViewController as? UINavigationController
+        let mainViewController = navigationController?.viewControllers.first as? MainViewController
+        mainViewController?.showMatchFromDeepLink()
     }
 }

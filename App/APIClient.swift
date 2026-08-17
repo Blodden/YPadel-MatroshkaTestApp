@@ -1,37 +1,103 @@
 import Foundation
 
+struct PushRegistration: Codable {
+    let token: String?
+    let environment: String
+    let enabled: Bool
+}
+
 struct SyncRequest: Encodable {
     let installationId: String
-    let deviceToken: String?
-    let match: MatchSnapshot
+    let matchToken: String?
+    let clientRevision: Int
+    let snapshot: MatchSnapshot
+    let push: PushRegistration
+}
+
+struct SyncResponse: Decodable {
+    let status: String
+    let matchToken: String
+    let serverRevision: Int
+    let snapshot: MatchSnapshot
+    let pushStatus: String
+    let serverTime: String
+}
+
+enum APIClientError: LocalizedError {
+    case invalidResponse
+    case serverStatus(Int)
+    case encoding
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidResponse:
+            return "Сервер вернул неизвестный ответ"
+        case let .serverStatus(status):
+            return "Сервер вернул код \(status)"
+        case .encoding:
+            return "Не удалось подготовить данные"
+        }
+    }
 }
 
 final class APIClient {
     private let baseURL: URL
     private let session: URLSession
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
 
     init(baseURL: URL, session: URLSession) {
         self.baseURL = baseURL
         self.session = session
+
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        self.encoder = encoder
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        self.decoder = decoder
     }
 
-    func checkHealth(completion: @escaping (Bool) -> Void) {
+    func checkHealth(completion: @escaping (Result<Void, Error>) -> Void) {
         let request = URLRequest(url: baseURL.appendingPathComponent("health"))
-        session.dataTask(with: request) { _, response, _ in
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            DispatchQueue.main.async { completion(statusCode == 200) }
+        session.dataTask(with: request) { _, response, error in
+            let result: Result<Void, Error>
+            if let error {
+                result = .failure(error)
+            } else if (response as? HTTPURLResponse)?.statusCode == 200 {
+                result = .success(())
+            } else {
+                result = .failure(APIClientError.invalidResponse)
+            }
+            DispatchQueue.main.async { completion(result) }
         }.resume()
     }
 
-    func sync(_ payload: SyncRequest, completion: @escaping (Bool) -> Void) {
+    func sync(_ payload: SyncRequest, completion: @escaping (Result<SyncResponse, Error>) -> Void) {
         var request = URLRequest(url: baseURL.appendingPathComponent("sync"))
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(payload)
 
-        session.dataTask(with: request) { _, response, _ in
-            let statusCode = (response as? HTTPURLResponse)?.statusCode
-            DispatchQueue.main.async { completion(statusCode == 200) }
+        do {
+            request.httpBody = try encoder.encode(payload)
+        } catch {
+            completion(.failure(APIClientError.encoding))
+            return
+        }
+
+        session.dataTask(with: request) { [decoder] data, response, error in
+            let result: Result<SyncResponse, Error>
+            if let error {
+                result = .failure(error)
+            } else if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                result = .failure(APIClientError.serverStatus(response.statusCode))
+            } else if let data, let decoded = try? decoder.decode(SyncResponse.self, from: data) {
+                result = .success(decoded)
+            } else {
+                result = .failure(APIClientError.invalidResponse)
+            }
+            DispatchQueue.main.async { completion(result) }
         }.resume()
     }
 }

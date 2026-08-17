@@ -18,15 +18,26 @@ final class NotificationService: UNNotificationServiceExtension {
         }
 
         if let score = request.content.userInfo["score"] as? String {
-            mutableContent.title = "YPadel • счет \(score)"
+            mutableContent.title = "YPoints"
+            let games = request.content.userInfo["games"] as? String ?? "0 : 0"
+            let sets = request.content.userInfo["sets"] as? String ?? "0 : 0"
+            mutableContent.subtitle = "Очки \(score) • Геймы \(games) • Сеты \(sets)"
         }
-        mutableContent.body = "\(mutableContent.body) Откройте карточку матча."
-        mutableContent.categoryIdentifier = "YPADEL_MATCH"
-        contentHandler(mutableContent)
+        if mutableContent.body.isEmpty {
+            mutableContent.body = "Состояние матча обновилось."
+        }
+        mutableContent.categoryIdentifier = "YPOINTS_MATCH"
+        finish(with: mutableContent)
     }
 
     override func serviceExtensionTimeWillExpire() {
-        guard let contentHandler, let bestAttemptContent else { return }
-        contentHandler(bestAttemptContent)
+        guard let bestAttemptContent else { return }
+        finish(with: bestAttemptContent)
+    }
+
+    private func finish(with content: UNNotificationContent) {
+        guard let contentHandler else { return }
+        self.contentHandler = nil
+        contentHandler(content)
     }
 }

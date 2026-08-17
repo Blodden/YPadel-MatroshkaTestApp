@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>ru</string>
     <key>CFBundleDisplayName</key>
-    <string>YPadel Notification Content</string>
+    <string>YPoints Уведомление</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
         <key>NSExtensionAttributes</key>
         <dict>
             <key>UNNotificationExtensionCategory</key>
-            <string>YPADEL_MATCH</string>
+            <string>YPOINTS_MATCH</string>
             <key>UNNotificationExtensionDefaultContentHidden</key>
             <false/>
             <key>UNNotificationExtensionInitialContentSizeRatio</key>

@@ -1,7 +1,9 @@
-APP_DISPLAY_NAME = YPadel: Счет и статистика
-APP_BUNDLE_IDENTIFIER = com.example.ypadel
-WIDGET_BUNDLE_IDENTIFIER = com.example.ypadel.widget
-NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER = com.example.ypadel.notification-service
-NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER = com.example.ypadel.notification-content
-APP_GROUP_IDENTIFIER = group.com.example.ypadel
+APP_DISPLAY_NAME = YPoints
+APP_BUNDLE_IDENTIFIER = com.example.ypoints
+WIDGET_BUNDLE_IDENTIFIER = com.example.ypoints.widget
+NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER = com.example.ypoints.notification-service
+NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER = com.example.ypoints.notification-content
+APP_GROUP_IDENTIFIER = group.com.example.ypoints
 APPMETRICA_API_KEY =
+PRIVACY_POLICY_URL =
+SUPPORT_URL =

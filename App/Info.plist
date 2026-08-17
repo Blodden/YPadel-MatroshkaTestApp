@@ -20,6 +20,17 @@
     <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>ypoints</string>
+            </array>
+        </dict>
+    </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UILaunchScreen</key>
@@ -39,28 +50,34 @@
         <true/>
     </dict>
     <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>Для подключения к устройствам поблизости</string>
+    <string>Bluetooth нужен, чтобы подключить находящийся рядом iPhone с YPoints и синхронизировать счёт матча.</string>
     <key>NSCameraUsageDescription</key>
-    <string>Для съёмки фото, видео и сканирования</string>
+    <string>Камера нужна, чтобы сделать фотографию матча и добавить её к карточке результата.</string>
     <key>NSContactsUsageDescription</key>
-    <string>Чтобы находить знакомых и делиться с ними</string>
+    <string>Контакты нужны, чтобы быстро добавить игроков в состав матча.</string>
     <key>NSFaceIDUsageDescription</key>
-    <string>Для быстрого и безопасного входа</string>
+    <string>Face ID нужен, чтобы открыть личную статистику и заметки о матчах.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Для работы функций, использующих ваше местоположение</string>
+    <string>Геолокация нужна, чтобы показать ближайшие падел-корты на карте.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Для записи звука и использования голосовых функций</string>
+    <string>Микрофон нужен, чтобы записать голосовую заметку к результату матча.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Чтобы выбирать фото и видео с устройства</string>
+    <string>Доступ к Фото нужен, чтобы показать снимки за день матча и выбрать изображение для карточки результата.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Чтобы сохранять фото и видео на устройстве</string>
+    <string>Доступ нужен, чтобы сохранять карточки счёта матчей в Фото.</string>
     <key>NSUserTrackingUsageDescription</key>
-    <string>Чтобы показывать более подходящие предложения и оценивать рекламу</string>
+    <string>Идентификатор устройства используется, чтобы определить источник установки и оценить эффективность продвижения YPoints.</string>
     <key>AppMetricaAPIKey</key>
     <string>$(APPMETRICA_API_KEY)</string>
     <key>APIBaseURL</key>
     <string>$(API_BASE_URL)</string>
     <key>AppGroupIdentifier</key>
     <string>$(APP_GROUP_IDENTIFIER)</string>
+    <key>PushEnvironment</key>
+    <string>$(PUSH_ENVIRONMENT)</string>
+    <key>PrivacyPolicyURL</key>
+    <string>$(PRIVACY_POLICY_URL)</string>
+    <key>SupportURL</key>
+    <string>$(SUPPORT_URL)</string>
 </dict>
 </plist>

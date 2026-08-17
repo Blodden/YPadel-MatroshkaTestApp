@@ -1,2 +1,4 @@
 #include "Shared.xcconfig"
 API_BASE_URL = https:/$()/example.invalid
+APNS_ENVIRONMENT = production
+PUSH_ENVIRONMENT = production

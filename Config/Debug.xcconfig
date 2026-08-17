@@ -1,3 +1,5 @@
 #include "Shared.xcconfig"
 API_BASE_URL = http:/$()/localhost:8080
+APNS_ENVIRONMENT = development
+PUSH_ENVIRONMENT = sandbox
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEBUG

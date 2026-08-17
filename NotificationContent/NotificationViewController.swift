@@ -11,37 +11,79 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.03, green: 0.25, blue: 0.17, alpha: 1)
 
-        titleLabel.text = "YPadel"
+        titleLabel.text = "YPoints"
         titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.font = .preferredFont(forTextStyle: .headline)
+        titleLabel.adjustsFontForContentSizeCategory = true
 
         scoreLabel.text = "0 : 0"
         scoreLabel.textColor = UIColor(red: 0.68, green: 0.93, blue: 0.22, alpha: 1)
-        scoreLabel.font = .monospacedDigitSystemFont(ofSize: 42, weight: .black)
+        scoreLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(
+            for: .monospacedDigitSystemFont(ofSize: 42, weight: .black)
+        )
+        scoreLabel.adjustsFontForContentSizeCategory = true
+        scoreLabel.accessibilityLabel = "Счет матча"
 
-        detailLabel.text = "Текущий матч"
-        detailLabel.textColor = UIColor.white.withAlphaComponent(0.78)
-        detailLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        detailLabel.text = "Состояние матча обновилось"
+        detailLabel.textColor = UIColor.white.withAlphaComponent(0.82)
+        detailLabel.font = .preferredFont(forTextStyle: .footnote)
+        detailLabel.adjustsFontForContentSizeCategory = true
+        detailLabel.numberOfLines = 2
+        detailLabel.textAlignment = .center
 
-        let stack = UIStackView(arrangedSubviews: [titleLabel, scoreLabel, detailLabel])
+        let openButton = makeButton(title: "Открыть", action: #selector(openMatch))
+        let hideButton = makeButton(title: "Скрыть", action: #selector(hideNotification))
+        let actions = UIStackView(arrangedSubviews: [openButton, hideButton])
+        actions.axis = .horizontal
+        actions.distribution = .fillEqually
+        actions.spacing = 8
+
+        let stack = UIStackView(arrangedSubviews: [titleLabel, scoreLabel, detailLabel, actions])
         stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 4
+        stack.alignment = .fill
+        stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
 
         NSLayoutConstraint.activate([
-            stack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stack.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: 12),
             stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stack.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20)
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stack.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -12),
+            openButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
+            hideButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
         ])
     }
 
     func didReceive(_ notification: UNNotification) {
         let content = notification.request.content
-        titleLabel.text = content.title.isEmpty ? "YPadel" : content.title
+        titleLabel.text = content.title.isEmpty ? "YPoints" : content.title
         detailLabel.text = content.body
-        scoreLabel.text = content.userInfo["score"] as? String ?? "0 : 0"
+        let rawScore = content.userInfo["score"] as? String ?? "0:0"
+        let games = content.userInfo["games"] as? String ?? "0 : 0"
+        let sets = content.userInfo["sets"] as? String ?? "0 : 0"
+        scoreLabel.text = rawScore.replacingOccurrences(of: ":", with: " : ")
+        scoreLabel.accessibilityValue = rawScore.replacingOccurrences(of: ":", with: " — ")
+        detailLabel.text = "\(content.body)\nГеймы \(games) • Сеты \(sets)"
+    }
+
+    private func makeButton(title: String, action: Selector) -> UIButton {
+        var configuration = UIButton.Configuration.gray()
+        configuration.title = title
+        configuration.cornerStyle = .medium
+        configuration.baseForegroundColor = .white
+        configuration.background.backgroundColor = UIColor.white.withAlphaComponent(0.18)
+        let button = UIButton(configuration: configuration)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        return button
+    }
+
+    @objc private func openMatch() {
+        extensionContext?.performNotificationDefaultAction()
+    }
+
+    @objc private func hideNotification() {
+        extensionContext?.dismissNotificationContentExtension()
     }
 }

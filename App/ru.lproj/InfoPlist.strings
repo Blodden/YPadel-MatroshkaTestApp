@@ -1,0 +1,9 @@
+"NSBluetoothAlwaysUsageDescription" = "Bluetooth нужен, чтобы подключить находящийся рядом iPhone с YPoints и синхронизировать счёт матча.";
+"NSCameraUsageDescription" = "Камера нужна, чтобы сделать фотографию матча и добавить её к карточке результата.";
+"NSContactsUsageDescription" = "Контакты нужны, чтобы быстро добавить игроков в состав матча.";
+"NSFaceIDUsageDescription" = "Face ID нужен, чтобы открыть личную статистику и заметки о матчах.";
+"NSLocationWhenInUseUsageDescription" = "Геолокация нужна, чтобы показать ближайшие падел-корты на карте.";
+"NSMicrophoneUsageDescription" = "Микрофон нужен, чтобы записать голосовую заметку к результату матча.";
+"NSPhotoLibraryUsageDescription" = "Доступ к Фото нужен, чтобы показать снимки за день матча и выбрать изображение для карточки результата.";
+"NSPhotoLibraryAddUsageDescription" = "Доступ нужен, чтобы сохранять карточки счёта матчей в Фото.";
+"NSUserTrackingUsageDescription" = "Идентификатор устройства используется, чтобы определить источник установки и оценить эффективность продвижения YPoints.";

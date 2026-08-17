@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "30DB3A9B8FC056341175F252"
-               BuildableName = "YPadel.app"
-               BlueprintName = "YPadel"
-               ReferencedContainer = "container:YPadel.xcodeproj">
+               BlueprintIdentifier = "6338F3DBC68C9AAB3BA1DEEA"
+               BuildableName = "YPoints.app"
+               BlueprintName = "YPoints"
+               ReferencedContainer = "container:YPoints.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A00A73A225447B7602D8587C"
-               BuildableName = "YPadelNotificationContent.appex"
-               BlueprintName = "YPadelNotificationContent"
-               ReferencedContainer = "container:YPadel.xcodeproj">
+               BlueprintIdentifier = "0BFDB9738F9D2957FBA3EB78"
+               BuildableName = "YPointsNotificationContent.appex"
+               BlueprintName = "YPointsNotificationContent"
+               ReferencedContainer = "container:YPoints.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,10 +43,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0304FA14371D71786091BC82"
-               BuildableName = "YPadelNotificationService.appex"
-               BlueprintName = "YPadelNotificationService"
-               ReferencedContainer = "container:YPadel.xcodeproj">
+               BlueprintIdentifier = "B36049A68747FB97D31CDAE7"
+               BuildableName = "YPointsNotificationService.appex"
+               BlueprintName = "YPointsNotificationService"
+               ReferencedContainer = "container:YPoints.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -57,10 +57,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F7F32DD5FCEBB565E3ED2082"
-               BuildableName = "YPadelWidget.appex"
-               BlueprintName = "YPadelWidget"
-               ReferencedContainer = "container:YPadel.xcodeproj">
+               BlueprintIdentifier = "FF9CE66DC5B24065C031C169"
+               BuildableName = "YPointsWidget.appex"
+               BlueprintName = "YPointsWidget"
+               ReferencedContainer = "container:YPoints.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -74,10 +74,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "30DB3A9B8FC056341175F252"
-            BuildableName = "YPadel.app"
-            BlueprintName = "YPadel"
-            ReferencedContainer = "container:YPadel.xcodeproj">
+            BlueprintIdentifier = "6338F3DBC68C9AAB3BA1DEEA"
+            BuildableName = "YPoints.app"
+            BlueprintName = "YPoints"
+            ReferencedContainer = "container:YPoints.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -97,10 +97,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "30DB3A9B8FC056341175F252"
-            BuildableName = "YPadel.app"
-            BlueprintName = "YPadel"
-            ReferencedContainer = "container:YPadel.xcodeproj">
+            BlueprintIdentifier = "6338F3DBC68C9AAB3BA1DEEA"
+            BuildableName = "YPoints.app"
+            BlueprintName = "YPoints"
+            ReferencedContainer = "container:YPoints.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -116,10 +116,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "30DB3A9B8FC056341175F252"
-            BuildableName = "YPadel.app"
-            BlueprintName = "YPadel"
-            ReferencedContainer = "container:YPadel.xcodeproj">
+            BlueprintIdentifier = "6338F3DBC68C9AAB3BA1DEEA"
+            BuildableName = "YPoints.app"
+            BlueprintName = "YPoints"
+            ReferencedContainer = "container:YPoints.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

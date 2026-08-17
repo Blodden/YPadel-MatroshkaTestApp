@@ -1,0 +1,811 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1EE3C0843A72B6F1045091A7 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D25AB16972079B9F21DBB0 /* AppConfiguration.swift */; };
+		231291D4C6F938C99C0B9B03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 008100CEA788089E59A7F096 /* InfoPlist.strings */; };
+		28A67C81EA4CD3627B7B06F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0583A085B9D35FEA3370D /* AppDelegate.swift */; };
+		3AE096C99760463E27DF029B /* YPointsNotificationContent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3F66007E4DD13204AC29D5EE /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063F2A96AE6D7A9FB9BDF9B /* APIClient.swift */; };
+		5A950C16ACAE706BC9864003 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3509D62F07D5731DC0887 /* AnalyticsReporter.swift */; };
+		7E4EACEC24DBE5D8F99EC025 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */; };
+		7FCE53D8C0D3371DCF38C1A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F67F2B4DF436654892B7372 /* SceneDelegate.swift */; };
+		7FF87C0AD9DA63668DCA92C7 /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB5317BB942C2EF7D36E5A4 /* BluetoothConnector.swift */; };
+		83BBE01FE0F83B320DD84FB6 /* YPointsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CE5840ED86C95CBA4AD88 /* YPointsWidget.swift */; };
+		87B588EC66BC8E993B0D11C1 /* YPointsNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9188B26EDD19F8C1F66ACED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F557673CCFB1F73E0CF47C52 /* Assets.xcassets */; };
+		9ACB5ED56E508297195EC83E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */; };
+		A911A9F2DC9C8DB10BA3763F /* AppMetricaAdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 636F4F181CBC0BAAC4B54B46 /* AppMetricaAdSupport */; };
+		ACEB1EDBD47113FE3955A1EA /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = B509086C3A4369C07B7DB8C9 /* AppMetricaCore */; };
+		AF239DCAC3FFC184BD25BA83 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAE9139D8D3536542C7508 /* NotificationService.swift */; };
+		AFE2119C7AF781905C74EDED /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */; };
+		B2E915C2DDA48F39EF004022 /* WidgetReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CA799B6686B4F51F4E2D5 /* WidgetReloader.swift */; };
+		C1F821489CD783E410A64AA6 /* YPointsWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1403FB8DFB919513559AEE50 /* YPointsWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DB826211DB422816C16BEA42 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972DE12F300E29BDDA1F3FC /* MainViewController.swift */; };
+		F0FDD20C79992F96F2D09D1B /* MatchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */; };
+		F86C87FB3A483FD1AA01B8FB /* MatchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0226D501F1C09679DD51EAC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5232CEE1AC1A89EC10BCCDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BFDB9738F9D2957FBA3EB78;
+			remoteInfo = YPointsNotificationContent;
+		};
+		FE897AA0DB7C8B0D7DDD6AE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5232CEE1AC1A89EC10BCCDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF9CE66DC5B24065C031C169;
+			remoteInfo = YPointsWidget;
+		};
+		FF00DE32370AFCE12E4D999A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5232CEE1AC1A89EC10BCCDC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B36049A68747FB97D31CDAE7;
+			remoteInfo = YPointsNotificationService;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E05E82224A6874FF8C6AE371 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C1F821489CD783E410A64AA6 /* YPointsWidget.appex in Embed Foundation Extensions */,
+				87B588EC66BC8E993B0D11C1 /* YPointsNotificationService.appex in Embed Foundation Extensions */,
+				3AE096C99760463E27DF029B /* YPointsNotificationContent.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		008100CEA788089E59A7F096 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1403FB8DFB919513559AEE50 /* YPointsWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		443CE5840ED86C95CBA4AD88 /* YPointsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPointsWidget.swift; sourceTree = "<group>"; };
+		47FCC7A173B719F9104F555A /* YPointsWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPointsWidget.entitlements; sourceTree = "<group>"; };
+		4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		55B3509D62F07D5731DC0887 /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
+		604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsNotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6972DE12F300E29BDDA1F3FC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		6A2A47675E90090AD79BF46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6F67F2B4DF436654892B7372 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7063F2A96AE6D7A9FB9BDF9B /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		81254861F5F70F50B44D0396 /* YPoints.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPoints.entitlements; sourceTree = "<group>"; };
+		81EFBDF4551E078E557847EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8204E4CBC6AE1CE73C0B41F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		82CAE9139D8D3536542C7508 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSnapshot.swift; sourceTree = "<group>"; };
+		88A0583A085B9D35FEA3370D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		900CA799B6686B4F51F4E2D5 /* WidgetReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetReloader.swift; sourceTree = "<group>"; };
+		98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		9EB5317BB942C2EF7D36E5A4 /* BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnector.swift; sourceTree = "<group>"; };
+		A3C5D6C7D013A2C509F9B61E /* YPoints.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YPoints.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		D4A16CE60C8D6AB700A3AFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		F557673CCFB1F73E0CF47C52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8D25AB16972079B9F21DBB0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3BB8823253C0A485764B432D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACEB1EDBD47113FE3955A1EA /* AppMetricaCore in Frameworks */,
+				A911A9F2DC9C8DB10BA3763F /* AppMetricaAdSupport in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		411040E708090B306265F894 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				D4A16CE60C8D6AB700A3AFA5 /* Info.plist */,
+				BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */,
+				47FCC7A173B719F9104F555A /* YPointsWidget.entitlements */,
+				443CE5840ED86C95CBA4AD88 /* YPointsWidget.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		428D3B658B2AB994BFD77751 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		63902CA375C1C1739B82E314 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3C5D6C7D013A2C509F9B61E /* YPoints.app */,
+				604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */,
+				058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */,
+				1403FB8DFB919513559AEE50 /* YPointsWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64529C088BB34A9C1809EBC5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				55B3509D62F07D5731DC0887 /* AnalyticsReporter.swift */,
+				7063F2A96AE6D7A9FB9BDF9B /* APIClient.swift */,
+				F8D25AB16972079B9F21DBB0 /* AppConfiguration.swift */,
+				88A0583A085B9D35FEA3370D /* AppDelegate.swift */,
+				F557673CCFB1F73E0CF47C52 /* Assets.xcassets */,
+				9EB5317BB942C2EF7D36E5A4 /* BluetoothConnector.swift */,
+				6A2A47675E90090AD79BF46B /* Info.plist */,
+				008100CEA788089E59A7F096 /* InfoPlist.strings */,
+				6972DE12F300E29BDDA1F3FC /* MainViewController.swift */,
+				DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */,
+				6F67F2B4DF436654892B7372 /* SceneDelegate.swift */,
+				900CA799B6686B4F51F4E2D5 /* WidgetReloader.swift */,
+				81254861F5F70F50B44D0396 /* YPoints.entitlements */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		ACD0817413C1402127671C85 = {
+			isa = PBXGroup;
+			children = (
+				64529C088BB34A9C1809EBC5 /* App */,
+				D4559DAA32270A391B1C8FC5 /* Config */,
+				F1BB43CA1C99272FAC438505 /* NotificationContent */,
+				CF4B0C6C817C681B7DA46DAC /* NotificationService */,
+				428D3B658B2AB994BFD77751 /* Shared */,
+				411040E708090B306265F894 /* Widget */,
+				63902CA375C1C1739B82E314 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF4B0C6C817C681B7DA46DAC /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				8204E4CBC6AE1CE73C0B41F1 /* Info.plist */,
+				82CAE9139D8D3536542C7508 /* NotificationService.swift */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		D4559DAA32270A391B1C8FC5 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */,
+				4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		F1BB43CA1C99272FAC438505 /* NotificationContent */ = {
+			isa = PBXGroup;
+			children = (
+				81EFBDF4551E078E557847EB /* Info.plist */,
+				2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */,
+			);
+			path = NotificationContent;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0BFDB9738F9D2957FBA3EB78 /* YPointsNotificationContent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B7BD9C0BDDF31BFAEC81B5A /* Build configuration list for PBXNativeTarget "YPointsNotificationContent" */;
+			buildPhases = (
+				A7F6A00FC9D06E71ED4CF2CC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YPointsNotificationContent;
+			productName = YPointsNotificationContent;
+			productReference = 604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		6338F3DBC68C9AAB3BA1DEEA /* YPoints */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 736917D32CC89A76336BE629 /* Build configuration list for PBXNativeTarget "YPoints" */;
+			buildPhases = (
+				7378BFE07B3FE18BC22BE0FB /* Sources */,
+				69F84CB4D7AB80A43BE7CC82 /* Resources */,
+				3BB8823253C0A485764B432D /* Frameworks */,
+				E05E82224A6874FF8C6AE371 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B913BBAE2273087C2A618783 /* PBXTargetDependency */,
+				B7E62D67ECC033AA0BB52F5D /* PBXTargetDependency */,
+				AA2C6A5E5E21E03FE46ABCA8 /* PBXTargetDependency */,
+			);
+			name = YPoints;
+			packageProductDependencies = (
+				B509086C3A4369C07B7DB8C9 /* AppMetricaCore */,
+				636F4F181CBC0BAAC4B54B46 /* AppMetricaAdSupport */,
+			);
+			productName = YPoints;
+			productReference = A3C5D6C7D013A2C509F9B61E /* YPoints.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B36049A68747FB97D31CDAE7 /* YPointsNotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07C7081F1027D2EEB28AB35B /* Build configuration list for PBXNativeTarget "YPointsNotificationService" */;
+			buildPhases = (
+				4463C91877F6BDCE7FF5C5A7 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YPointsNotificationService;
+			productName = YPointsNotificationService;
+			productReference = 058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		FF9CE66DC5B24065C031C169 /* YPointsWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43C5D8D206B94B900E3F8281 /* Build configuration list for PBXNativeTarget "YPointsWidget" */;
+			buildPhases = (
+				328DBCCAD5CC209CAAE49C9B /* Sources */,
+				454EBE06C600125F081217F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YPointsWidget;
+			productName = YPointsWidget;
+			productReference = 1403FB8DFB919513559AEE50 /* YPointsWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F5232CEE1AC1A89EC10BCCDC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0BFDB9738F9D2957FBA3EB78 = {
+						ProvisioningStyle = Automatic;
+					};
+					6338F3DBC68C9AAB3BA1DEEA = {
+						ProvisioningStyle = Automatic;
+					};
+					B36049A68747FB97D31CDAE7 = {
+						ProvisioningStyle = Automatic;
+					};
+					FF9CE66DC5B24065C031C169 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BEE87589F0B6E4635295C880 /* Build configuration list for PBXProject "YPoints" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				ru,
+			);
+			mainGroup = ACD0817413C1402127671C85;
+			packageReferences = (
+				3F5C30A0B5B1E6FC77E615C1 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */,
+			);
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6338F3DBC68C9AAB3BA1DEEA /* YPoints */,
+				0BFDB9738F9D2957FBA3EB78 /* YPointsNotificationContent */,
+				B36049A68747FB97D31CDAE7 /* YPointsNotificationService */,
+				FF9CE66DC5B24065C031C169 /* YPointsWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		454EBE06C600125F081217F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9ACB5ED56E508297195EC83E /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69F84CB4D7AB80A43BE7CC82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9188B26EDD19F8C1F66ACED9 /* Assets.xcassets in Resources */,
+				231291D4C6F938C99C0B9B03 /* InfoPlist.strings in Resources */,
+				7E4EACEC24DBE5D8F99EC025 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		328DBCCAD5CC209CAAE49C9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0FDD20C79992F96F2D09D1B /* MatchSnapshot.swift in Sources */,
+				83BBE01FE0F83B320DD84FB6 /* YPointsWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4463C91877F6BDCE7FF5C5A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF239DCAC3FFC184BD25BA83 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7378BFE07B3FE18BC22BE0FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F66007E4DD13204AC29D5EE /* APIClient.swift in Sources */,
+				5A950C16ACAE706BC9864003 /* AnalyticsReporter.swift in Sources */,
+				1EE3C0843A72B6F1045091A7 /* AppConfiguration.swift in Sources */,
+				28A67C81EA4CD3627B7B06F4 /* AppDelegate.swift in Sources */,
+				7FF87C0AD9DA63668DCA92C7 /* BluetoothConnector.swift in Sources */,
+				DB826211DB422816C16BEA42 /* MainViewController.swift in Sources */,
+				F86C87FB3A483FD1AA01B8FB /* MatchSnapshot.swift in Sources */,
+				7FCE53D8C0D3371DCF38C1A6 /* SceneDelegate.swift in Sources */,
+				B2E915C2DDA48F39EF004022 /* WidgetReloader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7F6A00FC9D06E71ED4CF2CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFE2119C7AF781905C74EDED /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA2C6A5E5E21E03FE46ABCA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BFDB9738F9D2957FBA3EB78 /* YPointsNotificationContent */;
+			targetProxy = 0226D501F1C09679DD51EAC2 /* PBXContainerItemProxy */;
+		};
+		B7E62D67ECC033AA0BB52F5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B36049A68747FB97D31CDAE7 /* YPointsNotificationService */;
+			targetProxy = FF00DE32370AFCE12E4D999A /* PBXContainerItemProxy */;
+		};
+		B913BBAE2273087C2A618783 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FF9CE66DC5B24065C031C169 /* YPointsWidget */;
+			targetProxy = FE897AA0DB7C8B0D7DDD6AE9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10B89D737F3046B7ED8ED468 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/YPoints.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPoints;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		188139BB421CC065A11DDBE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		3BF9AA35E498C676CCDFE738 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		48C748BEFC1B9E0E36F8E248 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Widget/YPointsWidget.entitlements;
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(WIDGET_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5A827CD712F98565CC006EA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/YPoints.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPoints;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6F6B7B4AD4EAE6C0BBB559FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsNotificationContent;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		C4B223EB5B829CA72E3C7AD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsNotificationContent;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CCF6FACE9D4C2161EBC7E38D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Widget/YPointsWidget.entitlements;
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Widget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(WIDGET_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsWidget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		DB25723B0F54CD07067F3E1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEVELOPMENT_TEAM = LLB3LY55PC;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsNotificationService;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F15A29185EDFADE4B8043A93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER)";
+				PRODUCT_NAME = YPointsNotificationService;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07C7081F1027D2EEB28AB35B /* Build configuration list for PBXNativeTarget "YPointsNotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB25723B0F54CD07067F3E1C /* Debug */,
+				F15A29185EDFADE4B8043A93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2B7BD9C0BDDF31BFAEC81B5A /* Build configuration list for PBXNativeTarget "YPointsNotificationContent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4B223EB5B829CA72E3C7AD1 /* Debug */,
+				6F6B7B4AD4EAE6C0BBB559FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		43C5D8D206B94B900E3F8281 /* Build configuration list for PBXNativeTarget "YPointsWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48C748BEFC1B9E0E36F8E248 /* Debug */,
+				CCF6FACE9D4C2161EBC7E38D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		736917D32CC89A76336BE629 /* Build configuration list for PBXNativeTarget "YPoints" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A827CD712F98565CC006EA4 /* Debug */,
+				10B89D737F3046B7ED8ED468 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BEE87589F0B6E4635295C880 /* Build configuration list for PBXProject "YPoints" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				188139BB421CC065A11DDBE3 /* Debug */,
+				3BF9AA35E498C676CCDFE738 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F5C30A0B5B1E6FC77E615C1 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appmetrica/appmetrica-sdk-ios";
+			requirement = {
+				kind = exactVersion;
+				version = 6.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		636F4F181CBC0BAAC4B54B46 /* AppMetricaAdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F5C30A0B5B1E6FC77E615C1 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaAdSupport;
+		};
+		B509086C3A4369C07B7DB8C9 /* AppMetricaCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F5C30A0B5B1E6FC77E615C1 /* XCRemoteSwiftPackageReference "appmetrica-sdk-ios" */;
+			productName = AppMetricaCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = F5232CEE1AC1A89EC10BCCDC /* Project object */;
+}

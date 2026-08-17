@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "generatedFor": "YPoints implementation checkpoint",
+  "product": {
+    "displayName": "YPoints",
+    "version": "1.0",
+    "build": "1",
+    "platform": "iOS",
+    "device": "iPhone only",
+    "orientation": "portrait only",
+    "minimumOS": "15.0"
+  },
+  "scoring": {
+    "mode": "FIP Advantage",
+    "points": "0, 15, 30, 40, deuce and advantage",
+    "set": "first to 6 games with a 2-game lead; tie-break at 6:6",
+    "tieBreak": "first to 7 points with a 2-point lead",
+    "match": "best of 3 sets"
+  },
+  "targets": [
+    {
+      "name": "YPoints",
+      "type": "application",
+      "bundleIdentifier": "com.example.ypoints",
+      "minimumOS": "15.0"
+    },
+    {
+      "name": "YPointsWidget",
+      "type": "Lock Screen widget extension",
+      "bundleIdentifier": "com.example.ypoints.widget",
+      "minimumOS": "16.0"
+    },
+    {
+      "name": "YPointsNotificationService",
+      "type": "notification service extension",
+      "bundleIdentifier": "com.example.ypoints.notification-service",
+      "minimumOS": "15.0"
+    },
+    {
+      "name": "YPointsNotificationContent",
+      "type": "notification content extension",
+      "bundleIdentifier": "com.example.ypoints.notification-content",
+      "minimumOS": "15.0"
+    }
+  ],
+  "permissions": [
+    {
+      "permission": "Bluetooth",
+      "purpose": "Bluetooth нужен, чтобы подключить находящийся рядом iPhone с YPoints и синхронизировать счёт матча.",
+      "trigger": "Кнопка «Табло по Bluetooth» запускает поиск, рекламу BLE-сервиса и двустороннюю передачу счёта.",
+      "deniedBehavior": "Счёт продолжает работать локально; экран объясняет, что Bluetooth можно включить в Настройках."
+    },
+    {
+      "permission": "Camera",
+      "purpose": "Камера нужна, чтобы сделать фотографию матча и добавить её к карточке результата.",
+      "trigger": "Кнопка съёмки на экране результата открывает системную камеру.",
+      "deniedBehavior": "Карточку результата можно создать без фото или выбрать снимок из Фото."
+    },
+    {
+      "permission": "Contacts",
+      "purpose": "Контакты нужны, чтобы быстро добавить игроков в состав матча.",
+      "trigger": "Кнопка добавления игрока запрашивает доступ и показывает доступные имена контактов.",
+      "deniedBehavior": "Игроков можно оставить с базовыми именами; доступ можно изменить в Настройках."
+    },
+    {
+      "permission": "Face ID",
+      "purpose": "Face ID нужен, чтобы открыть личную статистику и заметки о матчах.",
+      "trigger": "Кнопка «Открыть статистику» запускает системную биометрическую проверку с код-паролем как резервным способом.",
+      "deniedBehavior": "Защищённая статистика остаётся закрыта; остальной счётчик работает."
+    },
+    {
+      "permission": "Location When In Use",
+      "purpose": "Геолокация нужна, чтобы показать ближайшие падел-корты на карте.",
+      "trigger": "Экран карты запрашивает позицию при выборе поиска ближайших кортов.",
+      "deniedBehavior": "Карта остаётся доступна без позиционирования пользователя."
+    },
+    {
+      "permission": "Microphone",
+      "purpose": "Микрофон нужен, чтобы записать голосовую заметку к результату матча.",
+      "trigger": "Кнопка записи на экране результата создаёт локальную голосовую заметку длительностью до 30 секунд.",
+      "deniedBehavior": "Результат можно сохранить без голосовой заметки."
+    },
+    {
+      "permission": "Photo Library Read",
+      "purpose": "Доступ к Фото нужен, чтобы показать снимки за день матча и выбрать изображение для карточки результата.",
+      "trigger": "Кнопка выбора фото открывает локальную сетку снимков за день матча.",
+      "deniedBehavior": "Можно сделать новый снимок камерой или сохранить карточку без фотографии."
+    },
+    {
+      "permission": "Photo Library Add",
+      "purpose": "Доступ нужен, чтобы сохранять карточки счёта матчей в Фото.",
+      "trigger": "Кнопка сохранения карточки добавляет сгенерированное изображение в Фото.",
+      "deniedBehavior": "Карточка остаётся видна в приложении, но не добавляется в Фото."
+    },
+    {
+      "permission": "Advertising Tracking",
+      "purpose": "Идентификатор устройства используется, чтобы определить источник установки и оценить эффективность продвижения YPoints.",
+      "trigger": "Строка «Оценка продвижения» напрямую открывает системный запрос App Tracking Transparency.",
+      "deniedBehavior": "AppMetrica продолжает работать без IDFA; рекламы и передачи ATT-статуса на backend нет."
+    },
+    {
+      "permission": "Push Notifications",
+      "purpose": "Уведомления сообщат о приглашении, начале и результате матча.",
+      "trigger": "Кнопка напоминания показывает контекст и затем системный запрос уведомлений.",
+      "deniedBehavior": "Матч и счёт работают без уведомлений; приложение показывает статус разрешения."
+    }
+  ],
+  "dataInventory": {
+    "localOnly": [
+      "текущий счёт и локальная статистика",
+      "выбранные фотографии и сгенерированная карточка результата",
+      "имена выбранных контактов",
+      "голосовая заметка",
+      "текущая геопозиция и результаты поиска MapKit"
+    ],
+    "backend": [
+      "случайный installationId",
+      "непрозрачный matchToken",
+      "ревизия и снимок счёта",
+      "APNs device token и среда push"
+    ],
+    "appMetrica": [
+      "кастомное событие launch один раз за процесс после активации SDK",
+      "обобщённые события использования без пользовательского контента",
+      "IDFA только после статуса ATT authorized"
+    ],
+    "explicitlyExcluded": [
+      "координаты пользователя в AppMetrica — locationTracking отключён",
+      "координаты пользователя на собственном backend",
+      "контакты, фотографии и аудио на собственном backend",
+      "ATT-статус и IDFA на собственном backend"
+    ]
+  },
+  "backend": {
+    "implementation": "backend/server.py, Python standard library, in-memory storage",
+    "endpoints": [
+      "GET /health",
+      "POST /sync"
+    ],
+    "debugBaseURL": "http://localhost:8080",
+    "releaseBaseURL": "https://example.invalid",
+    "releaseStatus": "pending real HTTPS host and persistence decision"
+  },
+  "analytics": {
+    "provider": "AppMetrica 6.6.0",
+    "products": [
+      "AppMetricaCore",
+      "AppMetricaAdSupport"
+    ],
+    "apiKeyStatus": "pending",
+    "locationTracking": false,
+    "advertisingIdentifier": "enabled only after ATT authorized",
+    "adsSDK": "not integrated"
+  },
+  "extensions": {
+    "lockScreenWidget": "implemented; shares score through App Group",
+    "notificationService": "implemented; enriches remote match notifications",
+    "notificationContent": "implemented programmatically with Open and Hide actions"
+  },
+  "capabilities": {
+    "appGroup": {
+      "identifier": "group.com.example.ypoints",
+      "sourceEntitlements": "verified",
+      "signedEntitlements": "pending Apple Developer Team and signed archive"
+    },
+    "pushNotifications": {
+      "apsEnvironment": "configuration-dependent",
+      "sourceEntitlements": "verified",
+      "signedEntitlements": "pending Apple Developer Team and signed archive"
+    }
+  },
+  "privacy": {
+    "privacyManifest": "App/PrivacyInfo.xcprivacy",
+    "widgetPrivacyManifest": "Widget/PrivacyInfo.xcprivacy",
+    "requiredReasonAPIs": {
+      "appUserDefaults": [
+        "CA92.1",
+        "1C8F.1"
+      ],
+      "widgetAppGroupUserDefaults": [
+        "1C8F.1"
+      ]
+    },
+    "inAppPrivacySupportSurfaceStatus": "pending App Store preparation; top navigation button intentionally removed",
+    "privacyPolicyURLStatus": "pending",
+    "supportURLStatus": "pending",
+    "trackingDomains": [
+      "tracking.appmetrica.yandex.net",
+      "tracking.reserve.appmetrica.yandex.net"
+    ]
+  },
+  "verification": {
+    "debugBuild": "passed",
+    "releaseBuildWithoutSigning": "passed",
+    "simulatorLaunch": "passed",
+    "backendHealth": "passed",
+    "backendSync": "passed",
+    "unitTests": "intentionally absent",
+    "uiTests": "intentionally absent",
+    "physicalDevicePermissionPass": "pending",
+    "signedArchiveValidation": "pending"
+  },
+  "artifacts": {
+    "approvedDesign": "Design/approved-att-attribution.png",
+    "finalSimulatorScreenshot": "Design/running-dark-contrast.png",
+    "designSpecification": "Design/design.md",
+    "appIcon": "App/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+  },
+  "releaseBlockers": [
+    "replace all com.example bundle identifiers and App Group identifier",
+    "select Apple Developer Team and create matching App Group/capabilities",
+    "provide AppMetrica API key",
+    "deploy an HTTPS backend and replace example.invalid",
+    "provide privacy policy and support URLs",
+    "configure APNs key/certificate and backend push sender",
+    "verify Bluetooth, camera, contacts, Face ID, location, microphone, PhotoKit and APNs on physical iPhone",
+    "create and validate a signed archive"
+  ]
+}
