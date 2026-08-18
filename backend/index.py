@@ -34,10 +34,10 @@ def _create_table(session):
     )
     session.execute_scheme(
         """
-        CREATE TABLE IF NOT EXISTS feature_flags (
+        CREATE TABLE IF NOT EXISTS feature_flag_rules (
             app_id Utf8,
             flag_key Utf8,
-            enabled Bool,
+            disabled_from_version Utf8,
             revision Int64,
             updated_at Utf8,
             PRIMARY KEY (app_id, flag_key)
@@ -51,8 +51,10 @@ pool.retry_operation_sync(_create_table)
 
 def handler(event, context):
     try:
-        if event.get("action") == "setFeatureFlag":
-            return _set_feature_flag(event)
+        if event.get("action") == "setFeatureFlagRule":
+            return _set_feature_flag_rule(event)
+        if event.get("action") == "clearFeatureFlagRule":
+            return _clear_feature_flag_rule(event)
         if event.get("httpMethod") == "GET":
             return _json_response(200, _feature_config(event.get("queryStringParameters") or {}))
         request = _request_body(event)
@@ -68,28 +70,55 @@ def handler(event, context):
 
 def _feature_config(query):
     app_id = _required_string(query, "appId", 128)
-    stored = _read_feature_flags(app_id)
-    flag = stored.get("cloudSyncEnabled")
+    app_version = _app_version(query)
+    rule = _read_feature_flag_rule(app_id, "cloudSyncEnabled")
+    enabled = rule is None or _compare_versions(
+        app_version, rule["disabledFromVersion"]
+    ) < 0
     return {
-        "revision": flag["revision"] if flag else 0,
+        "revision": rule["revision"] if rule else 0,
         "refreshAfterSeconds": 3600,
-        "flags": {"cloudSyncEnabled": flag["enabled"] if flag else True},
+        "appVersion": app_version,
+        "rule": (
+            {"disabledFromVersion": rule["disabledFromVersion"]} if rule else None
+        ),
+        "flags": {"cloudSyncEnabled": enabled},
     }
 
 
-def _set_feature_flag(event):
+def _set_feature_flag_rule(event):
     app_id = _required_string(event, "appId", 128)
     key = _required_string(event, "key", 64)
-    enabled = event.get("enabled")
     if key != "cloudSyncEnabled":
         raise ValueError("feature_flag_unknown")
-    if not isinstance(enabled, bool):
-        raise ValueError("feature_flag_enabled_required")
-
-    current = _read_feature_flags(app_id).get(key)
+    disabled_from_version = _app_version(
+        {"appVersion": event.get("disabledFromVersion")}
+    )
+    current = _read_feature_flag_rule(app_id, key)
     revision = current["revision"] if current else 1
-    _write_feature_flag(app_id, key, enabled, revision)
-    return _feature_config({"appId": app_id})
+    _write_feature_flag_rule(app_id, key, disabled_from_version, revision)
+    return {
+        "status": "updated",
+        "appId": app_id,
+        "key": key,
+        "revision": revision,
+        "rule": {"disabledFromVersion": disabled_from_version},
+    }
+
+
+def _clear_feature_flag_rule(event):
+    app_id = _required_string(event, "appId", 128)
+    key = _required_string(event, "key", 64)
+    if key != "cloudSyncEnabled":
+        raise ValueError("feature_flag_unknown")
+    _delete_feature_flag_rule(app_id, key)
+    return {
+        "status": "cleared",
+        "appId": app_id,
+        "key": key,
+        "revision": 0,
+        "rule": None,
+    }
 
 
 def _request_body(event):
@@ -228,33 +257,35 @@ def _write(app_id, token, installation_id, revision, snapshot_json, push_json, u
     pool.retry_operation_sync(operation)
 
 
-def _read_feature_flags(app_id):
+def _read_feature_flag_rule(app_id, key):
     def operation(session):
         query = session.prepare(
             """
             DECLARE $app_id AS Utf8;
+            DECLARE $flag_key AS Utf8;
 
-            SELECT flag_key, enabled, revision
-            FROM feature_flags
-            WHERE app_id = $app_id;
+            SELECT disabled_from_version, revision
+            FROM feature_flag_rules
+            WHERE app_id = $app_id AND flag_key = $flag_key;
             """
         )
         return session.transaction().execute(
             query,
-            {"$app_id": app_id},
+            {"$app_id": app_id, "$flag_key": key},
             commit_tx=True,
         )
 
     result = pool.retry_operation_sync(operation)
-    if not result:
-        return {}
+    if not result or not result[0].rows:
+        return None
+    row = result[0].rows[0]
     return {
-        row.flag_key: {"enabled": row.enabled, "revision": row.revision}
-        for row in result[0].rows
+        "disabledFromVersion": row.disabled_from_version,
+        "revision": row.revision,
     }
 
 
-def _write_feature_flag(app_id, key, enabled, revision):
+def _write_feature_flag_rule(app_id, key, disabled_from_version, revision):
     updated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
     def operation(session):
@@ -262,14 +293,14 @@ def _write_feature_flag(app_id, key, enabled, revision):
             """
             DECLARE $app_id AS Utf8;
             DECLARE $flag_key AS Utf8;
-            DECLARE $enabled AS Bool;
+            DECLARE $disabled_from_version AS Utf8;
             DECLARE $revision AS Int64;
             DECLARE $updated_at AS Utf8;
 
-            UPSERT INTO feature_flags (
-                app_id, flag_key, enabled, revision, updated_at
+            UPSERT INTO feature_flag_rules (
+                app_id, flag_key, disabled_from_version, revision, updated_at
             ) VALUES (
-                $app_id, $flag_key, $enabled, $revision, $updated_at
+                $app_id, $flag_key, $disabled_from_version, $revision, $updated_at
             );
             """
         )
@@ -278,10 +309,30 @@ def _write_feature_flag(app_id, key, enabled, revision):
             {
                 "$app_id": app_id,
                 "$flag_key": key,
-                "$enabled": enabled,
+                "$disabled_from_version": disabled_from_version,
                 "$revision": revision,
                 "$updated_at": updated_at,
             },
+            commit_tx=True,
+        )
+
+    pool.retry_operation_sync(operation)
+
+
+def _delete_feature_flag_rule(app_id, key):
+    def operation(session):
+        query = session.prepare(
+            """
+            DECLARE $app_id AS Utf8;
+            DECLARE $flag_key AS Utf8;
+
+            DELETE FROM feature_flag_rules
+            WHERE app_id = $app_id AND flag_key = $flag_key;
+            """
+        )
+        session.transaction().execute(
+            query,
+            {"$app_id": app_id, "$flag_key": key},
             commit_tx=True,
         )
 
@@ -293,6 +344,27 @@ def _required_string(body, key, maximum_length):
     if not isinstance(value, str) or not value or len(value) > maximum_length:
         raise ValueError(f"{key}_required")
     return value
+
+
+def _app_version(body):
+    value = body.get("appVersion")
+    if not isinstance(value, str) or not value or len(value) > 32:
+        raise ValueError("appVersion_invalid")
+    _version_components(value)
+    return value
+
+
+def _version_components(value):
+    parts = value.split(".")
+    if not 1 <= len(parts) <= 3 or any(not part.isascii() or not part.isdigit() for part in parts):
+        raise ValueError("appVersion_invalid")
+    return tuple(int(part) for part in parts) + (0,) * (3 - len(parts))
+
+
+def _compare_versions(left, right):
+    left_components = _version_components(left)
+    right_components = _version_components(right)
+    return (left_components > right_components) - (left_components < right_components)
 
 
 def _compact_json(value, maximum_bytes, error):

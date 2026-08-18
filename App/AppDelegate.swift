@@ -20,7 +20,10 @@ final class AppServices {
         )
         let defaults = UserDefaults.standard
         analytics = AnalyticsReporter(apiKey: configuration.appMetricaAPIKey)
-        featureFlags = FeatureFlagStore(defaults: defaults)
+        featureFlags = FeatureFlagStore(
+            defaults: defaults,
+            appVersion: configuration.appVersion
+        )
         if let storedId = defaults.string(forKey: "installation.id") {
             installationId = storedId
         } else {

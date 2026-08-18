@@ -37,7 +37,7 @@ Deployment target приложения и notification extensions — iOS 15.0; 
 
 ```sh
 curl https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/health
-curl 'https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/config?appId=com.idev.ypoints'
+curl 'https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/config?appId=com.idev.ypoints&appVersion=1.0'
 curl -X POST https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/sync -H 'Content-Type: application/json' -d '{"appId":"com.idev.ypoints","installationId":"local","matchToken":null,"clientRevision":1,"snapshot":{"leftName":"Мы","rightName":"Соперники","leftPoints":2,"rightPoints":1,"leftGames":3,"rightGames":2,"leftSets":1,"rightSets":0,"state":"active","revision":1,"updatedAt":"2026-08-18T12:00:00Z"},"push":{"token":null,"environment":"sandbox","enabled":false}}'
 ```
 
@@ -47,15 +47,23 @@ Backend использует один API Gateway `mobile-api`, одну Cloud F
 
 `POST /sync` принимает `appId`, локальный revision/snapshot, непривязанный к личности installation ID, опциональный match token и APNs token. Сочетание `appId + matchToken` разделяет данные разных приложений на общем backend. Сервер возвращает актуальный snapshot и честный `pushStatus: pending_credentials`, пока APNs Team и `.p8` не настроены. Контакты, фото, аудио, координаты, ATT-статус и IDFA не передаются.
 
-`GET /config` возвращает `cloudSyncEnabled`. Приложение запрашивает флаг при запуске, хранит последнее успешное значение в `UserDefaults` и проверяет его перед каждым `/sync`, включая регистрацию APNs-токена. При выключенном флаге счёт, виджет и Bluetooth продолжают работать локально.
+`GET /config` возвращает `cloudSyncEnabled` для переданного `appVersion` (`CFBundleShortVersionString`). В Cloud хранится один необязательный порог `disabledFromVersion`: для версий ниже порога backend возвращает `true`, а для равной и более новых — `false`. Сравнение выполняется по числовым компонентам, поэтому `1.10` новее `1.2`; если порог удалён, все версии получают `true`. Приложение запрашивает флаг при запуске, хранит последнее успешное значение отдельно для каждой версии в `UserDefaults` и проверяет его перед каждым `/sync`, включая регистрацию APNs-токена. Если холодный backend отвечает после четырёхсекундного дедлайна splash, основной экран сразу открывается с кэшем, а уже начатый запрос затем обновляет кэш и строку статуса без повторного показа splash. При выключенном флаге счёт, виджет и Bluetooth продолжают работать локально.
 
 Изменение флага выполняется приватным IAM-вызовом функции и не опубликовано через API Gateway:
 
 ```sh
-yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"setFeatureFlag","appId":"com.idev.ypoints","key":"cloudSyncEnabled","enabled":false}'
+yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"setFeatureFlagRule","appId":"com.idev.ypoints","key":"cloudSyncEnabled","disabledFromVersion":"1.3"}'
 ```
 
-Для включения замените `false` на `true`. Новое значение применяется после следующего запуска приложения; при недоступности backend используется последнее сохранённое значение.
+В примере версии `1.0`–`1.2.x` получают `true`, а `1.3` и выше — `false`. Чтобы изменить границу, замените только `disabledFromVersion`. Версия должна состоять из одного–трёх числовых компонентов, например `1`, `1.3` или `1.3.2`; строкового сравнения нет.
+
+Чтобы удалить порог и вернуть `true` всем версиям:
+
+```sh
+yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"clearFeatureFlagRule","appId":"com.idev.ypoints","key":"cloudSyncEnabled"}'
+```
+
+`appVersion` обязателен только в публичном запросе `/config`; административный вызов задаёт или удаляет единый порог. Новое правило применяется после следующего запуска приложения; при недоступности backend используется последнее сохранённое значение текущей версии.
 
 Cloud Function авторизуется в YDB через привязанный сервисный аккаунт; долгоживущих ключей в репозитории нет. На другом компьютере достаточно установить `yc`, войти в тот же аккаунт и выбрать каталог `mobile-backends`.
 

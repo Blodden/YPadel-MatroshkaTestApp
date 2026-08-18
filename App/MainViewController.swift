@@ -539,6 +539,11 @@ final class MainViewController: UIViewController {
         }
     }
 
+    func refreshFeatureFlagStatus() {
+        guard isViewLoaded else { return }
+        showStatus(featureFlagStatusText)
+    }
+
     private func applyRemoteSnapshot(_ remoteSnapshot: MatchSnapshot) {
         guard remoteSnapshot.revision >= snapshot.revision else { return }
         snapshot = remoteSnapshot

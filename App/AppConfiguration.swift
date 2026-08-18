@@ -2,6 +2,7 @@ import Foundation
 
 struct AppConfiguration {
     let appIdentifier: String
+    let appVersion: String
     let appMetricaAPIKey: String
     let apiBaseURL: URL
     let appGroupIdentifier: String
@@ -11,6 +12,8 @@ struct AppConfiguration {
 
     init(bundle: Bundle) {
         appIdentifier = bundle.bundleIdentifier ?? "com.idev.ypoints"
+        let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+        appVersion = version.flatMap { $0.isEmpty ? nil : $0 } ?? "0"
         appMetricaAPIKey = bundle.object(forInfoDictionaryKey: "AppMetricaAPIKey") as? String ?? ""
 
         let rawURL = bundle.object(forInfoDictionaryKey: "APIBaseURL") as? String

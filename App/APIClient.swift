@@ -40,8 +40,8 @@ final class FeatureFlagStore {
     private(set) var cloudSyncEnabled: Bool
     private(set) var source: Source
 
-    init(defaults: UserDefaults) {
-        let key = "feature.cloudSyncEnabled"
+    init(defaults: UserDefaults, appVersion: String) {
+        let key = "feature.cloudSyncEnabled.\(appVersion)"
         self.defaults = defaults
         cloudSyncKey = key
         if defaults.object(forKey: key) == nil {
@@ -102,13 +102,17 @@ final class APIClient {
     @discardableResult
     func fetchFeatureFlags(
         appId: String,
+        appVersion: String,
         completion: @escaping (Result<FeatureFlagsResponse, Error>) -> Void
     ) -> URLSessionDataTask? {
         var components = URLComponents(
             url: baseURL.appendingPathComponent("config"),
             resolvingAgainstBaseURL: false
         )
-        components?.queryItems = [URLQueryItem(name: "appId", value: appId)]
+        components?.queryItems = [
+            URLQueryItem(name: "appId", value: appId),
+            URLQueryItem(name: "appVersion", value: appVersion)
+        ]
         guard let url = components?.url else {
             completion(.failure(APIClientError.encoding))
             return nil

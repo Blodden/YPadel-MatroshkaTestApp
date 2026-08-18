@@ -48,12 +48,20 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard !startupFinished, featureFlagTask == nil else { return }
 
         featureFlagTask = services.apiClient.fetchFeatureFlags(
-            appId: services.configuration.appIdentifier
+            appId: services.configuration.appIdentifier,
+            appVersion: services.configuration.appVersion
         ) { [weak self] result in
-            guard let self, !self.startupFinished else { return }
+            guard let self else { return }
             self.featureFlagTask = nil
+            var appliedRemoteValue = false
             if case let .success(response) = result {
-                _ = services.featureFlags.apply(response)
+                appliedRemoteValue = services.featureFlags.apply(response)
+            }
+            if self.startupFinished {
+                if appliedRemoteValue {
+                    self.refreshMainFeatureFlagStatus()
+                }
+                return
             }
             self.featureFlagRequestFinished = true
             if self.minimumDisplayTimeElapsed {
@@ -69,12 +77,18 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) { [weak self] in
             guard let self, !self.startupFinished else { return }
-            self.featureFlagTask?.cancel()
-            self.featureFlagTask = nil
             self.finishStartup(using: services)
         }
+    }
+
+    private func refreshMainFeatureFlagStatus() {
+        guard let navigationController = window?.rootViewController as? UINavigationController else {
+            return
+        }
+        let mainViewController = navigationController.viewControllers.first as? MainViewController
+        mainViewController?.refreshFeatureFlagStatus()
     }
 
     private func finishStartup(using services: AppServices) {

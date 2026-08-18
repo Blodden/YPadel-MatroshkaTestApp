@@ -152,17 +152,20 @@
   "featureFlags": {
     "provider": "existing Yandex Cloud Function and Serverless YDB",
     "cloudSyncEnabled": true,
-    "fallback": "last successful value in UserDefaults; true on first install",
-    "update": "private IAM function invocation; no public write endpoint",
+    "disabledFromVersion": null,
+    "resolution": "true below the optional numeric CFBundleShortVersionString threshold; false at or above it; true for all versions when no threshold exists",
+    "fallback": "last successful value for the current app version in UserDefaults; true before the first successful fetch for that version",
+    "update": "private IAM setFeatureFlagRule or clearFeatureFlagRule function invocation; no public write endpoint",
     "effect": "gates POST /sync and APNs token sync while local score, widget and Bluetooth remain available"
   },
   "startup": {
     "appearance": "single seamless dark-green screen with the current YPoints app icon centered at 160x160 pt, transparent rounded corners, no text, indicator or animation",
     "systemConfiguration": "UILaunchScreen in App/Info.plist; no launch storyboard",
     "minimumAppControlledSeconds": 0.7,
-    "maximumAppControlledSeconds": 2.0,
+    "maximumAppControlledSeconds": 4.0,
     "work": "initialize app services and fetch cloudSyncEnabled once",
-    "timeoutFallback": "last successful UserDefaults value; true on first install",
+    "timeoutFallback": "last successful UserDefaults value for the current app version; true before the first successful fetch for that version",
+    "lateResponse": "the in-flight request may update the current-version cache and existing main-screen status after the 4-second deadline without blocking or re-presenting startup",
     "presentation": "cold process launch only"
   },
   "analytics": {

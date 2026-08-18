@@ -60,9 +60,15 @@ paths:
           required: true
           schema:
             type: string
+        - name: appVersion
+          in: query
+          required: true
+          description: Numeric CFBundleShortVersionString used to evaluate the configured version threshold
+          schema:
+            type: string
       responses:
         "200":
-          description: Remote feature configuration
+          description: Remote feature configuration resolved against disabledFromVersion
           content:
             application/json:
               schema:
