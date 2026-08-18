@@ -21,25 +21,25 @@
     {
       "name": "YPoints",
       "type": "application",
-      "bundleIdentifier": "com.example.ypoints",
+      "bundleIdentifier": "com.idev.ypoints",
       "minimumOS": "15.0"
     },
     {
       "name": "YPointsWidget",
       "type": "Lock Screen widget extension",
-      "bundleIdentifier": "com.example.ypoints.widget",
+      "bundleIdentifier": "com.idev.ypoints.widget",
       "minimumOS": "16.0"
     },
     {
       "name": "YPointsNotificationService",
       "type": "notification service extension",
-      "bundleIdentifier": "com.example.ypoints.notification-service",
+      "bundleIdentifier": "com.idev.ypoints.notification-service",
       "minimumOS": "15.0"
     },
     {
       "name": "YPointsNotificationContent",
       "type": "notification content extension",
-      "bundleIdentifier": "com.example.ypoints.notification-content",
+      "bundleIdentifier": "com.idev.ypoints.notification-content",
       "minimumOS": "15.0"
     }
   ],
@@ -120,7 +120,6 @@
       "APNs device token и среда push"
     ],
     "appMetrica": [
-      "кастомное событие launch один раз за процесс после активации SDK",
       "обобщённые события использования без пользовательского контента",
       "IDFA только после статуса ATT authorized"
     ],
@@ -140,6 +139,7 @@
     ],
     "debugBaseURL": "https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net",
     "releaseBaseURL": "https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net",
+    "appId": "com.idev.ypoints",
     "partitionKey": "appId + matchToken",
     "authentication": "anonymous MVP; matchToken is a per-match bearer secret",
     "gatewayRateLimitRPS": 10,
@@ -162,7 +162,7 @@
       "AppMetricaCore",
       "AppMetricaAdSupport"
     ],
-    "apiKeyStatus": "pending",
+    "apiKeyStatus": "configured in Config/Shared.xcconfig",
     "locationTracking": false,
     "advertisingIdentifier": "enabled only after ATT authorized",
     "adsSDK": "not integrated"
@@ -174,7 +174,7 @@
   },
   "capabilities": {
     "appGroup": {
-      "identifier": "group.com.example.ypoints",
+      "identifier": "group.com.idev.ypoints",
       "sourceEntitlements": "verified",
       "signedEntitlements": "pending Apple Developer Team and signed archive"
     },
@@ -224,9 +224,7 @@
     "appIcon": "App/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
   },
   "releaseBlockers": [
-    "replace all com.example bundle identifiers and App Group identifier",
     "select Apple Developer Team and create matching App Group/capabilities",
-    "provide AppMetrica API key",
     "provide privacy policy and support URLs",
     "configure APNs key/certificate and backend push sender",
     "verify Bluetooth, camera, contacts, Face ID, location, microphone, PhotoKit and APNs on physical iPhone",

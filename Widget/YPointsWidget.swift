@@ -31,7 +31,7 @@ struct MatchProvider: TimelineProvider {
 
     private func makeEntry() -> MatchEntry {
         let groupIdentifier = Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String
-            ?? "group.com.example.ypoints"
+            ?? "group.com.idev.ypoints"
         return MatchEntry(
             date: Date(),
             snapshot: MatchSnapshot.load(groupIdentifier: groupIdentifier)

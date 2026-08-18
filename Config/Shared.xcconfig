@@ -1,9 +1,9 @@
 APP_DISPLAY_NAME = YPoints
-APP_BUNDLE_IDENTIFIER = com.example.ypoints
-WIDGET_BUNDLE_IDENTIFIER = com.example.ypoints.widget
-NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER = com.example.ypoints.notification-service
-NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER = com.example.ypoints.notification-content
-APP_GROUP_IDENTIFIER = group.com.example.ypoints
-APPMETRICA_API_KEY =
+APP_BUNDLE_IDENTIFIER = com.idev.ypoints
+WIDGET_BUNDLE_IDENTIFIER = com.idev.ypoints.widget
+NOTIFICATION_SERVICE_BUNDLE_IDENTIFIER = com.idev.ypoints.notification-service
+NOTIFICATION_CONTENT_BUNDLE_IDENTIFIER = com.idev.ypoints.notification-content
+APP_GROUP_IDENTIFIER = group.com.idev.ypoints
+APPMETRICA_API_KEY = 8a15f686-fb0a-474f-90c6-38422844ce9f
 PRIVACY_POLICY_URL =
 SUPPORT_URL =

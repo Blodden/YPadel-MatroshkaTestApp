@@ -10,14 +10,14 @@ struct AppConfiguration {
     let supportURL: URL?
 
     init(bundle: Bundle) {
-        appIdentifier = bundle.bundleIdentifier ?? "com.example.ypoints"
+        appIdentifier = bundle.bundleIdentifier ?? "com.idev.ypoints"
         appMetricaAPIKey = bundle.object(forInfoDictionaryKey: "AppMetricaAPIKey") as? String ?? ""
 
         let rawURL = bundle.object(forInfoDictionaryKey: "APIBaseURL") as? String
         apiBaseURL = URL(string: rawURL ?? "") ?? URL(string: "http://localhost:8080")!
 
         appGroupIdentifier = bundle.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String
-            ?? "group.com.example.ypoints"
+            ?? "group.com.idev.ypoints"
         pushEnvironment = bundle.object(forInfoDictionaryKey: "PushEnvironment") as? String ?? "sandbox"
 
         let privacyValue = bundle.object(forInfoDictionaryKey: "PrivacyPolicyURL") as? String ?? ""

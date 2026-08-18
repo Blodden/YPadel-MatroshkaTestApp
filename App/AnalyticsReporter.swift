@@ -4,7 +4,6 @@ import Foundation
 
 final class AnalyticsReporter {
     private var enabled = false
-    private var launchReported = false
 
     init(apiKey: String) {
         let trimmedKey = apiKey.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -16,13 +15,25 @@ final class AnalyticsReporter {
             NSLog("YPoints: AppMetrica не активирована — API key некорректен")
             return
         }
+        guard
+            let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
+            !appVersion.isEmpty,
+            let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String,
+            let numericBuildNumber = UInt(appBuildNumber),
+            numericBuildNumber > 0
+        else {
+            NSLog("YPoints: AppMetrica не активирована — версия или номер сборки некорректны")
+            return
+        }
+        configuration.appVersion = appVersion
+        configuration.appBuildNumber = appBuildNumber
+        configuration.revenueAutoTrackingEnabled = false
         configuration.locationTracking = false
         configuration.accurateLocationTracking = false
         configuration.advertisingIdentifierTrackingEnabled =
             ATTrackingManager.trackingAuthorizationStatus == .authorized
         AppMetrica.activate(with: configuration)
         enabled = true
-        reportLaunchOnce()
     }
 
     func report(_ name: String, parameters: [String: Any]? = nil) {
@@ -35,11 +46,5 @@ final class AnalyticsReporter {
     func setAdvertisingIdentifierTracking(enabled: Bool) {
         guard self.enabled else { return }
         AppMetrica.isAdvertisingIdentifierTrackingEnabled = enabled
-    }
-
-    private func reportLaunchOnce() {
-        guard !launchReported else { return }
-        launchReported = true
-        report("launch")
     }
 }

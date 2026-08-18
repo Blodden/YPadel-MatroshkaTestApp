@@ -10,9 +10,11 @@
 
 Все заменяемые значения находятся в `Config/Shared.xcconfig`:
 
-- `APP_BUNDLE_IDENTIFIER`
-- `APP_GROUP_IDENTIFIER`
-- `APPMETRICA_API_KEY` — пустой ключ безопасно отключает активацию SDK
+- `APP_BUNDLE_IDENTIFIER` — `com.idev.ypoints`
+- `APP_GROUP_IDENTIFIER` — `group.com.idev.ypoints`
+- `APPMETRICA_API_KEY` — SDK key приложения YPoints в AppMetrica; пустой ключ безопасно отключает активацию SDK
+
+Bundle identifiers следуют соглашению `com.idev.<имя приложения в нижнем регистре>`; extensions добавляют суффиксы `.widget`, `.notification-service` и `.notification-content`.
 
 Backend URL находится в `Config/Debug.xcconfig` и `Config/Release.xcconfig`. Оба варианта сейчас используют production HTTPS API Gateway в Yandex Cloud.
 
@@ -35,8 +37,8 @@ Deployment target приложения и notification extensions — iOS 15.0; 
 
 ```sh
 curl https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/health
-curl 'https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/config?appId=com.example.ypoints'
-curl -X POST https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/sync -H 'Content-Type: application/json' -d '{"appId":"com.example.ypoints","installationId":"local","matchToken":null,"clientRevision":1,"snapshot":{"leftName":"Мы","rightName":"Соперники","leftPoints":2,"rightPoints":1,"leftGames":3,"rightGames":2,"leftSets":1,"rightSets":0,"state":"active","revision":1,"updatedAt":"2026-08-18T12:00:00Z"},"push":{"token":null,"environment":"sandbox","enabled":false}}'
+curl 'https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/config?appId=com.idev.ypoints'
+curl -X POST https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/sync -H 'Content-Type: application/json' -d '{"appId":"com.idev.ypoints","installationId":"local","matchToken":null,"clientRevision":1,"snapshot":{"leftName":"Мы","rightName":"Соперники","leftPoints":2,"rightPoints":1,"leftGames":3,"rightGames":2,"leftSets":1,"rightSets":0,"state":"active","revision":1,"updatedAt":"2026-08-18T12:00:00Z"},"push":{"token":null,"environment":"sandbox","enabled":false}}'
 ```
 
 Backend использует один API Gateway `mobile-api`, одну Cloud Function `mobile-sync` и одну Serverless YDB `mobile-apps` в изолированном каталоге `mobile-backends`. Исходник функции находится в `backend/index.py`, закреплённая зависимость — в `backend/requirements.txt`, спецификация шлюза — в `backend/openapi.yaml`.
@@ -50,7 +52,7 @@ Backend использует один API Gateway `mobile-api`, одну Cloud F
 Изменение флага выполняется приватным IAM-вызовом функции и не опубликовано через API Gateway:
 
 ```sh
-yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"setFeatureFlag","appId":"com.example.ypoints","key":"cloudSyncEnabled","enabled":false}'
+yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"setFeatureFlag","appId":"com.idev.ypoints","key":"cloudSyncEnabled","enabled":false}'
 ```
 
 Для включения замените `false` на `true`. Новое значение применяется после следующего запуска приложения; при недоступности backend используется последнее сохранённое значение.
@@ -67,7 +69,7 @@ yc serverless api-gateway update --id d5d27ljq6thqpj2secmq --spec backend/openap
 
 ## ATT и AppMetrica
 
-В приложении нет рекламных экранов и Yandex Mobile Ads. Строка «Оценка продвижения» напрямую открывает системный ATT-диалог. AppMetricaAdSupport использует IDFA для атрибуции только после разрешения iOS; при отказе AppMetrica работает без IDFA. API key читается из xcconfig, а событие launch отправляется один раз на процесс после успешной активации SDK.
+В приложении нет рекламных экранов и Yandex Mobile Ads. Строка «Оценка продвижения» напрямую открывает системный ATT-диалог. AppMetricaAdSupport использует IDFA для атрибуции только после разрешения iOS; при отказе AppMetrica работает без IDFA. API key читается из xcconfig; SDK активируется только при непустом корректном ключе.
 
 Автоматический сбор location в AppMetrica явно отключён. Координаты используются только MapKit/Core Location на устройстве и не попадают в custom events или backend.
 
