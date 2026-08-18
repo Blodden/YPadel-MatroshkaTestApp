@@ -29,23 +29,37 @@ struct FeatureFlagsResponse: Decodable {
 }
 
 final class FeatureFlagStore {
+    enum Source {
+        case defaultValue
+        case cached
+        case remote
+    }
+
     private let defaults: UserDefaults
     private let cloudSyncKey: String
     private(set) var cloudSyncEnabled: Bool
+    private(set) var source: Source
 
     init(defaults: UserDefaults) {
         let key = "feature.cloudSyncEnabled"
         self.defaults = defaults
         cloudSyncKey = key
-        cloudSyncEnabled = defaults.object(forKey: key) == nil
-            ? true
-            : defaults.bool(forKey: key)
+        if defaults.object(forKey: key) == nil {
+            cloudSyncEnabled = true
+            source = .defaultValue
+        } else {
+            cloudSyncEnabled = defaults.bool(forKey: key)
+            source = .cached
+        }
     }
 
-    func apply(_ response: FeatureFlagsResponse) {
-        guard let enabled = response.flags["cloudSyncEnabled"] else { return }
+    @discardableResult
+    func apply(_ response: FeatureFlagsResponse) -> Bool {
+        guard let enabled = response.flags["cloudSyncEnabled"] else { return false }
         cloudSyncEnabled = enabled
+        source = .remote
         defaults.set(enabled, forKey: cloudSyncKey)
+        return true
     }
 }
 
@@ -85,25 +99,11 @@ final class APIClient {
         self.decoder = decoder
     }
 
-    func checkHealth(completion: @escaping (Result<Void, Error>) -> Void) {
-        let request = URLRequest(url: baseURL.appendingPathComponent("health"))
-        session.dataTask(with: request) { _, response, error in
-            let result: Result<Void, Error>
-            if let error {
-                result = .failure(error)
-            } else if (response as? HTTPURLResponse)?.statusCode == 200 {
-                result = .success(())
-            } else {
-                result = .failure(APIClientError.invalidResponse)
-            }
-            DispatchQueue.main.async { completion(result) }
-        }.resume()
-    }
-
+    @discardableResult
     func fetchFeatureFlags(
         appId: String,
         completion: @escaping (Result<FeatureFlagsResponse, Error>) -> Void
-    ) {
+    ) -> URLSessionDataTask? {
         var components = URLComponents(
             url: baseURL.appendingPathComponent("config"),
             resolvingAgainstBaseURL: false
@@ -111,10 +111,10 @@ final class APIClient {
         components?.queryItems = [URLQueryItem(name: "appId", value: appId)]
         guard let url = components?.url else {
             completion(.failure(APIClientError.encoding))
-            return
+            return nil
         }
 
-        session.dataTask(with: URLRequest(url: url)) { [decoder] data, response, error in
+        let task = session.dataTask(with: URLRequest(url: url)) { [decoder] data, response, error in
             let result: Result<FeatureFlagsResponse, Error>
             if let error {
                 result = .failure(error)
@@ -126,7 +126,9 @@ final class APIClient {
                 result = .failure(APIClientError.invalidResponse)
             }
             DispatchQueue.main.async { completion(result) }
-        }.resume()
+        }
+        task.resume()
+        return task
     }
 
     func sync(_ payload: SyncRequest, completion: @escaping (Result<SyncResponse, Error>) -> Void) {

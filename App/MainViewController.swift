@@ -90,7 +90,6 @@ final class MainViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
         updateScore()
-        refreshFeatureFlags()
         analytics.report("main_screen_opened")
     }
 
@@ -151,7 +150,7 @@ final class MainViewController: UIViewController {
             weight: .medium,
             color: UIColor.white.withAlphaComponent(0.78)
         )
-        statusLabel.text = "Проверяем синхронизацию…"
+        statusLabel.text = featureFlagStatusText
         statusLabel.textColor = UIColor.white.withAlphaComponent(0.78)
         statusLabel.font = .preferredFont(forTextStyle: .caption1)
         statusLabel.adjustsFontForContentSizeCategory = true
@@ -525,28 +524,18 @@ final class MainViewController: UIViewController {
         }
     }
 
-    private func refreshFeatureFlags() {
-        apiClient.fetchFeatureFlags(appId: configuration.appIdentifier) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case let .success(response):
-                self.featureFlags.apply(response)
-                guard self.featureFlags.cloudSyncEnabled else {
-                    self.showStatus("Облачная синхронизация отключена")
-                    return
-                }
-                self.apiClient.checkHealth { [weak self] healthResult in
-                    self?.showStatus(
-                        healthResult.isSuccess ? "Синхронизация доступна" : "Офлайн-режим"
-                    )
-                }
-            case .failure:
-                self.showStatus(
-                    self.featureFlags.cloudSyncEnabled
-                        ? "Офлайн-режим • используется сохранённая настройка"
-                        : "Облачная синхронизация отключена"
-                )
-            }
+    private var featureFlagStatusText: String {
+        switch featureFlags.source {
+        case .remote:
+            return featureFlags.cloudSyncEnabled
+                ? "Синхронизация доступна"
+                : "Облачная синхронизация отключена"
+        case .cached:
+            return featureFlags.cloudSyncEnabled
+                ? "Офлайн-режим • используется сохранённая настройка"
+                : "Облачная синхронизация отключена • используется сохранённая настройка"
+        case .defaultValue:
+            return "Офлайн-режим • используется настройка по умолчанию"
         }
     }
 
@@ -1571,11 +1560,4 @@ private enum Palette {
     static let actionBackground = UIColor(white: 0.91, alpha: 1)
     static let mutedText = UIColor(white: 0.34, alpha: 1)
     static let danger = UIColor(red: 0.68, green: 0.16, blue: 0.19, alpha: 1)
-}
-
-private extension Result where Success == Void {
-    var isSuccess: Bool {
-        if case .success = self { return true }
-        return false
-    }
 }
