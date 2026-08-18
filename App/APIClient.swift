@@ -7,6 +7,7 @@ struct PushRegistration: Codable {
 }
 
 struct SyncRequest: Encodable {
+    let appId: String
     let installationId: String
     let matchToken: String?
     let clientRevision: Int
@@ -21,6 +22,31 @@ struct SyncResponse: Decodable {
     let snapshot: MatchSnapshot
     let pushStatus: String
     let serverTime: String
+}
+
+struct FeatureFlagsResponse: Decodable {
+    let flags: [String: Bool]
+}
+
+final class FeatureFlagStore {
+    private let defaults: UserDefaults
+    private let cloudSyncKey: String
+    private(set) var cloudSyncEnabled: Bool
+
+    init(defaults: UserDefaults) {
+        let key = "feature.cloudSyncEnabled"
+        self.defaults = defaults
+        cloudSyncKey = key
+        cloudSyncEnabled = defaults.object(forKey: key) == nil
+            ? true
+            : defaults.bool(forKey: key)
+    }
+
+    func apply(_ response: FeatureFlagsResponse) {
+        guard let enabled = response.flags["cloudSyncEnabled"] else { return }
+        cloudSyncEnabled = enabled
+        defaults.set(enabled, forKey: cloudSyncKey)
+    }
 }
 
 enum APIClientError: LocalizedError {
@@ -67,6 +93,35 @@ final class APIClient {
                 result = .failure(error)
             } else if (response as? HTTPURLResponse)?.statusCode == 200 {
                 result = .success(())
+            } else {
+                result = .failure(APIClientError.invalidResponse)
+            }
+            DispatchQueue.main.async { completion(result) }
+        }.resume()
+    }
+
+    func fetchFeatureFlags(
+        appId: String,
+        completion: @escaping (Result<FeatureFlagsResponse, Error>) -> Void
+    ) {
+        var components = URLComponents(
+            url: baseURL.appendingPathComponent("config"),
+            resolvingAgainstBaseURL: false
+        )
+        components?.queryItems = [URLQueryItem(name: "appId", value: appId)]
+        guard let url = components?.url else {
+            completion(.failure(APIClientError.encoding))
+            return
+        }
+
+        session.dataTask(with: URLRequest(url: url)) { [decoder] data, response, error in
+            let result: Result<FeatureFlagsResponse, Error>
+            if let error {
+                result = .failure(error)
+            } else if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                result = .failure(APIClientError.serverStatus(response.statusCode))
+            } else if let data, let decoded = try? decoder.decode(FeatureFlagsResponse.self, from: data) {
+                result = .success(decoded)
             } else {
                 result = .failure(APIClientError.invalidResponse)
             }

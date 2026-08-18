@@ -12,6 +12,7 @@ final class MainViewController: UIViewController {
     private let configuration: AppConfiguration
     private let apiClient: APIClient
     private let analytics: AnalyticsReporter
+    private let featureFlags: FeatureFlagStore
     private let installationId: String
     private let contactsStore = CNContactStore()
     private let locationManager = CLLocationManager()
@@ -42,11 +43,13 @@ final class MainViewController: UIViewController {
         configuration: AppConfiguration,
         apiClient: APIClient,
         analytics: AnalyticsReporter,
+        featureFlags: FeatureFlagStore,
         installationId: String
     ) {
         self.configuration = configuration
         self.apiClient = apiClient
         self.analytics = analytics
+        self.featureFlags = featureFlags
         self.installationId = installationId
         snapshot = MatchSnapshot.load(groupIdentifier: configuration.appGroupIdentifier)
         matchToken = UserDefaults.standard.string(forKey: "match.token")
@@ -87,11 +90,7 @@ final class MainViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 
         updateScore()
-        apiClient.checkHealth { [weak self] result in
-            self?.showStatus(
-                result.isSuccess ? "Синхронизация доступна" : "Офлайн-режим"
-            )
-        }
+        refreshFeatureFlags()
         analytics.report("main_screen_opened")
     }
 
@@ -485,8 +484,15 @@ final class MainViewController: UIViewController {
         reloadMatchWidgets()
         bluetoothConnector?.update(snapshot)
 
+        guard featureFlags.cloudSyncEnabled else {
+            showStatus("Счет сохранён на устройстве • облачная синхронизация отключена")
+            analytics.report("sync_result", parameters: ["result": "disabled"])
+            return
+        }
+
         let pushToken = UserDefaults.standard.string(forKey: "push.deviceToken")
         let request = SyncRequest(
+            appId: configuration.appIdentifier,
             installationId: installationId,
             matchToken: matchToken,
             clientRevision: snapshot.revision,
@@ -515,6 +521,31 @@ final class MainViewController: UIViewController {
             case .failure:
                 self.showStatus("Счет сохранён на устройстве • офлайн")
                 self.analytics.report("sync_result", parameters: ["result": "offline"])
+            }
+        }
+    }
+
+    private func refreshFeatureFlags() {
+        apiClient.fetchFeatureFlags(appId: configuration.appIdentifier) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case let .success(response):
+                self.featureFlags.apply(response)
+                guard self.featureFlags.cloudSyncEnabled else {
+                    self.showStatus("Облачная синхронизация отключена")
+                    return
+                }
+                self.apiClient.checkHealth { [weak self] healthResult in
+                    self?.showStatus(
+                        healthResult.isSuccess ? "Синхронизация доступна" : "Офлайн-режим"
+                    )
+                }
+            case .failure:
+                self.showStatus(
+                    self.featureFlags.cloudSyncEnabled
+                        ? "Офлайн-режим • используется сохранённая настройка"
+                        : "Облачная синхронизация отключена"
+                )
             }
         }
     }

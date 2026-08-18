@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Mobile Apps API
+  version: 1.0.0
+x-yc-apigateway:
+  rateLimit:
+    allRequests:
+      rps: 10
+paths:
+  /health:
+    get:
+      operationId: health
+      responses:
+        "200":
+          description: Backend is available
+          content:
+            application/json:
+              schema:
+                type: object
+      x-yc-apigateway-integration:
+        type: dummy
+        http_code: 200
+        http_headers:
+          Content-Type: application/json; charset=utf-8
+          Cache-Control: no-store
+        content:
+          application/json: '{"status":"ok"}'
+  /sync:
+    post:
+      operationId: sync
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Current synchronized state
+          content:
+            application/json:
+              schema:
+                type: object
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: d4eod1tle64d77d5q5tb
+        tag: $latest
+        service_account_id: ajedaljpsc9s15h4pn3h
+        payload_format_version: "1.0"
+  /config:
+    get:
+      operationId: featureConfig
+      parameters:
+        - name: appId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Remote feature configuration
+          content:
+            application/json:
+              schema:
+                type: object
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+      x-yc-apigateway-integration:
+        type: cloud_functions
+        function_id: d4eod1tle64d77d5q5tb
+        tag: $latest
+        service_account_id: ajedaljpsc9s15h4pn3h
+        payload_format_version: "1.0"

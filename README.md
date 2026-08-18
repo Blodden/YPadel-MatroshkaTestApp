@@ -14,7 +14,7 @@
 - `APP_GROUP_IDENTIFIER`
 - `APPMETRICA_API_KEY` — пустой ключ безопасно отключает активацию SDK
 
-Debug backend URL находится в `Config/Debug.xcconfig`, Release URL — в `Config/Release.xcconfig`.
+Backend URL находится в `Config/Debug.xcconfig` и `Config/Release.xcconfig`. Оба варианта сейчас используют production HTTPS API Gateway в Yandex Cloud.
 
 Перед Release также нужно заполнить PRIVACY_POLICY_URL и SUPPORT_URL в Config/Shared.xcconfig.
 
@@ -31,17 +31,39 @@ open YPoints.xcodeproj
 
 Deployment target приложения и notification extensions — iOS 15.0; Lock Screen widget — iOS 16.0.
 
-## Локальный backend
+## Backend в Yandex Cloud
 
 ```sh
-python3 backend/server.py
-curl http://localhost:8080/health
-curl -X POST http://localhost:8080/sync -H 'Content-Type: application/json' -d '{"installationId":"local","matchToken":null,"clientRevision":1,"snapshot":{"leftName":"Мы","rightName":"Соперники","leftPoints":2,"rightPoints":1,"leftGames":3,"rightGames":2,"leftSets":1,"rightSets":0,"state":"active","revision":1,"updatedAt":"2026-08-17T12:00:00Z"},"push":{"token":null,"environment":"sandbox","enabled":false}}'
+curl https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/health
+curl 'https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/config?appId=com.example.ypoints'
+curl -X POST https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net/sync -H 'Content-Type: application/json' -d '{"appId":"com.example.ypoints","installationId":"local","matchToken":null,"clientRevision":1,"snapshot":{"leftName":"Мы","rightName":"Соперники","leftPoints":2,"rightPoints":1,"leftGames":3,"rightGames":2,"leftSets":1,"rightSets":0,"state":"active","revision":1,"updatedAt":"2026-08-18T12:00:00Z"},"push":{"token":null,"environment":"sandbox","enabled":false}}'
 ```
 
-Backend намеренно состоит из одного файла и двух маршрутов: `GET /health` и `POST /sync`. Данные последней синхронизации хранятся только в памяти процесса.
+Backend использует один API Gateway `mobile-api`, одну Cloud Function `mobile-sync` и одну Serverless YDB `mobile-apps` в изолированном каталоге `mobile-backends`. Исходник функции находится в `backend/index.py`, закреплённая зависимость — в `backend/requirements.txt`, спецификация шлюза — в `backend/openapi.yaml`.
 
-POST /sync принимает локальный revision/snapshot, непривязанный к личности installation ID, опциональный match token и APNs token. Сервер возвращает актуальный snapshot и честный pushStatus: pending_credentials, пока APNs Team и .p8 не настроены.
+Для защиты от случайного перерасхода шлюз ограничен `10 RPS`, функция — одним экземпляром и двумя одновременными запросами на зону, YDB — `10 RU/с` и `1 ГБ`. API намеренно остаётся анонимным для минимального MVP: `matchToken` работает как секрет конкретного матча, поэтому через backend нельзя передавать чувствительные пользовательские данные.
+
+`POST /sync` принимает `appId`, локальный revision/snapshot, непривязанный к личности installation ID, опциональный match token и APNs token. Сочетание `appId + matchToken` разделяет данные разных приложений на общем backend. Сервер возвращает актуальный snapshot и честный `pushStatus: pending_credentials`, пока APNs Team и `.p8` не настроены. Контакты, фото, аудио, координаты, ATT-статус и IDFA не передаются.
+
+`GET /config` возвращает `cloudSyncEnabled`. Приложение запрашивает флаг при запуске, хранит последнее успешное значение в `UserDefaults` и проверяет его перед каждым `/sync`, включая регистрацию APNs-токена. При выключенном флаге счёт, виджет и Bluetooth продолжают работать локально.
+
+Изменение флага выполняется приватным IAM-вызовом функции и не опубликовано через API Gateway:
+
+```sh
+yc serverless function invoke --id d4eod1tle64d77d5q5tb --data '{"action":"setFeatureFlag","appId":"com.example.ypoints","key":"cloudSyncEnabled","enabled":false}'
+```
+
+Для включения замените `false` на `true`. Новое значение применяется после следующего запуска приложения; при недоступности backend используется последнее сохранённое значение.
+
+Cloud Function авторизуется в YDB через привязанный сервисный аккаунт; долгоживущих ключей в репозитории нет. На другом компьютере достаточно установить `yc`, войти в тот же аккаунт и выбрать каталог `mobile-backends`.
+
+Повторное развёртывание кода функции и спецификации шлюза:
+
+```sh
+yc config profile activate mobile-backend
+yc serverless function version create --function-id d4eod1tle64d77d5q5tb --runtime python312 --entrypoint index.handler --memory 256m --execution-timeout 10s --source-path backend --service-account-id ajedaljpsc9s15h4pn3h --environment YDB_ENDPOINT=grpcs://ydb.serverless.yandexcloud.net:2135,YDB_DATABASE=/ru-central1/b1gphpa2kupo8no6avg6/etn9g57v0om80lma5b4i
+yc serverless api-gateway update --id d5d27ljq6thqpj2secmq --spec backend/openapi.yaml --execution-timeout 15s
+```
 
 ## ATT и AppMetrica
 

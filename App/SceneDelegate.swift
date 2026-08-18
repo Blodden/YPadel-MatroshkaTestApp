@@ -17,6 +17,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             configuration: services.configuration,
             apiClient: services.apiClient,
             analytics: services.analytics,
+            featureFlags: services.featureFlags,
             installationId: services.installationId
         )
         let navigationController = UINavigationController(rootViewController: mainViewController)

@@ -132,14 +132,29 @@
     ]
   },
   "backend": {
-    "implementation": "backend/server.py, Python standard library, in-memory storage",
+    "implementation": "Yandex API Gateway + Python 3.12 Cloud Function + Serverless YDB",
     "endpoints": [
       "GET /health",
+      "GET /config",
       "POST /sync"
     ],
-    "debugBaseURL": "http://localhost:8080",
-    "releaseBaseURL": "https://example.invalid",
-    "releaseStatus": "pending real HTTPS host and persistence decision"
+    "debugBaseURL": "https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net",
+    "releaseBaseURL": "https://d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net",
+    "partitionKey": "appId + matchToken",
+    "authentication": "anonymous MVP; matchToken is a per-match bearer secret",
+    "gatewayRateLimitRPS": 10,
+    "functionZoneInstancesLimit": 1,
+    "functionZoneRequestsLimit": 2,
+    "ydbThrottle": "10 RU/s",
+    "ydbStorageLimit": "1 GB",
+    "releaseStatus": "production HTTPS and persistent sync verified; APNs delivery remains pending Apple credentials"
+  },
+  "featureFlags": {
+    "provider": "existing Yandex Cloud Function and Serverless YDB",
+    "cloudSyncEnabled": true,
+    "fallback": "last successful value in UserDefaults; true on first install",
+    "update": "private IAM function invocation; no public write endpoint",
+    "effect": "gates POST /sync and APNs token sync while local score, widget and Bluetooth remain available"
   },
   "analytics": {
     "provider": "AppMetrica 6.6.0",
@@ -195,6 +210,8 @@
     "simulatorLaunch": "passed",
     "backendHealth": "passed",
     "backendSync": "passed",
+    "cloudSyncEnabled": "passed for remote false and true states",
+    "publicFeatureFlagWrite": "not exposed; POST /config returns HTTP 405",
     "unitTests": "intentionally absent",
     "uiTests": "intentionally absent",
     "physicalDevicePermissionPass": "pending",
@@ -210,7 +227,6 @@
     "replace all com.example bundle identifiers and App Group identifier",
     "select Apple Developer Team and create matching App Group/capabilities",
     "provide AppMetrica API key",
-    "deploy an HTTPS backend and replace example.invalid",
     "provide privacy policy and support URLs",
     "configure APNs key/certificate and backend push sender",
     "verify Bluetooth, camera, contacts, Face ID, location, microphone, PhotoKit and APNs on physical iPhone",

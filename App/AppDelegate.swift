@@ -5,6 +5,7 @@ final class AppServices {
     let configuration: AppConfiguration
     let apiClient: APIClient
     let analytics: AnalyticsReporter
+    let featureFlags: FeatureFlagStore
     let installationId: String
 
     init(bundle: Bundle) {
@@ -17,9 +18,9 @@ final class AppServices {
             baseURL: configuration.apiBaseURL,
             session: URLSession(configuration: sessionConfiguration)
         )
-        analytics = AnalyticsReporter(apiKey: configuration.appMetricaAPIKey)
-
         let defaults = UserDefaults.standard
+        analytics = AnalyticsReporter(apiKey: configuration.appMetricaAPIKey)
+        featureFlags = FeatureFlagStore(defaults: defaults)
         if let storedId = defaults.string(forKey: "installation.id") {
             installationId = storedId
         } else {
@@ -32,8 +33,10 @@ final class AppServices {
     func syncPushToken(_ token: String) {
         let defaults = UserDefaults.standard
         defaults.set(token, forKey: "push.deviceToken")
+        guard featureFlags.cloudSyncEnabled else { return }
         let snapshot = MatchSnapshot.load(groupIdentifier: configuration.appGroupIdentifier)
         let request = SyncRequest(
+            appId: configuration.appIdentifier,
             installationId: installationId,
             matchToken: defaults.string(forKey: "match.token"),
             clientRevision: snapshot.revision,

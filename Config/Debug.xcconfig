@@ -1,5 +1,5 @@
 #include "Shared.xcconfig"
-API_BASE_URL = http:/$()/localhost:8080
+API_BASE_URL = https:/$()/d5d27ljq6thqpj2secmq.sax5b7yq.apigw.yandexcloud.net
 APNS_ENVIRONMENT = development
 PUSH_ENVIRONMENT = sandbox
 SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEBUG
