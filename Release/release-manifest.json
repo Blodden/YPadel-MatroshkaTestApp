@@ -231,7 +231,6 @@
     "publicFeatureFlagWrite": "not exposed; POST /config returns HTTP 405",
     "unitTests": "intentionally absent",
     "uiTests": "intentionally absent",
-    "physicalDevicePermissionPass": "pending",
     "signedArchiveValidation": "pending"
   },
   "artifacts": {
@@ -244,7 +243,6 @@
     "select Apple Developer Team and create matching App Group/capabilities",
     "provide privacy policy and support URLs",
     "configure APNs key/certificate and backend push sender",
-    "verify Bluetooth, camera, contacts, Face ID, location, microphone, PhotoKit and APNs on physical iPhone",
     "create and validate a signed archive"
   ]
 }

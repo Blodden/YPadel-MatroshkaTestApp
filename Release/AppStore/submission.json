@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-19",
+  "status": "gate-4-preliminary-approved-archive-blocked-signing",
+  "perRunUserFacts": {
+    "status": "preliminary",
+    "finalReconfirmationRequired": true,
+    "finalReconfirmationStatus": "pending-user-request-before-app-store-delivery",
+    "rule": "Every user-provided legal, contact, storefront, compliance, retention, URL, version and build answer must be shown together and explicitly reconfirmed before App Store delivery. Preliminary answers do not authorize publication, upload or submission."
+  },
+  "application": {
+    "name": {
+      "value": "YPoints",
+      "status": "accepted"
+    },
+    "bundleIdentifier": {
+      "value": "com.idev.ypoints",
+      "status": "accepted"
+    },
+    "platform": {
+      "value": "iOS, iPhone only, portrait only",
+      "status": "accepted"
+    },
+    "minimumOS": {
+      "value": "15.0",
+      "status": "accepted"
+    },
+    "version": {
+      "value": "1.0",
+      "status": "preliminary-approved-gate-4"
+    },
+    "build": {
+      "value": "1",
+      "status": "preliminary-approved-gate-4"
+    },
+    "releaseType": {
+      "value": "first release",
+      "status": "preliminary-user-answer"
+    },
+    "primaryLocale": {
+      "value": "ru-RU",
+      "status": "preliminary-user-answer"
+    },
+    "primaryCategory": {
+      "value": "Sports",
+      "status": "preliminary-user-answer"
+    },
+    "sku": {
+      "value": "YPOINTS-IOS-001",
+      "status": "proposed"
+    },
+    "price": {
+      "value": "free",
+      "status": "preliminary-user-answer"
+    },
+    "storefronts": {
+      "value": [
+        {
+          "country": "Russia",
+          "code": "RU"
+        }
+      ],
+      "status": "preliminary-user-answer"
+    },
+    "releaseMode": {
+      "value": "manual",
+      "status": "preliminary-user-answer"
+    }
+  },
+  "toolchain": {
+    "localXcode": "26.5 (17F42)",
+    "localIPhoneOSSDK": "26.5",
+    "currentAppleUploadMinimum": "Xcode 26 or later with the iOS 26 SDK or later",
+    "status": "meets-current-requirement",
+    "checkedAt": "2026-08-19",
+    "source": "https://developer.apple.com/news/upcoming-requirements/"
+  },
+  "legal": {
+    "developerOrControllerName": {
+      "value": {
+        "ru": "Евгений Безгин",
+        "en": "Evgenii Bezgin"
+      },
+      "status": "preliminary-user-answer"
+    },
+    "publicPrivacyAndSupportEmail": {
+      "value": "bezgineg@yandex.ru",
+      "status": "preliminary-user-answer"
+    },
+    "copyright": {
+      "value": "2026 Evgenii Bezgin",
+      "status": "preliminary-user-answer"
+    },
+    "privacyPolicyDraft": {
+      "path": "legal/privacy-policy.md",
+      "status": "preliminary-approved-gate-1"
+    },
+    "supportDraft": {
+      "path": "legal/support.md",
+      "status": "preliminary-approved-gate-1"
+    },
+    "effectiveDate": {
+      "value": null,
+      "status": "deferred-until-final-pre-publication-confirmation"
+    },
+    "privacyPolicyURL": {
+      "value": null,
+      "status": "deferred-until-final-pre-publication-confirmation"
+    },
+    "supportURL": {
+      "value": null,
+      "status": "deferred-until-final-pre-publication-confirmation"
+    },
+    "eula": {
+      "value": "Apple standard EULA",
+      "status": "accepted"
+    },
+    "legalAdvice": false
+  },
+  "dataRetention": {
+      "localData": {
+        "value": "Данные внутри YPoints хранятся до их сброса или замены доступными действиями приложения либо до удаления приложения. Карточки результатов, сохранённые в системное приложение «Фото», хранятся до их удаления пользователем из «Фото» и не удаляются при удалении YPoints.",
+        "status": "preliminary-user-answer"
+      },
+      "backendSnapshotAndIdentifiers": {
+        "value": "Автоматический срок удаления не установлен. Данные хранятся, пока работает сервис, и удаляются вручную после подтверждённого запроса пользователя.",
+        "status": "preliminary-user-answer"
+      },
+      "appMetrica": {
+        "value": "Данные AppMetrica хранятся в течение срока использования сервиса и удаляются в соответствии с условиями AppMetrica и применимым законодательством.",
+        "status": "preliminary-user-answer"
+      },
+    "deletionRequestChannel": {
+      "value": "bezgineg@yandex.ru",
+      "status": "preliminary-user-answer"
+    }
+  },
+  "privacy": {
+    "source": "Release/release-manifest.json and AppSpec.md",
+    "collectsData": true,
+    "dataTypesStatus": "preliminary-approved-gate-3",
+    "privacyPolicyRequired": true,
+    "privacyChoicesURLRequired": false,
+    "dataTypes": [
+      {
+        "type": "Other User Content",
+        "sources": [
+          "YPoints backend match score snapshot"
+        ],
+        "purposes": [
+          "App Functionality"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "stored with a device-level installation identifier",
+        "usedForTracking": false,
+        "optionalCollection": false,
+        "collectionCondition": "sent automatically when cloudSyncEnabled is true; the local score remains usable without backend sync"
+      },
+      {
+        "type": "Device ID",
+        "sources": [
+          "random installationId",
+          "APNs device token after notification opt-in",
+          "AppMetrica identifiers",
+          "IDFA after ATT authorization"
+        ],
+        "purposes": [
+          "App Functionality",
+          "Analytics",
+          "Developer's Advertising or Marketing"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "Apple treats linkage through a device identifier as linked to the user",
+        "usedForTracking": true,
+        "trackingCondition": "IDFA only after ATT status authorized",
+        "optionalCollection": "mixed",
+        "collectionCondition": "APNs token and IDFA require separate user permission; installation and analytics identifiers are otherwise collected as recorded in the implementation handoff"
+      },
+      {
+        "type": "Product Interaction",
+        "sources": [
+          "AppMetrica product analytics"
+        ],
+        "purposes": [
+          "Analytics"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "analytics may be associated with device-level identifiers",
+        "usedForTracking": false,
+        "optionalCollection": false
+      },
+      {
+        "type": "Crash Data",
+        "sources": [
+          "AppMetrica diagnostics"
+        ],
+        "purposes": [
+          "Analytics",
+          "App Functionality"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "diagnostics may be associated with device-level identifiers",
+        "usedForTracking": false,
+        "optionalCollection": false
+      },
+      {
+        "type": "Performance Data",
+        "sources": [
+          "AppMetrica diagnostics"
+        ],
+        "purposes": [
+          "Analytics",
+          "App Functionality"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "diagnostics may be associated with device-level identifiers",
+        "usedForTracking": false,
+        "optionalCollection": false
+      },
+      {
+        "type": "Other Diagnostic Data",
+        "sources": [
+          "AppMetrica diagnostics"
+        ],
+        "purposes": [
+          "Analytics",
+          "App Functionality"
+        ],
+        "linkedToUser": true,
+        "linkageBasis": "diagnostics may be associated with device-level identifiers",
+        "usedForTracking": false,
+        "optionalCollection": false
+      }
+    ],
+    "notCollectedByDeveloper": [
+      "Contacts",
+      "Photos or Videos",
+      "Audio Data",
+      "Precise Location",
+      "Coarse Location",
+      "Biometric Data"
+    ],
+    "notCollectedReason": "These permission-backed values remain on device; MapKit data collected by Apple is not developer collection.",
+    "tracking": {
+      "value": "IDFA may be used by AppMetricaAdSupport for attribution only after ATT authorization",
+      "dataTypes": [
+        "Device ID"
+      ],
+      "advertisingDisplayedInApp": false,
+      "status": "accepted-from-handoff"
+    },
+    "thirdPartySDKs": [
+      {
+        "name": "AppMetrica",
+        "purpose": "product analytics, diagnostics and ATT-authorized attribution",
+        "status": "accepted-from-handoff"
+      }
+    ]
+  },
+  "compliance": {
+    "ageRating": {
+      "expectedGlobalRating": "4+",
+      "madeForKids": false,
+      "override": "Not Applicable",
+      "inAppControls": {
+        "parentalControls": false,
+        "ageAssurance": false
+      },
+      "capabilities": {
+        "unrestrictedWebAccess": false,
+        "userGeneratedContent": false,
+        "socialMedia": false,
+        "socialMediaDisabledForUsersUnder13": false,
+        "messagingAndChat": false,
+        "advertising": false
+      },
+      "contentDescriptors": {
+        "profanityOrCrudeHumor": "None",
+        "horrorOrFearThemes": "None",
+        "alcoholTobaccoOrDrugUseOrReferences": "None",
+        "medicalOrTreatmentInformation": "None",
+        "healthOrWellnessTopics": "None",
+        "matureOrSuggestiveThemes": "None",
+        "sexualContentOrNudity": "None",
+        "graphicSexualContentAndNudity": "None",
+        "cartoonOrFantasyViolence": "None",
+        "realisticViolence": "None",
+        "prolongedGraphicOrSadisticRealisticViolence": "None",
+        "gunsOrOtherWeapons": "None",
+        "simulatedGambling": "None",
+        "contests": "None",
+        "gambling": false,
+        "lootBoxes": false
+      },
+      "status": "preliminary-approved-gate-3"
+    },
+    "contentRights": {
+      "value": "The app displays third-party map and search data only through Apple MapKit under Apple's terms. No other third-party content is included, shown or accessed.",
+      "status": "preliminary-user-answer"
+    },
+    "dsaTraderStatus": {
+      "value": null,
+      "status": "deferred-by-user-until-final-pre-submission-confirmation"
+    },
+    "exportCompliance": {
+      "value": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "basis": "Uses only standard HTTPS/TLS and Apple-provided encryption. The reviewed YBApp-style fixed-seed XOR string obfuscation is not treated as non-exempt encryption. No proprietary cryptography, VPN or encrypted messaging is included."
+      },
+      "status": "preliminary-user-answer"
+    },
+    "accounts": {
+      "value": "The app does not create user accounts or require sign-in",
+      "status": "accepted-from-handoff"
+    },
+    "advertisingAndTracking": {
+      "advertisingDisplayedInApp": false,
+      "trackingScenarioPresent": true,
+      "trackingScenario": "ATT-authorized IDFA attribution through AppMetricaAdSupport",
+      "status": "preliminary-approved-gate-3"
+    }
+  },
+  "reviewInformation": {
+    "contactFirstName": {
+      "value": "Евгений",
+      "status": "preliminary-user-answer"
+    },
+    "contactLastName": {
+      "value": "Безгин",
+      "status": "preliminary-user-answer"
+    },
+    "contactEmail": {
+      "value": "bezgineg@yandex.ru",
+      "status": "preliminary-user-answer"
+    },
+    "contactPhone": {
+      "value": "+381603821777",
+      "status": "preliminary-user-answer"
+    },
+    "demoAccountRequired": false,
+    "artifact": "review-information.md",
+    "notes": {
+      "value": null,
+      "status": "not-required-unless-physical-permission-path-needs-clarification"
+    },
+    "status": "preliminary-approved-gate-3"
+  },
+  "privacyPolicyLink": {
+    "proposedPlacement": "Небольшая текстовая кнопка «Политика конфиденциальности» внизу существующего основного прокручиваемого экрана",
+    "placementStatus": "preliminary-approved-gate-1",
+    "approvedMockup": "Design/approved-privacy-policy-link.png",
+    "urlStatus": "deferred-until-final-pre-publication-confirmation",
+    "codeChangeStatus": "deferred-until-real-https-url-at-final-pre-publication-stage"
+  },
+  "metadata": {
+    "path": "metadata/ru-RU.md",
+    "status": "preliminary-approved-gate-2"
+  },
+  "screenshots": {
+    "locale": "ru-RU",
+    "plannedCount": 1,
+    "plannedState": "Основной экран: очки 40:30, геймы 5:4, сеты 1:0, без персональных данных",
+    "plannedPortraitSize": "1320x2868",
+    "fileFormats": [
+      "png",
+      "jpeg",
+      "jpg"
+    ],
+    "alphaAllowed": false,
+    "file": "screenshots/ru-RU/01-main-score.jpg",
+    "captureDevice": "iPhone 16 Pro Max, iOS 18.6 Simulator",
+    "captureConfiguration": "Release",
+    "authenticApplicationUI": true,
+    "containsPersonalData": false,
+    "status": "preliminary-approved-gate-2"
+  },
+  "archive": {
+    "localReleaseBuildWithoutSigning": "passed in implementation handoff",
+    "requestedArchivePath": "YPoints-1.0-1.xcarchive",
+    "localArchiveAttempt": "failed at GatherProvisioningInputs because DEVELOPMENT_TEAM is empty for the app, widget, notification service and notification content targets",
+    "signedArchive": "blocked-apple-developer-team-and-signing-for-all-four-shipped-targets",
+    "upload": "not-authorized",
+    "submission": "not-authorized"
+  },
+  "approvals": {
+    "gate1LegalAndPrivacyLinkPlacement": "preliminary-approved",
+    "gate2MetadataAndScreenshots": "preliminary-approved",
+    "gate3PrivacyComplianceAndReviewInformation": "preliminary-approved",
+    "gate4VersionBuildAndArchive": "preliminary-approved; archive-blocked-signing",
+    "finalPreSubmissionReconfirmation": "pending-user-request"
+  },
+  "externalBlockers": [
+    "Apple Developer Program membership and Team selection",
+    "App ID, App Group and Push capabilities in the selected Team",
+    "APNs credentials and backend push sender",
+    "public HTTPS Privacy Policy URL",
+    "public HTTPS Support URL",
+    "signed Release archive",
+    "App Store Connect app record, metadata entry, validation, upload and submission"
+  ]
+}
