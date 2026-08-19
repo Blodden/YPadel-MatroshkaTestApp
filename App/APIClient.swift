@@ -37,13 +37,17 @@ final class FeatureFlagStore {
 
     private let defaults: UserDefaults
     private let cloudSyncKey: String
+    private let appVersion: String
+    private let appGroupIdentifier: String
     private(set) var cloudSyncEnabled: Bool
     private(set) var source: Source
 
-    init(defaults: UserDefaults, appVersion: String) {
+    init(defaults: UserDefaults, appVersion: String, appGroupIdentifier: String) {
         let key = "feature.cloudSyncEnabled.\(appVersion)"
         self.defaults = defaults
         cloudSyncKey = key
+        self.appVersion = appVersion
+        self.appGroupIdentifier = appGroupIdentifier
         if defaults.object(forKey: key) == nil {
             cloudSyncEnabled = true
             source = .defaultValue
@@ -51,6 +55,11 @@ final class FeatureFlagStore {
             cloudSyncEnabled = defaults.bool(forKey: key)
             source = .cached
         }
+        SharedFeatureFlags.saveCloudSyncEnabled(
+            cloudSyncEnabled,
+            appVersion: appVersion,
+            groupIdentifier: appGroupIdentifier
+        )
     }
 
     @discardableResult
@@ -59,6 +68,11 @@ final class FeatureFlagStore {
         cloudSyncEnabled = enabled
         source = .remote
         defaults.set(enabled, forKey: cloudSyncKey)
+        SharedFeatureFlags.saveCloudSyncEnabled(
+            enabled,
+            appVersion: appVersion,
+            groupIdentifier: appGroupIdentifier
+        )
         return true
     }
 }

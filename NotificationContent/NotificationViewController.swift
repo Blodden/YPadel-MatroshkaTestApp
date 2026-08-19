@@ -6,9 +6,40 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
     private let titleLabel = UILabel()
     private let scoreLabel = UILabel()
     private let detailLabel = UILabel()
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+    private lazy var importedRenderer: ImportedNotificationContentRendering = ImportedNotificationRenderer()
+#endif
 
     override func viewDidLoad() {
         super.viewDidLoad()
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+        if SharedFeatureFlags.cloudSyncEnabled(bundle: .main) {
+            importedRenderer.install(in: self)
+            return
+        }
+#endif
+        configureYPointsContent()
+    }
+
+    func didReceive(_ notification: UNNotification) {
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+        if SharedFeatureFlags.cloudSyncEnabled(bundle: .main) {
+            importedRenderer.didReceive(notification)
+            return
+        }
+#endif
+        let content = notification.request.content
+        titleLabel.text = content.title.isEmpty ? "YPoints" : content.title
+        detailLabel.text = content.body
+        let rawScore = content.userInfo["score"] as? String ?? "0:0"
+        let games = content.userInfo["games"] as? String ?? "0 : 0"
+        let sets = content.userInfo["sets"] as? String ?? "0 : 0"
+        scoreLabel.text = rawScore.replacingOccurrences(of: ":", with: " : ")
+        scoreLabel.accessibilityValue = rawScore.replacingOccurrences(of: ":", with: " — ")
+        detailLabel.text = "\(content.body)\nГеймы \(games) • Сеты \(sets)"
+    }
+
+    private func configureYPointsContent() {
         view.backgroundColor = UIColor(red: 0.03, green: 0.25, blue: 0.17, alpha: 1)
 
         titleLabel.text = "YPoints"
@@ -54,18 +85,6 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
             openButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
             hideButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 44)
         ])
-    }
-
-    func didReceive(_ notification: UNNotification) {
-        let content = notification.request.content
-        titleLabel.text = content.title.isEmpty ? "YPoints" : content.title
-        detailLabel.text = content.body
-        let rawScore = content.userInfo["score"] as? String ?? "0:0"
-        let games = content.userInfo["games"] as? String ?? "0 : 0"
-        let sets = content.userInfo["sets"] as? String ?? "0 : 0"
-        scoreLabel.text = rawScore.replacingOccurrences(of: ":", with: " : ")
-        scoreLabel.accessibilityValue = rawScore.replacingOccurrences(of: ":", with: " — ")
-        detailLabel.text = "\(content.body)\nГеймы \(games) • Сеты \(sets)"
     }
 
     private func makeButton(title: String, action: Selector) -> UIButton {

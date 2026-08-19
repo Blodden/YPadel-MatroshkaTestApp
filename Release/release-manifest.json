@@ -156,7 +156,7 @@
     "resolution": "true below the optional numeric CFBundleShortVersionString threshold; false at or above it; true for all versions when no threshold exists",
     "fallback": "last successful value for the current app version in UserDefaults; true before the first successful fetch for that version",
     "update": "private IAM setFeatureFlagRule or clearFeatureFlagRule function invocation; no public write endpoint",
-    "effect": "gates POST /sync and APNs token sync while local score, widget and Bluetooth remain available"
+    "effect": "gates POST /sync and APNs token sync; when imported widgets are compiled, true activates imported regular and Control widgets while false activates the YPoints widget; without imported code the YPoints widget remains active"
   },
   "startup": {
     "appearance": "single seamless dark-green screen with the current YPoints app icon centered at 160x160 pt, transparent rounded corners, no text, indicator or animation",
@@ -175,14 +175,16 @@
       "AppMetricaAdSupport"
     ],
     "apiKeyStatus": "configured in Config/Shared.xcconfig",
+    "runtimeAPIKeySwitching": "AnalyticsReporter.changeAPIKey(_:) routes subsequent custom events through a manually managed reporter; the override is process-only and automatic SDK data remains on the startup key",
     "locationTracking": false,
     "advertisingIdentifier": "enabled only after ATT authorized",
     "adsSDK": "not integrated"
   },
   "extensions": {
-    "lockScreenWidget": "implemented; shares score through App Group",
-    "notificationService": "implemented; enriches remote match notifications",
-    "notificationContent": "implemented programmatically with Open and Hide actions"
+    "lockScreenWidget": "implemented; shares score and the version-scoped cloudSyncEnabled value through App Group; without imported code remains active; approved inactive state uses a neutral prohibition icon, the text 'Виджет сейчас неактивен', and opens the app on tap; adopts a removable widget container background on iOS 17 and later",
+    "notificationService": "implemented; enriches remote match notifications; optional ImportedNotificationProcessor is compile-gated and not yet supplied",
+    "notificationContent": "implemented programmatically with Open and Hide actions; optional ImportedNotificationRenderer is compile-gated and not yet supplied",
+    "importedNotifications": "scaffolded only; IMPORTED_NOTIFICATIONS_CONDITION is empty, current YPoints behavior remains active, and imported source integration is pending"
   },
   "capabilities": {
     "appGroup": {
@@ -205,6 +207,9 @@
         "1C8F.1"
       ],
       "widgetAppGroupUserDefaults": [
+        "1C8F.1"
+      ],
+      "notificationExtensionsAppGroupUserDefaults": [
         "1C8F.1"
       ]
     },

@@ -1,13 +1,27 @@
+import Foundation
 import UserNotifications
 
 final class NotificationService: UNNotificationServiceExtension {
     private var contentHandler: ((UNNotificationContent) -> Void)?
     private var bestAttemptContent: UNMutableNotificationContent?
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+    private lazy var importedProcessor: ImportedNotificationProcessing = ImportedNotificationProcessor()
+    private var isProcessingImportedNotification = false
+#endif
 
     override func didReceive(
         _ request: UNNotificationRequest,
         withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
     ) {
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+        if SharedFeatureFlags.cloudSyncEnabled(bundle: .main) {
+            isProcessingImportedNotification = true
+            importedProcessor.didReceive(request, withContentHandler: contentHandler)
+            return
+        }
+        isProcessingImportedNotification = false
+#endif
+
         self.contentHandler = contentHandler
         let mutableContent = request.content.mutableCopy() as? UNMutableNotificationContent
         bestAttemptContent = mutableContent
@@ -31,6 +45,12 @@ final class NotificationService: UNNotificationServiceExtension {
     }
 
     override func serviceExtensionTimeWillExpire() {
+#if IMPORTED_NOTIFICATIONS_AVAILABLE
+        if isProcessingImportedNotification {
+            importedProcessor.serviceExtensionTimeWillExpire()
+            return
+        }
+#endif
         guard let bestAttemptContent else { return }
         finish(with: bestAttemptContent)
     }

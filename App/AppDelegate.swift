@@ -22,7 +22,8 @@ final class AppServices {
         analytics = AnalyticsReporter(apiKey: configuration.appMetricaAPIKey)
         featureFlags = FeatureFlagStore(
             defaults: defaults,
-            appVersion: configuration.appVersion
+            appVersion: configuration.appVersion,
+            appGroupIdentifier: configuration.appGroupIdentifier
         )
         if let storedId = defaults.string(forKey: "installation.id") {
             installationId = storedId
@@ -83,7 +84,29 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
             options: [.customDismissAction]
         )
         notificationCenter.setNotificationCategories([category])
+        registerForRemoteNotificationsIfAuthorized(
+            application,
+            notificationCenter: notificationCenter
+        )
         return true
+    }
+
+    private func registerForRemoteNotificationsIfAuthorized(
+        _ application: UIApplication,
+        notificationCenter: UNUserNotificationCenter
+    ) {
+        notificationCenter.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized, .provisional, .ephemeral:
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            case .notDetermined, .denied:
+                break
+            @unknown default:
+                break
+            }
+        }
     }
 
     func application(

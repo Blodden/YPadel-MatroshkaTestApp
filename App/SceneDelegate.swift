@@ -57,6 +57,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if case let .success(response) = result {
                 appliedRemoteValue = services.featureFlags.apply(response)
             }
+            if appliedRemoteValue {
+                reloadMatchWidgets()
+            }
             if self.startupFinished {
                 if appliedRemoteValue {
                     self.refreshMainFeatureFlagStatus()

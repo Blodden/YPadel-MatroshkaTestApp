@@ -4,6 +4,7 @@ import WidgetKit
 struct MatchEntry: TimelineEntry {
     let date: Date
     let snapshot: MatchSnapshot
+    let isActive: Bool
 }
 
 struct MatchProvider: TimelineProvider {
@@ -16,7 +17,8 @@ struct MatchProvider: TimelineProvider {
                 leftGames: 3,
                 rightGames: 2,
                 leftSets: 1
-            )
+            ),
+            isActive: true
         )
     }
 
@@ -32,9 +34,20 @@ struct MatchProvider: TimelineProvider {
     private func makeEntry() -> MatchEntry {
         let groupIdentifier = Bundle.main.object(forInfoDictionaryKey: "AppGroupIdentifier") as? String
             ?? "group.com.idev.ypoints"
+#if IMPORTED_WIDGET_AVAILABLE
+        let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            ?? "0"
+        let isActive = !SharedFeatureFlags.cloudSyncEnabled(
+            appVersion: appVersion,
+            groupIdentifier: groupIdentifier
+        )
+#else
+        let isActive = true
+#endif
         return MatchEntry(
             date: Date(),
-            snapshot: MatchSnapshot.load(groupIdentifier: groupIdentifier)
+            snapshot: MatchSnapshot.load(groupIdentifier: groupIdentifier),
+            isActive: isActive
         )
     }
 }
@@ -43,6 +56,24 @@ struct MatchLockScreenView: View {
     let entry: MatchEntry
 
     var body: some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            content
+                .containerBackground(.clear, for: .widget)
+        } else {
+            content
+        }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if entry.isActive {
+            scoreContent
+        } else {
+            inactiveContent
+        }
+    }
+
+    private var scoreContent: some View {
         HStack(spacing: 8) {
             Image(systemName: "number")
                 .font(.title3)
@@ -58,9 +89,22 @@ struct MatchLockScreenView: View {
         }
         .widgetURL(URL(string: "ypoints://match"))
     }
+
+    private var inactiveContent: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "nosign")
+                .font(.title3)
+            Text("Виджет сейчас неактивен")
+                .font(.caption)
+                .lineLimit(2)
+            Spacer(minLength: 0)
+        }
+        .widgetURL(URL(string: "ypoints://match"))
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Виджет сейчас неактивен")
+    }
 }
 
-@main
 struct YPointsWidget: Widget {
     let kind = "YPointsLockScreenScore"
 
@@ -71,5 +115,20 @@ struct YPointsWidget: Widget {
         .configurationDisplayName("Счет YPoints")
         .description("Счет и состояние матча на экране блокировки.")
         .supportedFamilies([.accessoryRectangular])
+    }
+}
+
+@main
+struct YPointsWidgetBundle: WidgetBundle {
+    var body: some Widget {
+        YPointsWidget()
+
+#if IMPORTED_WIDGET_AVAILABLE
+        ImportedWidget()
+
+        if #available(iOSApplicationExtension 18.0, *) {
+            ImportedControlWidget()
+        }
+#endif
     }
 }

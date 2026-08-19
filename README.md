@@ -12,7 +12,7 @@
 
 - `APP_BUNDLE_IDENTIFIER` — `com.idev.ypoints`
 - `APP_GROUP_IDENTIFIER` — `group.com.idev.ypoints`
-- `APPMETRICA_API_KEY` — SDK key приложения YPoints в AppMetrica; пустой ключ безопасно отключает активацию SDK
+- `APPMETRICA_API_KEY` — валидный SDK key приложения YPoints в AppMetrica
 
 Bundle identifiers следуют соглашению `com.idev.<имя приложения в нижнем регистре>`; extensions добавляют суффиксы `.widget`, `.notification-service` и `.notification-content`.
 
@@ -22,7 +22,9 @@ Backend URL находится в `Config/Debug.xcconfig` и `Config/Release.xcc
 
 После изменения bundle ID нужно также заменить производные bundle ID расширений и создать подходящие App ID/capabilities в Apple Developer. Для push и App Group запуск на физическом устройстве требует выбранную Development Team.
 
-Исходные entitlements приложения и виджета генерируются XcodeGen из `project.yml`: приложение получает Push Notifications и App Group, виджет — тот же App Group. Не редактируйте сгенерированные `.entitlements` отдельно от `project.yml`. Privacy Manifest есть у приложения (`App/PrivacyInfo.xcprivacy`) и виджета (`Widget/PrivacyInfo.xcprivacy`); причины доступа к UserDefaults разделяют обычные настройки приложения и данные App Group.
+Исходные entitlements приложения, виджета и notification extensions генерируются XcodeGen из `project.yml`: приложение получает Push Notifications и App Group, а расширения — тот же App Group. Не редактируйте сгенерированные `.entitlements` отдельно от `project.yml`. Privacy Manifest есть у каждого target, который читает обычные настройки или данные App Group.
+
+Импортированный push-код пока не является частью проекта. `IMPORTED_NOTIFICATIONS_CONDITION` в `Config/Shared.xcconfig` оставлен пустым, поэтому обе notification extensions всегда используют текущую реализацию YPoints. После появления `ImportedNotificationProcessor` и `ImportedNotificationRenderer` значение можно заменить на `IMPORTED_NOTIFICATIONS_AVAILABLE`: при `cloudSyncEnabled = true` extensions выберут импортированные реализации, при `false` — текущие. Без импортированных файлов проект продолжает собираться.
 
 ## Генерация проекта
 
@@ -77,7 +79,9 @@ yc serverless api-gateway update --id d5d27ljq6thqpj2secmq --spec backend/openap
 
 ## ATT и AppMetrica
 
-В приложении нет рекламных экранов и Yandex Mobile Ads. Строка «Оценка продвижения» напрямую открывает системный ATT-диалог. AppMetricaAdSupport использует IDFA для атрибуции только после разрешения iOS; при отказе AppMetrica работает без IDFA. API key читается из xcconfig; SDK активируется только при непустом корректном ключе.
+В приложении нет рекламных экранов и Yandex Mobile Ads. Строка «Оценка продвижения» напрямую открывает системный ATT-диалог. AppMetricaAdSupport использует IDFA для атрибуции только после разрешения iOS; при отказе AppMetrica работает без IDFA. Основной валидный API key читается из xcconfig и используется при активации SDK.
+
+`AnalyticsReporter.changeAPIKey(_:)` переключает последующие custom events на reporter другого API key в рамках текущего запуска. Перед переключением текущая дополнительная сессия останавливается, новая запускается вручную. Ключ не сохраняется между запусками; автоматические события и прочие данные основной SDK-конфигурации продолжают относиться к ключу, с которым AppMetrica была активирована при старте приложения. Передача основного ключа в метод возвращает custom events на основной reporter.
 
 Автоматический сбор location в AppMetrica явно отключён. Координаты используются только MapKit/Core Location на устройстве и не попадают в custom events или backend.
 

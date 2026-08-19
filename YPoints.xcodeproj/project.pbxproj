@@ -3,16 +3,19 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ED061A02356EB454BB5025B /* SharedFeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */; };
 		1EE3C0843A72B6F1045091A7 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D25AB16972079B9F21DBB0 /* AppConfiguration.swift */; };
 		231291D4C6F938C99C0B9B03 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 008100CEA788089E59A7F096 /* InfoPlist.strings */; };
+		233501CAB15FE6C6FAC6FA8E /* SharedFeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */; };
 		28A67C81EA4CD3627B7B06F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0583A085B9D35FEA3370D /* AppDelegate.swift */; };
 		3AE096C99760463E27DF029B /* YPointsNotificationContent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3F66007E4DD13204AC29D5EE /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063F2A96AE6D7A9FB9BDF9B /* APIClient.swift */; };
 		5A950C16ACAE706BC9864003 /* AnalyticsReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B3509D62F07D5731DC0887 /* AnalyticsReporter.swift */; };
+		644C822CA32705CA4B1D22BD /* SharedFeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */; };
 		7E4EACEC24DBE5D8F99EC025 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */; };
 		7FCE53D8C0D3371DCF38C1A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F67F2B4DF436654892B7372 /* SceneDelegate.swift */; };
 		7FF87C0AD9DA63668DCA92C7 /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB5317BB942C2EF7D36E5A4 /* BluetoothConnector.swift */; };
@@ -20,15 +23,20 @@
 		87B588EC66BC8E993B0D11C1 /* YPointsNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9188B26EDD19F8C1F66ACED9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F557673CCFB1F73E0CF47C52 /* Assets.xcassets */; };
 		9ACB5ED56E508297195EC83E /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */; };
+		9EC52ACC0A1EA8546A4A58E5 /* SharedFeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */; };
+		A563BA6FE42891B915B2B097 /* ImportedNotificationContentRendering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972E49C368B1AD58BDBD2E90 /* ImportedNotificationContentRendering.swift */; };
 		A911A9F2DC9C8DB10BA3763F /* AppMetricaAdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 636F4F181CBC0BAAC4B54B46 /* AppMetricaAdSupport */; };
 		ACEB1EDBD47113FE3955A1EA /* AppMetricaCore in Frameworks */ = {isa = PBXBuildFile; productRef = B509086C3A4369C07B7DB8C9 /* AppMetricaCore */; };
 		AF239DCAC3FFC184BD25BA83 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CAE9139D8D3536542C7508 /* NotificationService.swift */; };
 		AFE2119C7AF781905C74EDED /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */; };
 		B2E915C2DDA48F39EF004022 /* WidgetReloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CA799B6686B4F51F4E2D5 /* WidgetReloader.swift */; };
+		BFCFFE90E5643D1B9F638F8C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 285B05DF4E963F4C86B33B25 /* PrivacyInfo.xcprivacy */; };
 		C1F821489CD783E410A64AA6 /* YPointsWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1403FB8DFB919513559AEE50 /* YPointsWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D463026201D08F4889F62579 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EEE5E49E93CFAED3A2306F96 /* PrivacyInfo.xcprivacy */; };
 		DB826211DB422816C16BEA42 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6972DE12F300E29BDDA1F3FC /* MainViewController.swift */; };
 		F0FDD20C79992F96F2D09D1B /* MatchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */; };
 		F86C87FB3A483FD1AA01B8FB /* MatchSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */; };
+		FB525EFC8ED054B8234B90BE /* ImportedNotificationProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801FBA685946CD8087FC4B8A /* ImportedNotificationProcessing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,18 +81,22 @@
 
 /* Begin PBXFileReference section */
 		008100CEA788089E59A7F096 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		1403FB8DFB919513559AEE50 /* YPointsWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		058EB4F679DDD5AF856A0931 /* YPointsNotificationService.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = YPointsNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFeatureFlags.swift; sourceTree = "<group>"; };
+		1403FB8DFB919513559AEE50 /* YPointsWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = YPointsWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		285B05DF4E963F4C86B33B25 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		40D135ED532B6FFCA6161966 /* YPointsNotificationContent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPointsNotificationContent.entitlements; sourceTree = "<group>"; };
 		443CE5840ED86C95CBA4AD88 /* YPointsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPointsWidget.swift; sourceTree = "<group>"; };
 		47FCC7A173B719F9104F555A /* YPointsWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPointsWidget.entitlements; sourceTree = "<group>"; };
 		4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		55B3509D62F07D5731DC0887 /* AnalyticsReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsReporter.swift; sourceTree = "<group>"; };
-		604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YPointsNotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		604D4AF21F20D7E886067FBB /* YPointsNotificationContent.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = YPointsNotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6972DE12F300E29BDDA1F3FC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6A2A47675E90090AD79BF46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6F67F2B4DF436654892B7372 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7063F2A96AE6D7A9FB9BDF9B /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		801FBA685946CD8087FC4B8A /* ImportedNotificationProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedNotificationProcessing.swift; sourceTree = "<group>"; };
 		81254861F5F70F50B44D0396 /* YPoints.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPoints.entitlements; sourceTree = "<group>"; };
 		81EFBDF4551E078E557847EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8204E4CBC6AE1CE73C0B41F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -92,12 +104,15 @@
 		87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchSnapshot.swift; sourceTree = "<group>"; };
 		88A0583A085B9D35FEA3370D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		900CA799B6686B4F51F4E2D5 /* WidgetReloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetReloader.swift; sourceTree = "<group>"; };
+		951FA1BEEED4F1412C63AD40 /* YPointsNotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YPointsNotificationService.entitlements; sourceTree = "<group>"; };
+		972E49C368B1AD58BDBD2E90 /* ImportedNotificationContentRendering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedNotificationContentRendering.swift; sourceTree = "<group>"; };
 		98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9EB5317BB942C2EF7D36E5A4 /* BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothConnector.swift; sourceTree = "<group>"; };
-		A3C5D6C7D013A2C509F9B61E /* YPoints.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YPoints.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A3C5D6C7D013A2C509F9B61E /* YPoints.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = YPoints.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD298CC7F59328B8240BF521 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D4A16CE60C8D6AB700A3AFA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		DF5C6B0D698A82E05DA9A6BD /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		EEE5E49E93CFAED3A2306F96 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F557673CCFB1F73E0CF47C52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8D25AB16972079B9F21DBB0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				87BA59F03D48AD8A78A8B717 /* MatchSnapshot.swift */,
+				0F6B3787F26A0BF7AA03BE88 /* SharedFeatureFlags.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -181,8 +197,11 @@
 		CF4B0C6C817C681B7DA46DAC /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
+				801FBA685946CD8087FC4B8A /* ImportedNotificationProcessing.swift */,
 				8204E4CBC6AE1CE73C0B41F1 /* Info.plist */,
 				82CAE9139D8D3536542C7508 /* NotificationService.swift */,
+				EEE5E49E93CFAED3A2306F96 /* PrivacyInfo.xcprivacy */,
+				951FA1BEEED4F1412C63AD40 /* YPointsNotificationService.entitlements */,
 			);
 			path = NotificationService;
 			sourceTree = "<group>";
@@ -199,8 +218,11 @@
 		F1BB43CA1C99272FAC438505 /* NotificationContent */ = {
 			isa = PBXGroup;
 			children = (
+				972E49C368B1AD58BDBD2E90 /* ImportedNotificationContentRendering.swift */,
 				81EFBDF4551E078E557847EB /* Info.plist */,
 				2DF5CB3496353CF98AF0355C /* NotificationViewController.swift */,
+				285B05DF4E963F4C86B33B25 /* PrivacyInfo.xcprivacy */,
+				40D135ED532B6FFCA6161966 /* YPointsNotificationContent.entitlements */,
 			);
 			path = NotificationContent;
 			sourceTree = "<group>";
@@ -213,6 +235,7 @@
 			buildConfigurationList = 2B7BD9C0BDDF31BFAEC81B5A /* Build configuration list for PBXNativeTarget "YPointsNotificationContent" */;
 			buildPhases = (
 				A7F6A00FC9D06E71ED4CF2CC /* Sources */,
+				BD58E61FBB1961C1898D26BC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -253,6 +276,7 @@
 			buildConfigurationList = 07C7081F1027D2EEB28AB35B /* Build configuration list for PBXNativeTarget "YPointsNotificationService" */;
 			buildPhases = (
 				4463C91877F6BDCE7FF5C5A7 /* Sources */,
+				9A70BF9526F464802CA840FD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -289,15 +313,19 @@
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					0BFDB9738F9D2957FBA3EB78 = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					6338F3DBC68C9AAB3BA1DEEA = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					B36049A68747FB97D31CDAE7 = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 					FF9CE66DC5B24065C031C169 = {
+						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -345,6 +373,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9A70BF9526F464802CA840FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D463026201D08F4889F62579 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD58E61FBB1961C1898D26BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFCFFE90E5643D1B9F638F8C /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -353,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0FDD20C79992F96F2D09D1B /* MatchSnapshot.swift in Sources */,
+				233501CAB15FE6C6FAC6FA8E /* SharedFeatureFlags.swift in Sources */,
 				83BBE01FE0F83B320DD84FB6 /* YPointsWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +406,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB525EFC8ED054B8234B90BE /* ImportedNotificationProcessing.swift in Sources */,
 				AF239DCAC3FFC184BD25BA83 /* NotificationService.swift in Sources */,
+				644C822CA32705CA4B1D22BD /* SharedFeatureFlags.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +424,7 @@
 				DB826211DB422816C16BEA42 /* MainViewController.swift in Sources */,
 				F86C87FB3A483FD1AA01B8FB /* MatchSnapshot.swift in Sources */,
 				7FCE53D8C0D3371DCF38C1A6 /* SceneDelegate.swift in Sources */,
+				9EC52ACC0A1EA8546A4A58E5 /* SharedFeatureFlags.swift in Sources */,
 				B2E915C2DDA48F39EF004022 /* WidgetReloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,7 +433,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A563BA6FE42891B915B2B097 /* ImportedNotificationContentRendering.swift in Sources */,
 				AFE2119C7AF781905C74EDED /* NotificationViewController.swift in Sources */,
+				1ED061A02356EB454BB5025B /* SharedFeatureFlags.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +467,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/YPoints.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = LLB3LY55PC;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -492,10 +541,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -562,10 +608,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -585,7 +628,6 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widget/YPointsWidget.entitlements;
-				DEVELOPMENT_TEAM = LLB3LY55PC;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -609,7 +651,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/YPoints.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = LLB3LY55PC;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -629,6 +670,7 @@
 			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = NotificationContent/YPointsNotificationContent.entitlements;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -641,6 +683,7 @@
 				PRODUCT_NAME = YPointsNotificationContent;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(IMPORTED_NOTIFICATIONS_CONDITION)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -650,7 +693,7 @@
 			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = LLB3LY55PC;
+				CODE_SIGN_ENTITLEMENTS = NotificationContent/YPointsNotificationContent.entitlements;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -663,6 +706,7 @@
 				PRODUCT_NAME = YPointsNotificationContent;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(IMPORTED_NOTIFICATIONS_CONDITION)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -673,7 +717,6 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = Widget/YPointsWidget.entitlements;
-				DEVELOPMENT_TEAM = LLB3LY55PC;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Widget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -695,7 +738,7 @@
 			baseConfigurationReference = 98E6FF371EFCFFEA1B3DA7C9 /* Debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEVELOPMENT_TEAM = LLB3LY55PC;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/YPointsNotificationService.entitlements;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -708,6 +751,7 @@
 				PRODUCT_NAME = YPointsNotificationService;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(IMPORTED_NOTIFICATIONS_CONDITION)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -717,6 +761,7 @@
 			baseConfigurationReference = 4B1133BBAA0D60B97BD52ECB /* Release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = NotificationService/YPointsNotificationService.entitlements;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = NotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -729,6 +774,7 @@
 				PRODUCT_NAME = YPointsNotificationService;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) $(IMPORTED_NOTIFICATIONS_CONDITION)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
