@@ -36,7 +36,7 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
         let sets = content.userInfo["sets"] as? String ?? "0 : 0"
         scoreLabel.text = rawScore.replacingOccurrences(of: ":", with: " : ")
         scoreLabel.accessibilityValue = rawScore.replacingOccurrences(of: ":", with: " — ")
-        detailLabel.text = "\(content.body)\nГеймы \(games) • Сеты \(sets)"
+        detailLabel.text = L10n.format("notification.detailsFormat", content.body, games, sets)
     }
 
     private func configureYPointsContent() {
@@ -53,17 +53,17 @@ final class NotificationViewController: UIViewController, UNNotificationContentE
             for: .monospacedDigitSystemFont(ofSize: 42, weight: .black)
         )
         scoreLabel.adjustsFontForContentSizeCategory = true
-        scoreLabel.accessibilityLabel = "Счет матча"
+        scoreLabel.accessibilityLabel = L10n.text("score.accessibility")
 
-        detailLabel.text = "Состояние матча обновилось"
+        detailLabel.text = L10n.text("notification.updatedPlain")
         detailLabel.textColor = UIColor.white.withAlphaComponent(0.82)
         detailLabel.font = .preferredFont(forTextStyle: .footnote)
         detailLabel.adjustsFontForContentSizeCategory = true
         detailLabel.numberOfLines = 2
         detailLabel.textAlignment = .center
 
-        let openButton = makeButton(title: "Открыть", action: #selector(openMatch))
-        let hideButton = makeButton(title: "Скрыть", action: #selector(hideNotification))
+        let openButton = makeButton(title: L10n.text("notification.open"), action: #selector(openMatch))
+        let hideButton = makeButton(title: L10n.text("notification.hide"), action: #selector(hideNotification))
         let actions = UIStackView(arrangedSubviews: [openButton, hideButton])
         actions.axis = .horizontal
         actions.distribution = .fillEqually

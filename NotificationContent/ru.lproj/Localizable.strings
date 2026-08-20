@@ -1,0 +1,5 @@
+"score.accessibility" = "Счет матча";
+"notification.updatedPlain" = "Состояние матча обновилось";
+"notification.detailsFormat" = "%@\nГеймы %@ • Сеты %@";
+"notification.open" = "Открыть";
+"notification.hide" = "Скрыть";

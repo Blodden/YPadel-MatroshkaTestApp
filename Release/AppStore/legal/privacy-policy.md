@@ -1,3 +1,97 @@
+# YPoints Privacy Policy
+
+> Draft prepared for release. The complete document must be reconfirmed before the app is submitted to the App Store. This text is not legal advice. Remove this notice and provide the effective date before publication.
+
+Effective date: `PENDING`
+
+## 1. Data controller
+
+YPoints is owned and operated by Evgenii Bezgin (`Евгений Безгин` in Russian-language forms).
+
+For privacy questions and data deletion requests, contact bezgineg@yandex.ru.
+
+## 2. Purpose of the application
+
+YPoints helps users keep score and statistics for padel matches, synchronize a local scoreboard, find courts, add players and match materials, save a result card, and receive notifications. No account is required to use the application.
+
+## 3. Permissions and data that remain on the device
+
+YPoints requests a system permission only after an explicit user action. Access can be revoked in iPhone Settings.
+
+- **Bluetooth:** the current score can be transferred directly between nearby compatible iPhones. This data is not sent to the YPoints server or AppMetrica.
+- **Camera and Photos:** the application can take a photo, display permitted photos, select an image, and save a result card to the Photo Library. Photos are not sent to the YPoints server or AppMetrica.
+- **Contacts:** the application uses permitted names to select players. Contacts and selected names are not sent to the YPoints server or AppMetrica.
+- **Face ID:** iOS performs a local authentication check before private statistics are opened. YPoints does not receive or store biometric data.
+- **Location:** the current position is used to search for nearby courts through Apple Maps. YPoints does not send coordinates to its server or AppMetrica.
+- **Microphone:** a voice note is recorded and stored locally. Audio is not sent to the YPoints server or AppMetrica.
+
+Data stored inside YPoints is retained until it is reset or replaced using available application actions, or until the application is deleted. Result cards saved to the system Photos application remain there until the user deletes them and are not removed when YPoints is deleted.
+
+## 4. Data transmitted to the YPoints server
+
+For minimal synchronization, the application may transmit the following data to Yandex Cloud:
+
+- a random installation identifier that is not based on a name, contacts, or Apple ID;
+- an opaque match token;
+- a revision number and compact score state;
+- an APNs device token and push environment for notification delivery;
+- the bundle identifier and application version used to obtain the remote `cloudSyncEnabled` setting.
+
+Contacts, photos, audio, coordinates, ATT status, and IDFA are not sent to the YPoints server. The backend does not contain user accounts and, under the accepted data model, does not associate stored data with an identified person.
+
+Match-state and APNs-token synchronization occurs only while the server-controlled `cloudSyncEnabled` setting is enabled. Core features continue to work locally when it is disabled.
+
+No automatic deletion period is currently configured for server data. You can request deletion by contacting bezgineg@yandex.ru.
+
+## 5. AppMetrica
+
+YPoints uses the AppMetrica SDK for product analytics, application diagnostics, and promotion attribution. Depending on the actual SDK configuration, the SDK may process technical information about the device and application, IP address, device model, connection type, SDK version, bundle identifier, product interaction data, and diagnostic data.
+
+Automatic location collection in AppMetrica is disabled. Contacts, photos, audio, coordinates, and the contents of user notes are not added to custom analytics events.
+
+IDFA may be transmitted to AppMetrica for advertising attribution only after the user authorizes tracking through the system App Tracking Transparency request. If permission is declined, the application continues to work and AppMetrica operates without IDFA.
+
+AppMetrica data is retained for the period during which the service is used and is deleted in accordance with AppMetrica terms and applicable law. AppMetrica data-processing terms are available in the [service terms](https://yandex.com/legal/metrica_termsofuse/) and [Yandex Privacy Policy](https://yandex.com/legal/confidential/).
+
+## 6. Push notifications
+
+After notification permission is granted, the application receives an APNs device token from Apple and may send it to the YPoints server to deliver invitations and notifications about match starts and results. Notifications can be disabled in iPhone Settings. The token may change, so the application may transmit its latest value again.
+
+## 7. Service providers
+
+Data is shared only with providers required for the described application behavior:
+
+- Apple, for iOS system functions, maps, the Photo Library, biometric authentication, and APNs;
+- Yandex Cloud, for minimal server synchronization and remote configuration;
+- AppMetrica, for analytics, diagnostics, and user-authorized attribution.
+
+YPoints does not sell user data or disclose it to third parties for money or other compensation.
+
+## 8. Managing data and permissions
+
+Users can:
+
+- change access to Bluetooth, camera, Contacts, Face ID, location, microphone, Photos, tracking, and notifications in iPhone Settings;
+- reset or replace local materials using available application actions, delete the application, and separately delete saved result cards from the system Photos application;
+- request information about server data or request its deletion by contacting bezgineg@yandex.ru.
+
+Revoking a permission does not automatically delete materials previously saved on the device or records stored on the backend. Server-data deletion can be requested at bezgineg@yandex.ru.
+
+## 9. Children
+
+YPoints is intended for a general audience and is not directed specifically at children. The application does not request a date of birth and does not create user accounts.
+
+## 10. Changes to this policy
+
+If the categories of data or processing methods change, an updated version of this policy will be published at the same address with a new effective date.
+
+## 11. Contact
+
+- Application owner: Evgenii Bezgin (`Евгений Безгин`).
+- Privacy contact email: bezgineg@yandex.ru.
+
+---
+
 # Политика конфиденциальности YPoints
 
 > Черновик для подготовки релиза. Документ будет целиком повторно согласован перед фактической отправкой в App Store. Этот текст не является юридической консультацией. До публикации необходимо удалить эту пометку и указать дату вступления политики в силу.

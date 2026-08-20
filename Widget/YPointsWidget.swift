@@ -78,11 +78,21 @@ struct MatchLockScreenView: View {
             Image(systemName: "number")
                 .font(.title3)
             VStack(alignment: .leading, spacing: 1) {
-                Text(entry.snapshot.state == .finished ? "Матч завершен" : "Текущий матч")
+                Text(
+                    entry.snapshot.state == .finished
+                        ? L10n.text("match.finishedPlain")
+                        : L10n.text("match.section")
+                )
                     .font(.caption2)
                 Text(entry.snapshot.pointsScoreText)
                     .font(.system(.title2, design: .rounded, weight: .bold))
-                Text("Г \(entry.snapshot.gamesScoreText)  •  С \(entry.snapshot.setsScoreText)")
+                Text(
+                    L10n.format(
+                        "widget.scoreDetailsFormat",
+                        entry.snapshot.gamesScoreText,
+                        entry.snapshot.setsScoreText
+                    )
+                )
                     .font(.caption2)
             }
             Spacer(minLength: 0)
@@ -94,14 +104,14 @@ struct MatchLockScreenView: View {
         HStack(spacing: 8) {
             Image(systemName: "nosign")
                 .font(.title3)
-            Text("Виджет сейчас неактивен")
+            Text(L10n.text("widget.inactive"))
                 .font(.caption)
                 .lineLimit(2)
             Spacer(minLength: 0)
         }
         .widgetURL(URL(string: "ypoints://match"))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Виджет сейчас неактивен")
+        .accessibilityLabel(L10n.text("widget.inactive"))
     }
 }
 
@@ -112,8 +122,8 @@ struct YPointsWidget: Widget {
         StaticConfiguration(kind: kind, provider: MatchProvider()) { entry in
             MatchLockScreenView(entry: entry)
         }
-        .configurationDisplayName("Счет YPoints")
-        .description("Счет и состояние матча на экране блокировки.")
+        .configurationDisplayName(L10n.text("widget.displayName"))
+        .description(L10n.text("widget.description"))
         .supportedFamilies([.accessoryRectangular])
     }
 }

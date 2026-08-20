@@ -1,0 +1,10 @@
+"match.finishedPlain" = "Match finished";
+"match.section" = "Current match";
+"widget.scoreDetailsFormat" = "G %@  •  S %@";
+"widget.inactive" = "Widget is currently inactive";
+"widget.displayName" = "YPoints score";
+"widget.description" = "Match score and status on the Lock Screen.";
+"score.teamOurs" = "Us";
+"score.teamOpponents" = "Opponents";
+"score.advantage" = "ADV";
+"notification.scoreFormat" = "Points %@ • Games %@ • Sets %@";

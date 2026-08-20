@@ -85,11 +85,11 @@ enum APIClientError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidResponse:
-            return "Сервер вернул неизвестный ответ"
+            return L10n.text("api.unknownResponse")
         case let .serverStatus(status):
-            return "Сервер вернул код \(status)"
+            return L10n.format("api.statusFormat", status)
         case .encoding:
-            return "Не удалось подготовить данные"
+            return L10n.text("api.encodingFailed")
         }
     }
 }

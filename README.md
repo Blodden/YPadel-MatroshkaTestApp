@@ -4,6 +4,8 @@
 
 Проект предназначен исключительно для iPhone и работает только в портретной ориентации. Поддержка iPad, Mac Catalyst, запуска iPhone/iPad-приложения на Mac, visionOS и Apple Vision отключена для приложения и всех extensions.
 
+Интерфейс следует системному языку iOS. English — development и fallback localization; Russian — вторая полноценная локализация. Внутреннего переключателя языка нет.
+
 Иконка приложения находится в `App/Assets.xcassets/AppIcon.appiconset` и собирается как `AppIcon` основного target.
 
 ## Настройка

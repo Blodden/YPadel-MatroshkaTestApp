@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-19",
-  "status": "gate-4-preliminary-approved-archive-blocked-signing",
+  "generatedAt": "2026-08-20",
+  "status": "all-local-gates-preliminary-approved-final-reconfirmation-and-signing-blocked",
   "perRunUserFacts": {
     "status": "preliminary",
     "finalReconfirmationRequired": true,
@@ -25,6 +25,23 @@
       "value": "15.0",
       "status": "accepted"
     },
+    "shippedLocalizations": {
+      "value": [
+        "en",
+        "ru"
+      ],
+      "developmentLanguage": "en",
+      "fallbackLanguage": "en",
+      "selection": "iOS system language; no in-app language selector",
+      "targets": [
+        "app",
+        "Lock Screen widget",
+        "notification service extension",
+        "notification content extension"
+      ],
+      "approvedMatrix": "Design/localization-en.md",
+      "status": "accepted-from-implementation-handoff"
+    },
     "version": {
       "value": "1.0",
       "status": "preliminary-approved-gate-4"
@@ -38,7 +55,7 @@
       "status": "preliminary-user-answer"
     },
     "primaryLocale": {
-      "value": "ru-RU",
+      "value": "en-US",
       "status": "preliminary-user-answer"
     },
     "primaryCategory": {
@@ -93,11 +110,19 @@
     },
     "privacyPolicyDraft": {
       "path": "legal/privacy-policy.md",
-      "status": "preliminary-approved-gate-1"
+      "languages": [
+        "en",
+        "ru"
+      ],
+      "status": "preliminary-approved-gate-1-english-first-bilingual"
     },
     "supportDraft": {
       "path": "legal/support.md",
-      "status": "preliminary-approved-gate-1"
+      "languages": [
+        "en",
+        "ru"
+      ],
+      "status": "preliminary-approved-gate-1-english-first-bilingual"
     },
     "effectiveDate": {
       "value": null,
@@ -347,19 +372,40 @@
   },
   "privacyPolicyLink": {
     "proposedPlacement": "Небольшая текстовая кнопка «Политика конфиденциальности» внизу существующего основного прокручиваемого экрана",
+    "localizedTitles": {
+      "en": "Privacy Policy",
+      "ru": "Политика конфиденциальности"
+    },
     "placementStatus": "preliminary-approved-gate-1",
     "approvedMockup": "Design/approved-privacy-policy-link.png",
     "urlStatus": "deferred-until-final-pre-publication-confirmation",
     "codeChangeStatus": "deferred-until-real-https-url-at-final-pre-publication-stage"
   },
   "metadata": {
-    "path": "metadata/ru-RU.md",
+    "primaryLanguage": "en-US",
+    "path": "metadata/en-US.md",
+    "localizedPaths": {
+      "en-US": "metadata/en-US.md",
+      "ru-RU": "metadata/ru-RU.md"
+    },
+    "productPageLocalizations": [
+      "en-US",
+      "ru-RU"
+    ],
+    "englishProductPageStatus": "primary localization preliminary-approved by instruction to mirror ru-RU",
+    "russianProductPageStatus": "secondary localization; previously preliminary-approved",
     "status": "preliminary-approved-gate-2"
   },
   "screenshots": {
-    "locale": "ru-RU",
-    "plannedCount": 1,
-    "plannedState": "Основной экран: очки 40:30, геймы 5:4, сеты 1:0, без персональных данных",
+    "primaryLocale": "en-US",
+    "secondaryLocales": [
+      "ru-RU"
+    ],
+    "plannedCountPerLocale": 1,
+    "plannedStates": {
+      "en-US": "Main screen: points 40:30, games 5:4, sets 1:0, without personal data",
+      "ru-RU": "Основной экран: очки 40:30, геймы 5:4, сеты 1:0, без персональных данных"
+    },
     "plannedPortraitSize": "1320x2868",
     "fileFormats": [
       "png",
@@ -367,12 +413,15 @@
       "jpg"
     ],
     "alphaAllowed": false,
-    "file": "screenshots/ru-RU/01-main-score.jpg",
+    "files": {
+      "en-US": "screenshots/en-US/01-main-score.jpg",
+      "ru-RU": "screenshots/ru-RU/01-main-score.jpg"
+    },
     "captureDevice": "iPhone 16 Pro Max, iOS 18.6 Simulator",
     "captureConfiguration": "Release",
     "authenticApplicationUI": true,
     "containsPersonalData": false,
-    "status": "preliminary-approved-gate-2"
+    "status": "preliminary-approved-gate-2-for-en-US-and-ru-RU"
   },
   "archive": {
     "localReleaseBuildWithoutSigning": "passed in implementation handoff",
@@ -383,8 +432,8 @@
     "submission": "not-authorized"
   },
   "approvals": {
-    "gate1LegalAndPrivacyLinkPlacement": "preliminary-approved",
-    "gate2MetadataAndScreenshots": "preliminary-approved",
+    "gate1LegalAndPrivacyLinkPlacement": "preliminary-approved-english-first-bilingual-drafts-and-placement",
+    "gate2MetadataAndScreenshots": "preliminary-approved-for-en-US-and-ru-RU-by-user-instruction-without-repeat-approval",
     "gate3PrivacyComplianceAndReviewInformation": "preliminary-approved",
     "gate4VersionBuildAndArchive": "preliminary-approved; archive-blocked-signing",
     "finalPreSubmissionReconfirmation": "pending-user-request"

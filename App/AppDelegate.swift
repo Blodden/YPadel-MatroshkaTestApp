@@ -71,10 +71,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.delegate = self
 
-        let openAction = UNNotificationAction(identifier: "OPEN_MATCH", title: "Открыть")
+        let openAction = UNNotificationAction(
+            identifier: "OPEN_MATCH",
+            title: L10n.text("notification.open")
+        )
         let hideAction = UNNotificationAction(
             identifier: "HIDE_MATCH",
-            title: "Скрыть",
+            title: L10n.text("notification.hide"),
             options: [.destructive]
         )
         let category = UNNotificationCategory(
@@ -133,9 +136,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationC
     func application(
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
-    ) {
-        NSLog("YPoints: APNs registration failed: \(error.localizedDescription)")
-    }
+    ) {}
 
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,

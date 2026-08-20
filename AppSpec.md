@@ -257,6 +257,32 @@
 - Утверждённый макет: `Design/approved-privacy-policy-link.png`.
 - Реальный HTTPS URL и изменение кода отложены до финального этапа перед публикацией.
 
+## Утверждённая локализация RU/EN
+
+- Приложение, Lock Screen widget, Notification Service Extension и Notification Content Extension поставляются на русском и английском языках.
+- Английский является development localization и fallback-языком; русский остаётся второй полноценной локализацией.
+- Язык выбирается системными настройками iOS. Переключатель языка внутри приложения не добавляется.
+- Утверждённая полная матрица пользовательских строк: `Design/localization-en.md` (`approved`).
+- Утверждённый английский макет основного экрана: `Design/localization-en-candidate.png`.
+- Существующие визуальная система, порядок секций, цвета, типографика, элементы управления и иконка сохраняются.
+- Для английского подзаголовка и длинных статусов разрешён перенос строк без уменьшения кегля; две кнопки начисления очков остаются рядом.
+- Локализуются UIKit-интерфейс, accessibility-тексты, системные purpose strings, виджет, обе notification extensions, уведомления и текст внутри сохраняемой карточки результата.
+- Название `YPoints`, технические идентификаторы, analytics events, persistence keys, backend fields, deep links и notification category identifiers не локализуются.
+- Основная локализация страницы App Store — `en-US`; русская `ru-RU` сохраняется как дополнительная локализация для основной аудитории в РФ.
+
+### English permission copy
+
+- `NSBluetoothAlwaysUsageDescription`: “Bluetooth is needed to connect a nearby iPhone running YPoints and synchronize the match score.”
+- `NSCameraUsageDescription`: “Camera access is needed to take a match photo and add it to the result card.”
+- `NSContactsUsageDescription`: “Contacts access is needed to quickly add players to the match lineup.”
+- `NSFaceIDUsageDescription`: “Face ID is needed to open your private match statistics and notes.”
+- `NSLocationWhenInUseUsageDescription`: “Location access is needed to show nearby padel courts on the map.”
+- `NSMicrophoneUsageDescription`: “Microphone access is needed to record a voice note for the match result.”
+- `NSPhotoLibraryUsageDescription`: “Photo access is needed to show pictures taken on the match day and select one for the result card.”
+- `NSPhotoLibraryAddUsageDescription`: “Access is needed to save match score cards to Photos.”
+- `NSUserTrackingUsageDescription`: “YPoints uses your device identifier to identify the installation source and measure promotion effectiveness.”
+- Push pre-permission: “Notifications will let you know about match invitations, starts, and results.”
+
 ## Pending decisions
 
 - Точный срок хранения и способ удаления локальной истории матчей и материалов.

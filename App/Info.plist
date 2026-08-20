@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>ru</string>
+    <string>en</string>
     <key>CFBundleDisplayName</key>
     <string>$(APP_DISPLAY_NAME)</string>
     <key>CFBundleExecutable</key>
@@ -59,23 +59,23 @@
         <true/>
     </dict>
     <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>Bluetooth нужен, чтобы подключить находящийся рядом iPhone с YPoints и синхронизировать счёт матча.</string>
+    <string>Bluetooth is needed to connect a nearby iPhone running YPoints and synchronize the match score.</string>
     <key>NSCameraUsageDescription</key>
-    <string>Камера нужна, чтобы сделать фотографию матча и добавить её к карточке результата.</string>
+    <string>Camera access is needed to take a match photo and add it to the result card.</string>
     <key>NSContactsUsageDescription</key>
-    <string>Контакты нужны, чтобы быстро добавить игроков в состав матча.</string>
+    <string>Contacts access is needed to quickly add players to the match lineup.</string>
     <key>NSFaceIDUsageDescription</key>
-    <string>Face ID нужен, чтобы открыть личную статистику и заметки о матчах.</string>
+    <string>Face ID is needed to open your private match statistics and notes.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Геолокация нужна, чтобы показать ближайшие падел-корты на карте.</string>
+    <string>Location access is needed to show nearby padel courts on the map.</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>Микрофон нужен, чтобы записать голосовую заметку к результату матча.</string>
+    <string>Microphone access is needed to record a voice note for the match result.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Доступ к Фото нужен, чтобы показать снимки за день матча и выбрать изображение для карточки результата.</string>
+    <string>Photo access is needed to show pictures taken on the match day and select one for the result card.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Доступ нужен, чтобы сохранять карточки счёта матчей в Фото.</string>
+    <string>Access is needed to save match score cards to Photos.</string>
     <key>NSUserTrackingUsageDescription</key>
-    <string>Идентификатор устройства используется, чтобы определить источник установки и оценить эффективность продвижения YPoints.</string>
+    <string>YPoints uses your device identifier to identify the installation source and measure promotion effectiveness.</string>
     <key>AppMetricaAPIKey</key>
     <string>$(APPMETRICA_API_KEY)</string>
     <key>APIBaseURL</key>

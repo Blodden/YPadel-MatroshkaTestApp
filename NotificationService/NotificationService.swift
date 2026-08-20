@@ -35,10 +35,10 @@ final class NotificationService: UNNotificationServiceExtension {
             mutableContent.title = "YPoints"
             let games = request.content.userInfo["games"] as? String ?? "0 : 0"
             let sets = request.content.userInfo["sets"] as? String ?? "0 : 0"
-            mutableContent.subtitle = "Очки \(score) • Геймы \(games) • Сеты \(sets)"
+            mutableContent.subtitle = L10n.format("notification.scoreFormat", score, games, sets)
         }
         if mutableContent.body.isEmpty {
-            mutableContent.body = "Состояние матча обновилось."
+            mutableContent.body = L10n.text("notification.updated")
         }
         mutableContent.categoryIdentifier = "YPOINTS_MATCH"
         finish(with: mutableContent)

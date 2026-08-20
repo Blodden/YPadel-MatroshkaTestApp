@@ -24,8 +24,8 @@ struct MatchSnapshot: Codable {
     var updatedAt: Date
 
     init(
-        leftName: String = "Мы",
-        rightName: String = "Соперники",
+        leftName: String = L10n.text("score.teamOurs"),
+        rightName: String = L10n.text("score.teamOpponents"),
         leftPoints: Int = 0,
         rightPoints: Int = 0,
         leftGames: Int = 0,
@@ -69,7 +69,7 @@ struct MatchSnapshot: Codable {
     }
 
     var scoreSummary: String {
-        "Очки \(pointsScoreText) • Геймы \(gamesScoreText) • Сеты \(setsScoreText)"
+        L10n.format("notification.scoreFormat", pointsScoreText, gamesScoreText, setsScoreText)
     }
 
     func awardingPoint(to side: MatchSide) -> MatchSnapshot {
@@ -170,7 +170,7 @@ struct MatchSnapshot: Codable {
         case 1: return "15"
         case 2: return "30"
         case 3: return "40"
-        case 4: return "БОЛ"
+        case 4: return L10n.text("score.advantage")
         default: return "0"
         }
     }

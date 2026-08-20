@@ -1,0 +1,10 @@
+"match.finishedPlain" = "Матч завершен";
+"match.section" = "Текущий матч";
+"widget.scoreDetailsFormat" = "Г %@  •  С %@";
+"widget.inactive" = "Виджет сейчас неактивен";
+"widget.displayName" = "Счет YPoints";
+"widget.description" = "Счет и состояние матча на экране блокировки.";
+"score.teamOurs" = "Мы";
+"score.teamOpponents" = "Соперники";
+"score.advantage" = "БОЛ";
+"notification.scoreFormat" = "Очки %@ • Геймы %@ • Сеты %@";

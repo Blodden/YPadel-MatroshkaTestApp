@@ -79,8 +79,8 @@ final class MainViewController: UIViewController {
             statusChanged: { [weak self] status, active in
                 self?.showStatus(status)
                 self?.bluetoothButton?.configuration?.title = active
-                    ? "Отключить Bluetooth-табло"
-                    : "Табло по Bluetooth"
+                    ? L10n.text("bluetooth.disable")
+                    : L10n.text("bluetooth.enable")
             },
             snapshotReceived: { [weak self] remoteSnapshot in
                 self?.applyRemoteSnapshot(remoteSnapshot)
@@ -139,13 +139,13 @@ final class MainViewController: UIViewController {
     private func makeHeader() -> UIView {
         let container = UIView()
         let titleLabel = makeDynamicLabel(
-            text: "Счет и статистика",
+            text: L10n.text("main.title"),
             style: .title1,
             weight: .bold,
             color: .white
         )
         let subtitleLabel = makeDynamicLabel(
-            text: "Все для текущего матча — на одном экране",
+            text: L10n.text("main.subtitle"),
             style: .subheadline,
             weight: .medium,
             color: UIColor.white.withAlphaComponent(0.78)
@@ -155,7 +155,7 @@ final class MainViewController: UIViewController {
         statusLabel.font = .preferredFont(forTextStyle: .caption1)
         statusLabel.adjustsFontForContentSizeCategory = true
         statusLabel.numberOfLines = 0
-        statusLabel.accessibilityLabel = "Статус"
+        statusLabel.accessibilityLabel = L10n.text("status.accessibility")
 
         let stack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel, statusLabel])
         stack.axis = .vertical
@@ -184,7 +184,7 @@ final class MainViewController: UIViewController {
         )
         scoreLabel.adjustsFontForContentSizeCategory = true
         scoreLabel.textColor = Palette.darkGreen
-        scoreLabel.accessibilityLabel = "Счет матча"
+        scoreLabel.accessibilityLabel = L10n.text("score.accessibility")
 
         opponentLabel.textAlignment = .center
         opponentLabel.textColor = Palette.mutedText
@@ -199,20 +199,26 @@ final class MainViewController: UIViewController {
             label.adjustsFontForContentSizeCategory = true
         }
 
-        let ourPointButton = makePrimaryButton(title: "+ очко нам", action: #selector(addOurPoint))
-        let theirPointButton = makePrimaryButton(title: "+ соперникам", action: #selector(addTheirPoint))
+        let ourPointButton = makePrimaryButton(
+            title: L10n.text("score.addOurs"),
+            action: #selector(addOurPoint)
+        )
+        let theirPointButton = makePrimaryButton(
+            title: L10n.text("score.addTheirs"),
+            action: #selector(addTheirPoint)
+        )
         self.ourPointButton = ourPointButton
         self.theirPointButton = theirPointButton
         let scoreButtons = makeButtonRow([ourPointButton, theirPointButton])
         let bluetoothButton = makeActionButton(
-            title: "Табло по Bluetooth",
+            title: L10n.text("bluetooth.enable"),
             symbol: "dot.radiowaves.left.and.right",
             action: #selector(toggleBluetooth)
         )
         self.bluetoothButton = bluetoothButton
 
         let stack = UIStackView(arrangedSubviews: [
-            makeSectionTitle("Текущий матч"),
+            makeSectionTitle(L10n.text("match.section")),
             opponentLabel,
             scorePhaseLabel,
             scoreLabel,
@@ -221,22 +227,22 @@ final class MainViewController: UIViewController {
             scoreButtons,
             bluetoothButton,
             makeActionButton(
-                title: "Напомнить о матче",
+                title: L10n.text("notifications.action"),
                 symbol: "bell.badge",
                 action: #selector(enableMatchReminder)
             ),
             makeActionButton(
-                title: "Открыть статистику",
+                title: L10n.text("statistics.action"),
                 symbol: "faceid",
                 action: #selector(openStatistics)
             ),
             makeTextButton(
-                title: "Завершить матч",
+                title: L10n.text("score.finish"),
                 color: Palette.darkGreen,
                 action: #selector(finishMatch)
             ),
             makeTextButton(
-                title: "Сбросить счет",
+                title: L10n.text("score.reset"),
                 color: Palette.danger,
                 action: #selector(resetScore)
             )
@@ -258,23 +264,23 @@ final class MainViewController: UIViewController {
             ),
             animated: false
         )
-        mapView.accessibilityLabel = "Карта ближайших падел-кортов"
+        mapView.accessibilityLabel = L10n.text("map.accessibility")
 
         let stack = UIStackView(arrangedSubviews: [
-            makeSectionTitle("Корт и игроки"),
+            makeSectionTitle(L10n.text("court.section")),
             mapView,
             makeActionButton(
-                title: "Найти корты рядом",
+                title: L10n.text("court.find"),
                 symbol: "location.fill",
                 action: #selector(findCourts)
             ),
             makeActionButton(
-                title: "Выбрать партнера",
+                title: L10n.text("partner.choose"),
                 symbol: "person.crop.circle.badge.plus",
                 action: #selector(choosePartner)
             ),
             makeActionButton(
-                title: "Оценка продвижения",
+                title: L10n.text("tracking.action"),
                 symbol: "chart.line.uptrend.xyaxis",
                 action: #selector(requestPromotionMeasurement)
             )
@@ -293,38 +299,38 @@ final class MainViewController: UIViewController {
         mediaPreview.tintColor = UIColor(red: 0.18, green: 0.42, blue: 0.31, alpha: 1)
         mediaPreview.translatesAutoresizingMaskIntoConstraints = false
         mediaPreview.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        mediaPreview.accessibilityLabel = "Фото матча"
+        mediaPreview.accessibilityLabel = L10n.text("photo.accessibility")
 
         voiceNoteStatusLabel.font = .preferredFont(forTextStyle: .footnote)
         voiceNoteStatusLabel.adjustsFontForContentSizeCategory = true
         voiceNoteStatusLabel.textColor = Palette.mutedText
         voiceNoteStatusLabel.numberOfLines = 0
-        voiceNoteStatusLabel.accessibilityLabel = "Состояние голосовой заметки"
+        voiceNoteStatusLabel.accessibilityLabel = L10n.text("voice.accessibility")
 
         let voiceNoteButton = makeActionButton(
-            title: "Записать голосовую заметку",
+            title: L10n.text("voice.record"),
             symbol: "mic.fill",
             action: #selector(handleVoiceNote)
         )
         self.voiceNoteButton = voiceNoteButton
 
         let stack = UIStackView(arrangedSubviews: [
-            makeSectionTitle("Материалы матча"),
+            makeSectionTitle(L10n.text("materials.section")),
             mediaPreview,
             makeActionButton(
-                title: "Снять фото матча",
+                title: L10n.text("photo.take"),
                 symbol: "camera.fill",
                 action: #selector(takeMatchPhoto)
             ),
             makeActionButton(
-                title: "Выбрать фото за сегодня",
+                title: L10n.text("photo.chooseToday"),
                 symbol: "photo.on.rectangle",
                 action: #selector(browseMatchPhotos)
             ),
             voiceNoteButton,
             voiceNoteStatusLabel,
             makeActionButton(
-                title: "Сохранить карточку счета",
+                title: L10n.text("scoreCard.save"),
                 symbol: "square.and.arrow.down.fill",
                 action: #selector(saveScoreCard)
             )
@@ -443,7 +449,9 @@ final class MainViewController: UIViewController {
     @objc private func finishMatch() {
         snapshot = snapshot.finishing()
         updateScoreAndSync(event: "match_finished")
-        scheduleNotificationIfAuthorized(body: "Матч завершен. \(snapshot.scoreSummary)")
+        scheduleNotificationIfAuthorized(
+            body: L10n.format("push.finishedBodyFormat", snapshot.scoreSummary)
+        )
     }
 
     @objc private func resetScore() {
@@ -459,22 +467,22 @@ final class MainViewController: UIViewController {
 
     private func updateScore() {
         scorePhaseLabel.text = snapshot.state == .finished
-            ? "Матч завершён"
-            : (snapshot.isTieBreak ? "Тай-брейк" : "Очки")
+            ? L10n.text("match.finished")
+            : (snapshot.isTieBreak ? L10n.text("match.tieBreak") : L10n.text("score.points"))
         scoreLabel.text = snapshot.pointsScoreText
         scoreLabel.accessibilityValue = snapshot.scoreSummary
-        gamesLabel.text = "Геймы   \(snapshot.gamesScoreText)"
-        gamesLabel.accessibilityLabel = "Геймы"
+        gamesLabel.text = L10n.format("score.gamesFormat", snapshot.gamesScoreText)
+        gamesLabel.accessibilityLabel = L10n.text("score.games")
         gamesLabel.accessibilityValue = snapshot.gamesScoreText
-        setsLabel.text = "Сеты   \(snapshot.setsScoreText)"
-        setsLabel.accessibilityLabel = "Сеты"
+        setsLabel.text = L10n.format("score.setsFormat", snapshot.setsScoreText)
+        setsLabel.accessibilityLabel = L10n.text("score.sets")
         setsLabel.accessibilityValue = snapshot.setsScoreText
         ourPointButton?.isEnabled = snapshot.state == .active
         theirPointButton?.isEnabled = snapshot.state == .active
         if let selectedPartnerName {
-            opponentLabel.text = "Мы с \(selectedPartnerName)  •  Соперники"
+            opponentLabel.text = L10n.format("score.teamsWithPartnerFormat", selectedPartnerName)
         } else {
-            opponentLabel.text = "Мы  •  Соперники"
+            opponentLabel.text = L10n.text("score.teams")
         }
     }
 
@@ -484,7 +492,7 @@ final class MainViewController: UIViewController {
         bluetoothConnector?.update(snapshot)
 
         guard featureFlags.cloudSyncEnabled else {
-            showStatus("Счет сохранён на устройстве • облачная синхронизация отключена")
+            showStatus(L10n.text("sync.disabledLocalSaved"))
             analytics.report("sync_result", parameters: ["result": "disabled"])
             return
         }
@@ -513,12 +521,12 @@ final class MainViewController: UIViewController {
                 }
                 self.showStatus(
                     response.pushStatus == "pending_credentials"
-                        ? "Синхронизировано • отправка push ожидает APNs-ключ"
-                        : "Счет синхронизирован"
+                        ? L10n.text("sync.successPushPending")
+                        : L10n.text("sync.success")
                 )
                 self.analytics.report("sync_result", parameters: ["result": "success"])
             case .failure:
-                self.showStatus("Счет сохранён на устройстве • офлайн")
+                self.showStatus(L10n.text("sync.offlineSaved"))
                 self.analytics.report("sync_result", parameters: ["result": "offline"])
             }
         }
@@ -528,14 +536,14 @@ final class MainViewController: UIViewController {
         switch featureFlags.source {
         case .remote:
             return featureFlags.cloudSyncEnabled
-                ? "Синхронизация доступна"
-                : "Облачная синхронизация отключена"
+                ? L10n.text("sync.available")
+                : L10n.text("sync.disabled")
         case .cached:
             return featureFlags.cloudSyncEnabled
-                ? "Офлайн-режим • используется сохранённая настройка"
-                : "Облачная синхронизация отключена • используется сохранённая настройка"
+                ? L10n.text("sync.offlineCached")
+                : L10n.text("sync.disabledCached")
         case .defaultValue:
-            return "Офлайн-режим • используется настройка по умолчанию"
+            return L10n.text("sync.offlineDefault")
         }
     }
 
@@ -560,16 +568,16 @@ final class MainViewController: UIViewController {
     @objc private func openStatistics() {
         analytics.report("feature_action", parameters: ["feature": "protected_statistics"])
         let context = LAContext()
-        context.localizedFallbackTitle = "Использовать код-пароль"
+        context.localizedFallbackTitle = L10n.text("faceID.fallback")
         var error: NSError?
         guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
-            showPermissionUnavailable("Face ID и код-пароль недоступны на этом устройстве.")
+            showPermissionUnavailable(L10n.text("faceID.unavailable"))
             reportPermission("face_id", result: "unavailable")
             return
         }
         context.evaluatePolicy(
             .deviceOwnerAuthentication,
-            localizedReason: "Открыть личную статистику и заметки о матчах"
+            localizedReason: L10n.text("faceID.reason")
         ) { [weak self] success, evaluationError in
             DispatchQueue.main.async {
                 guard let self else { return }
@@ -579,7 +587,7 @@ final class MainViewController: UIViewController {
                 } else {
                     let code = (evaluationError as? LAError)?.code
                     self.reportPermission("face_id", result: code == .userCancel ? "cancelled" : "denied")
-                    self.showStatus("Статистика осталась заблокирована")
+                    self.showStatus(L10n.text("faceID.locked"))
                 }
             }
         }
@@ -604,9 +612,9 @@ final class MainViewController: UIViewController {
             beginCourtSearch()
         case .denied, .restricted:
             reportPermission("location", result: "denied")
-            showSettingsAlert(message: "Разрешите геолокацию, чтобы находить корты рядом. Карту можно изучать и без текущей позиции.")
+            showSettingsAlert(message: L10n.text("location.denied"))
         @unknown default:
-            showStatus("Геолокация: неизвестный статус")
+            showStatus(L10n.text("location.unknown"))
         }
     }
 
@@ -618,7 +626,7 @@ final class MainViewController: UIViewController {
 
     private func searchPadelCourts(center: CLLocationCoordinate2D) {
         let request = MKLocalSearch.Request()
-        request.naturalLanguageQuery = "падел-корт"
+        request.naturalLanguageQuery = L10n.text("map.searchQuery")
         request.region = MKCoordinateRegion(
             center: center,
             span: MKCoordinateSpan(latitudeDelta: 0.18, longitudeDelta: 0.18)
@@ -629,15 +637,15 @@ final class MainViewController: UIViewController {
             let items = Array((response?.mapItems ?? []).prefix(8))
             for item in items {
                 let annotation = MKPointAnnotation()
-                annotation.title = item.name ?? "Падел-корт"
+                annotation.title = item.name ?? L10n.text("map.defaultCourt")
                 annotation.coordinate = item.placemark.coordinate
                 self.mapView.addAnnotation(annotation)
             }
             self.mapView.setRegion(request.region, animated: true)
             self.showStatus(
                 items.isEmpty
-                    ? "Корты не найдены — карту можно изучить вручную"
-                    : "Найдено кортов: \(items.count)"
+                    ? L10n.text("map.empty")
+                    : L10n.format("map.foundFormat", items.count)
             )
             self.reportPermission("location", result: "authorized")
         }
@@ -657,18 +665,18 @@ final class MainViewController: UIViewController {
                         self?.loadAuthorizedContactNames()
                     } else {
                         self?.reportPermission("contacts", result: "denied")
-                        self?.showSettingsAlert(message: "Разрешите контакты, чтобы выбрать партнера для локального состава.")
+                        self?.showSettingsAlert(message: L10n.text("contacts.denied"))
                     }
                 }
             }
         case .denied, .restricted:
             reportPermission("contacts", result: "denied")
-            showSettingsAlert(message: "Разрешите контакты, чтобы выбрать партнера для локального состава.")
+            showSettingsAlert(message: L10n.text("contacts.denied"))
         default:
             if #available(iOS 18.0, *), status == .limited {
                 loadAuthorizedContactNames()
             } else {
-                showStatus("Контакты: неизвестный статус")
+                showStatus(L10n.text("contacts.unknown"))
             }
         }
     }
@@ -694,7 +702,7 @@ final class MainViewController: UIViewController {
                 DispatchQueue.main.async { self?.presentContactNames(names) }
             } catch {
                 DispatchQueue.main.async {
-                    self?.showStatus("Не удалось прочитать разрешённые контакты")
+                    self?.showStatus(L10n.text("contacts.readFailed"))
                 }
             }
         }
@@ -702,22 +710,25 @@ final class MainViewController: UIViewController {
 
     private func presentContactNames(_ names: [String]) {
         guard !names.isEmpty else {
-            showInformation(title: "Контакты", message: "Среди доступных контактов нет имён для выбора.")
+            showInformation(
+                title: L10n.text("contacts.title"),
+                message: L10n.text("contacts.empty")
+            )
             return
         }
         let alert = UIAlertController(
-            title: "Добавить игрока",
-            message: "Имя останется только на этом iPhone.",
+            title: L10n.text("contacts.addPlayer"),
+            message: L10n.text("contacts.localOnly"),
             preferredStyle: .actionSheet
         )
         for name in names {
             alert.addAction(UIAlertAction(title: name, style: .default) { [weak self] _ in
                 self?.selectedPartnerName = name
                 self?.updateScore()
-                self?.showStatus("Игрок добавлен в локальный состав")
+                self?.showStatus(L10n.text("contacts.added"))
             })
         }
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.text("common.cancel"), style: .cancel))
         present(alert, animated: true)
     }
 
@@ -742,19 +753,19 @@ final class MainViewController: UIViewController {
         switch status {
         case .authorized:
             analytics.setAdvertisingIdentifierTracking(enabled: true)
-            showStatus("Оценка продвижения через AppMetrica включена")
+            showStatus(L10n.text("tracking.enabled"))
             reportPermission("tracking", result: "authorized")
         case .denied, .restricted:
             analytics.setAdvertisingIdentifierTracking(enabled: false)
-            showStatus("AppMetrica работает без IDFA")
+            showStatus(L10n.text("tracking.withoutIDFA"))
             reportPermission("tracking", result: status == .denied ? "denied" : "restricted")
             if offerSettings {
-                showSettingsAlert(message: "Отслеживание отключено. YPoints продолжает работать без IDFA.")
+                showSettingsAlert(message: L10n.text("tracking.denied"))
             }
         case .notDetermined:
-            showStatus("Решение об оценке продвижения ещё не принято")
+            showStatus(L10n.text("tracking.notDetermined"))
         @unknown default:
-            showStatus("ATT: неизвестный статус")
+            showStatus(L10n.text("tracking.unknown"))
         }
     }
 
@@ -769,20 +780,20 @@ final class MainViewController: UIViewController {
                     self?.reportPermission("camera", result: granted ? "authorized" : "denied")
                     granted
                         ? self?.presentCamera()
-                        : self?.showSettingsAlert(message: "Разрешите камеру, чтобы снять фото матча.")
+                        : self?.showSettingsAlert(message: L10n.text("camera.denied"))
                 }
             }
         case .denied, .restricted:
             reportPermission("camera", result: "denied")
-            showSettingsAlert(message: "Разрешите камеру, чтобы снять фото матча.")
+            showSettingsAlert(message: L10n.text("camera.denied"))
         @unknown default:
-            showStatus("Камера: неизвестный статус")
+            showStatus(L10n.text("camera.unknown"))
         }
     }
 
     private func presentCamera() {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            showPermissionUnavailable("Камера недоступна в симуляторе. Проверьте функцию на iPhone.")
+            showPermissionUnavailable(L10n.text("camera.simulatorUnavailable"))
             return
         }
         let picker = UIImagePickerController()
@@ -806,15 +817,15 @@ final class MainViewController: UIViewController {
                         self?.presentMatchDayPhotoBrowser(limited: newStatus == .limited)
                     } else {
                         self?.reportPermission("photo_read", result: "denied")
-                        self?.showSettingsAlert(message: "Разрешите просмотр Фото, чтобы выбрать снимок за день матча.")
+                        self?.showSettingsAlert(message: L10n.text("photoRead.denied"))
                     }
                 }
             }
         case .denied, .restricted:
             reportPermission("photo_read", result: "denied")
-            showSettingsAlert(message: "Разрешите просмотр Фото, чтобы выбрать снимок за день матча.")
+            showSettingsAlert(message: L10n.text("photoRead.denied"))
         @unknown default:
-            showStatus("Фото: неизвестный статус")
+            showStatus(L10n.text("photoRead.unknown"))
         }
     }
 
@@ -835,7 +846,10 @@ final class MainViewController: UIViewController {
         var assets: [PHAsset] = []
         result.enumerateObjects { asset, _, _ in assets.append(asset) }
         guard !assets.isEmpty else {
-            showInformation(title: "Фото за день матча", message: "Доступных снимков за этот день не найдено.")
+            showInformation(
+                title: L10n.text("photoRead.dayTitle"),
+                message: L10n.text("photoRead.empty")
+            )
             return
         }
 
@@ -845,7 +859,7 @@ final class MainViewController: UIViewController {
         ) { [weak self] image in
             self?.selectedPhoto = image
             self?.mediaPreview.image = image
-            self?.showStatus("Фото добавлено к карточке результата")
+            self?.showStatus(L10n.text("photoRead.addedToCard"))
         }
         present(UINavigationController(rootViewController: controller), animated: true)
     }
@@ -853,7 +867,7 @@ final class MainViewController: UIViewController {
     @objc private func handleVoiceNote() {
         if audioRecorder?.isRecording == true {
             voiceNoteButton?.isEnabled = false
-            voiceNoteStatusLabel.text = "Сохраняем голосовую заметку…"
+            voiceNoteStatusLabel.text = L10n.text("voice.saving")
             audioRecorder?.stop()
             return
         }
@@ -862,7 +876,7 @@ final class MainViewController: UIViewController {
             audioPlayer = nil
             try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
             updateVoiceNoteUI()
-            showStatus("Воспроизведение остановлено")
+            showStatus(L10n.text("voice.playbackStopped"))
             return
         }
         if voiceNoteURL != nil {
@@ -882,15 +896,15 @@ final class MainViewController: UIViewController {
                     if granted {
                         self?.startVoiceRecording(session: session)
                     } else {
-                        self?.showSettingsAlert(message: "Разрешите микрофон, чтобы записать заметку.")
+                        self?.showSettingsAlert(message: L10n.text("voice.denied"))
                     }
                 }
             }
         case .denied:
             reportPermission("microphone", result: "denied")
-            showSettingsAlert(message: "Разрешите микрофон, чтобы записать заметку.")
+            showSettingsAlert(message: L10n.text("voice.denied"))
         @unknown default:
-            showStatus("Микрофон: неизвестный статус")
+            showStatus(L10n.text("voice.unknown"))
         }
     }
 
@@ -918,30 +932,30 @@ final class MainViewController: UIViewController {
             audioRecorder = recorder
             recorder.record(forDuration: 30)
             updateVoiceNoteUI()
-            showStatus("Идёт запись • нажмите ещё раз для остановки • максимум 30 секунд")
+            showStatus(L10n.text("voice.recordingStatus"))
             reportPermission("microphone", result: "authorized")
         } catch {
-            showStatus("Не удалось начать запись")
+            showStatus(L10n.text("voice.recordFailed"))
         }
     }
 
     private func presentVoiceNoteActions() {
         let alert = UIAlertController(
-            title: "Голосовая заметка записана",
-            message: "Она хранится только на этом iPhone. Можно прослушать, записать заново или удалить.",
+            title: L10n.text("voice.recordedTitle"),
+            message: L10n.text("voice.recordedMessage"),
             preferredStyle: .actionSheet
         )
-        alert.addAction(UIAlertAction(title: "Прослушать", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.text("voice.play"), style: .default) { [weak self] _ in
             self?.playVoiceNote()
         })
-        alert.addAction(UIAlertAction(title: "Перезаписать", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.text("voice.replace"), style: .default) { [weak self] _ in
             self?.deleteVoiceNote()
             self?.handleVoiceNote()
         })
-        alert.addAction(UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.text("voice.delete"), style: .destructive) { [weak self] _ in
             self?.deleteVoiceNote()
         })
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.text("common.cancel"), style: .cancel))
         present(alert, animated: true)
     }
 
@@ -955,9 +969,9 @@ final class MainViewController: UIViewController {
             audioPlayer?.delegate = self
             audioPlayer?.play()
             updateVoiceNoteUI()
-            showStatus("Воспроизводим голосовую заметку")
+            showStatus(L10n.text("voice.playing"))
         } catch {
-            showStatus("Не удалось воспроизвести заметку")
+            showStatus(L10n.text("voice.playFailed"))
         }
     }
 
@@ -970,7 +984,7 @@ final class MainViewController: UIViewController {
         }
         self.voiceNoteURL = nil
         updateVoiceNoteUI()
-        showStatus("Голосовая заметка удалена")
+        showStatus(L10n.text("voice.deleted"))
     }
 
     private func voiceNoteFileURL() -> URL {
@@ -994,24 +1008,24 @@ final class MainViewController: UIViewController {
         let color: UIColor
 
         if audioRecorder?.isRecording == true {
-            title = "Остановить запись"
+            title = L10n.text("voice.stopRecording")
             symbol = "stop.circle.fill"
-            status = "Идёт запись • нажмите кнопку, чтобы остановить • максимум 30 секунд"
+            status = L10n.text("voice.recordingButtonStatus")
             color = Palette.danger
         } else if audioPlayer?.isPlaying == true {
-            title = "Остановить воспроизведение"
+            title = L10n.text("voice.stopPlayback")
             symbol = "stop.fill"
-            status = "Воспроизводим сохранённую заметку"
+            status = L10n.text("voice.playingSaved")
             color = Palette.darkGreen
         } else if voiceNoteURL != nil {
-            title = "Управление голосовой заметкой"
+            title = L10n.text("voice.manage")
             symbol = "waveform"
-            status = "Заметка сохранена • нажмите, чтобы прослушать, перезаписать или удалить"
+            status = L10n.text("voice.savedStatus")
             color = Palette.darkGreen
         } else {
-            title = "Записать голосовую заметку"
+            title = L10n.text("voice.record")
             symbol = "mic.fill"
-            status = "Записи пока нет • максимальная длительность 30 секунд"
+            status = L10n.text("voice.emptyStatus")
             color = Palette.darkGreen
         }
 
@@ -1040,15 +1054,15 @@ final class MainViewController: UIViewController {
                         self?.saveGeneratedScoreCard()
                     } else {
                         self?.reportPermission("photo_add", result: "denied")
-                        self?.showSettingsAlert(message: "Разрешите сохранение, чтобы добавить карточку счета в Фото.")
+                        self?.showSettingsAlert(message: L10n.text("photoAdd.denied"))
                     }
                 }
             }
         case .denied, .restricted:
             reportPermission("photo_add", result: "denied")
-            showSettingsAlert(message: "Разрешите сохранение, чтобы добавить карточку счета в Фото.")
+            showSettingsAlert(message: L10n.text("photoAdd.denied"))
         @unknown default:
-            showStatus("Сохранение в Фото: неизвестный статус")
+            showStatus(L10n.text("photoAdd.unknown"))
         }
     }
 
@@ -1080,7 +1094,11 @@ final class MainViewController: UIViewController {
                     .paragraphStyle: centered
                 ]
             )
-            "Геймы   \(snapshot.gamesScoreText)    •    Сеты   \(snapshot.setsScoreText)".draw(
+            L10n.format(
+                "score.cardDetailsFormat",
+                snapshot.gamesScoreText,
+                snapshot.setsScoreText
+            ).draw(
                 in: CGRect(x: 80, y: 915, width: 1040, height: 80),
                 withAttributes: [
                     .font: UIFont.monospacedDigitSystemFont(ofSize: 40, weight: .semibold),
@@ -1088,7 +1106,7 @@ final class MainViewController: UIViewController {
                     .paragraphStyle: centered
                 ]
             )
-            "Мы   •   Соперники".draw(
+            L10n.text("score.cardTeams").draw(
                 in: CGRect(x: 80, y: 1035, width: 1040, height: 80),
                 withAttributes: [
                     .font: UIFont.systemFont(ofSize: 42, weight: .semibold),
@@ -1102,17 +1120,21 @@ final class MainViewController: UIViewController {
             PHAssetChangeRequest.creationRequestForAsset(from: image)
         } completionHandler: { [weak self] saved, _ in
             DispatchQueue.main.async {
-                self?.showStatus(saved ? "Карточка счета сохранена в Фото" : "Не удалось сохранить карточку")
+                self?.showStatus(
+                    saved
+                        ? L10n.text("scoreCard.savedStatus")
+                        : L10n.text("scoreCard.failedStatus")
+                )
                 if saved {
                     self?.reportPermission("photo_add", result: "authorized")
                     self?.showInformation(
-                        title: "Сохранено в Фото",
-                        message: "Карточка счёта добавлена в медиатеку."
+                        title: L10n.text("scoreCard.savedTitle"),
+                        message: L10n.text("scoreCard.savedMessage")
                     )
                 } else {
                     self?.showInformation(
-                        title: "Не удалось сохранить",
-                        message: "Карточка счёта не была добавлена в Фото."
+                        title: L10n.text("scoreCard.failedTitle"),
+                        message: L10n.text("scoreCard.failedMessage")
                     )
                 }
             }
@@ -1131,9 +1153,9 @@ final class MainViewController: UIViewController {
                     self.finishPushSetup()
                 case .denied:
                     self.reportPermission("push", result: "denied")
-                    self.showSettingsAlert(message: "Разрешите уведомления, чтобы получать события матча.")
+                    self.showSettingsAlert(message: L10n.text("push.denied"))
                 @unknown default:
-                    self.showStatus("Уведомления: неизвестный статус")
+                    self.showStatus(L10n.text("push.unknown"))
                 }
             }
         }
@@ -1141,12 +1163,12 @@ final class MainViewController: UIViewController {
 
     private func presentPushPreprompt() {
         let alert = UIAlertController(
-            title: "Уведомления о матче",
-            message: "Уведомления сообщат о приглашении, начале и результате матча.",
+            title: L10n.text("push.prePermissionTitle"),
+            message: L10n.text("push.prePermissionMessage"),
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Не сейчас", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Продолжить", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: L10n.text("push.notNow"), style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.text("push.continue"), style: .default) { [weak self] _ in
             UNUserNotificationCenter.current().requestAuthorization(
                 options: [.alert, .badge, .sound]
             ) { granted, _ in
@@ -1155,7 +1177,7 @@ final class MainViewController: UIViewController {
                     if granted {
                         self?.finishPushSetup()
                     } else {
-                        self?.showStatus("Уведомления не включены")
+                        self?.showStatus(L10n.text("push.notEnabled"))
                     }
                 }
             }
@@ -1167,8 +1189,8 @@ final class MainViewController: UIViewController {
         UIApplication.shared.registerForRemoteNotifications()
         scheduleNotificationIfAuthorized(
             body: snapshot.state == .finished
-                ? "Матч завершен. \(snapshot.scoreSummary)"
-                : "Матч продолжается. \(snapshot.scoreSummary)"
+                ? L10n.format("push.finishedBodyFormat", snapshot.scoreSummary)
+                : L10n.format("push.inProgressBodyFormat", snapshot.scoreSummary)
         )
         reportPermission("push", result: "authorized")
         syncSnapshot()
@@ -1198,8 +1220,8 @@ final class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.showStatus(
                         error == nil
-                            ? "Проверочное уведомление появится через 5 секунд"
-                            : "Не удалось создать уведомление"
+                            ? L10n.text("push.scheduled")
+                            : L10n.text("push.scheduleFailed")
                     )
                 }
             }
@@ -1220,19 +1242,23 @@ final class MainViewController: UIViewController {
 
     private func showInformation(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "ОК", style: .default))
+        alert.addAction(UIAlertAction(title: L10n.text("common.ok"), style: .default))
         let presenter = navigationController?.visibleViewController ?? self
         presenter.present(alert, animated: true)
     }
 
     private func showPermissionUnavailable(_ message: String) {
-        showInformation(title: "Функция недоступна", message: message)
+        showInformation(title: L10n.text("common.unavailableTitle"), message: message)
     }
 
     private func showSettingsAlert(message: String) {
-        let alert = UIAlertController(title: "Нужен доступ", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Настройки", style: .default) { _ in
+        let alert = UIAlertController(
+            title: L10n.text("common.accessRequiredTitle"),
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: L10n.text("common.cancel"), style: .cancel))
+        alert.addAction(UIAlertAction(title: L10n.text("common.settings"), style: .default) { _ in
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(url)
         })
@@ -1247,7 +1273,7 @@ extension MainViewController: CLLocationManagerDelegate {
             beginCourtSearch()
         case .denied, .restricted:
             reportPermission("location", result: "denied")
-            showStatus("Геолокация не разрешена • карта доступна без текущей позиции")
+            showStatus(L10n.text("location.notAuthorized"))
         default:
             break
         }
@@ -1261,7 +1287,7 @@ extension MainViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         manager.stopUpdatingLocation()
-        showStatus("Не удалось определить позицию • карта доступна вручную")
+        showStatus(L10n.text("location.failed"))
     }
 }
 
@@ -1273,7 +1299,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         selectedPhoto = info[.originalImage] as? UIImage
         mediaPreview.image = selectedPhoto
         picker.dismiss(animated: true)
-        showStatus("Фото матча добавлено к карточке результата")
+        showStatus(L10n.text("photo.addedToCard"))
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -1288,11 +1314,11 @@ extension MainViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         if flag {
             voiceNoteURL = recorder.url
-            showStatus("Голосовая заметка сохранена на этом iPhone")
+            showStatus(L10n.text("voice.savedOnDevice"))
         } else {
             try? FileManager.default.removeItem(at: recorder.url)
             voiceNoteURL = nil
-            showStatus("Запись голосовой заметки прервана")
+            showStatus(L10n.text("voice.interrupted"))
         }
         updateVoiceNoteUI()
     }
@@ -1301,7 +1327,11 @@ extension MainViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         audioPlayer = nil
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         updateVoiceNoteUI()
-        showStatus(flag ? "Воспроизведение завершено" : "Воспроизведение прервано")
+        showStatus(
+            flag
+                ? L10n.text("voice.playbackFinished")
+                : L10n.text("voice.playbackInterrupted")
+        )
     }
 }
 
@@ -1328,7 +1358,7 @@ private final class MatchPhotoGridViewController: UICollectionViewController, UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Фото за день матча"
+        title = L10n.text("photoRead.dayTitle")
         collectionView.backgroundColor = .systemBackground
         collectionView.register(MatchPhotoCell.self, forCellWithReuseIdentifier: "photo")
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -1337,7 +1367,7 @@ private final class MatchPhotoGridViewController: UICollectionViewController, UI
             action: #selector(close)
         )
         if limited {
-            title = "Доступные фото за день"
+            title = L10n.text("photoRead.availableTitle")
         }
     }
 
@@ -1422,7 +1452,7 @@ private final class MatchPhotoCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         isAccessibilityElement = true
-        accessibilityLabel = "Фотография за день матча"
+        accessibilityLabel = L10n.text("photoRead.cellAccessibility")
     }
 
     @available(*, unavailable)
@@ -1463,7 +1493,7 @@ private final class ResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Результат матча"
+        title = L10n.text("result.title")
         view.backgroundColor = Palette.background
 
         let card = UIView()
@@ -1479,11 +1509,15 @@ private final class ResultViewController: UIViewController {
         )
         scoreLabel.adjustsFontForContentSizeCategory = true
         scoreLabel.textColor = Palette.darkGreen
-        scoreLabel.accessibilityLabel = "Итоговый счет"
+        scoreLabel.accessibilityLabel = L10n.text("result.scoreAccessibility")
         scoreLabel.accessibilityValue = snapshot.scoreSummary
 
         let scoreDetailsLabel = UILabel()
-        scoreDetailsLabel.text = "Геймы   \(snapshot.gamesScoreText)\nСеты   \(snapshot.setsScoreText)"
+        scoreDetailsLabel.text = L10n.format(
+            "score.detailsFormat",
+            snapshot.gamesScoreText,
+            snapshot.setsScoreText
+        )
         scoreDetailsLabel.textAlignment = .center
         scoreDetailsLabel.numberOfLines = 2
         scoreDetailsLabel.font = .preferredFont(forTextStyle: .headline)
@@ -1497,16 +1531,20 @@ private final class ResultViewController: UIViewController {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 14
         imageView.heightAnchor.constraint(equalToConstant: 210).isActive = true
-        imageView.accessibilityLabel = photo == nil ? "Фото матча не выбрано" : "Фото матча"
+        imageView.accessibilityLabel = photo == nil
+            ? L10n.text("result.photoMissing")
+            : L10n.text("result.photoAccessibility")
 
         let voiceLabel = UILabel()
-        voiceLabel.text = hasVoiceNote ? "Голосовая заметка сохранена" : "Голосовой заметки нет"
+        voiceLabel.text = hasVoiceNote
+            ? L10n.text("result.voiceSaved")
+            : L10n.text("result.noVoice")
         voiceLabel.font = .preferredFont(forTextStyle: .body)
         voiceLabel.adjustsFontForContentSizeCategory = true
         voiceLabel.textColor = Palette.mutedText
 
         var buttonConfiguration = UIButton.Configuration.filled()
-        buttonConfiguration.title = "Сохранить карточку"
+        buttonConfiguration.title = L10n.text("result.saveCard")
         buttonConfiguration.image = UIImage(systemName: "square.and.arrow.down")
         buttonConfiguration.imagePadding = 8
         buttonConfiguration.baseBackgroundColor = Palette.lime
@@ -1522,7 +1560,9 @@ private final class ResultViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
 
         let syncLabel = UILabel()
-        syncLabel.text = snapshot.state == .finished ? "Матч завершен" : "Матч продолжается"
+        syncLabel.text = snapshot.state == .finished
+            ? L10n.text("match.finishedPlain")
+            : L10n.text("match.inProgress")
         syncLabel.font = .preferredFont(forTextStyle: .footnote)
         syncLabel.adjustsFontForContentSizeCategory = true
         syncLabel.textColor = Palette.mutedText

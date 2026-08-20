@@ -48,12 +48,12 @@ final class BluetoothConnector: NSObject {
         localCharacteristic = nil
         centralManager = nil
         peripheralManager = nil
-        statusChanged("Bluetooth-табло отключено", false)
+        statusChanged(L10n.text("bluetooth.off"), false)
     }
 
     private func start() {
         active = true
-        statusChanged("Bluetooth: ищем iPhone с YPoints…", true)
+        statusChanged(L10n.text("bluetooth.searchingPhone"), true)
         centralManager = CBCentralManager(delegate: self, queue: .main)
         peripheralManager = CBPeripheralManager(delegate: self, queue: .main)
     }
@@ -66,7 +66,7 @@ final class BluetoothConnector: NSObject {
         guard let snapshot = try? JSONDecoder().decode(MatchSnapshot.self, from: data) else { return }
         latestSnapshot = snapshot
         snapshotReceived(snapshot)
-        statusChanged("Bluetooth: счет получен", true)
+        statusChanged(L10n.text("bluetooth.scoreReceived"), true)
     }
 
     private func sendToConnectedPeer() {
@@ -96,15 +96,15 @@ extension BluetoothConnector: CBCentralManagerDelegate {
         switch central.state {
         case .poweredOn:
             central.scanForPeripherals(withServices: [serviceUUID])
-            statusChanged("Bluetooth: поиск совместимого табло…", true)
+            statusChanged(L10n.text("bluetooth.searchingScoreboard"), true)
         case .unauthorized:
-            statusChanged("Bluetooth: доступ запрещён", false)
+            statusChanged(L10n.text("bluetooth.denied"), false)
         case .poweredOff:
-            statusChanged("Bluetooth выключен", false)
+            statusChanged(L10n.text("bluetooth.poweredOff"), false)
         case .unsupported:
-            statusChanged("Bluetooth не поддерживается", false)
+            statusChanged(L10n.text("bluetooth.unsupported"), false)
         default:
-            statusChanged("Bluetooth пока недоступен", false)
+            statusChanged(L10n.text("bluetooth.unavailable"), false)
         }
     }
 
@@ -118,12 +118,18 @@ extension BluetoothConnector: CBCentralManagerDelegate {
         connectedPeripheral = peripheral
         peripheral.delegate = self
         central.stopScan()
-        statusChanged("Bluetooth: подключаем \(peripheral.name ?? "YPoints")…", true)
+        statusChanged(
+            L10n.format("bluetooth.connectingFormat", peripheral.name ?? "YPoints"),
+            true
+        )
         central.connect(peripheral)
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        statusChanged("Bluetooth: \(peripheral.name ?? "YPoints") подключён", true)
+        statusChanged(
+            L10n.format("bluetooth.connectedFormat", peripheral.name ?? "YPoints"),
+            true
+        )
         peripheral.discoverServices([serviceUUID])
     }
 
@@ -133,7 +139,7 @@ extension BluetoothConnector: CBCentralManagerDelegate {
         error: Error?
     ) {
         connectedPeripheral = nil
-        statusChanged("Bluetooth: подключение не удалось", true)
+        statusChanged(L10n.text("bluetooth.connectionFailed"), true)
         central.scanForPeripherals(withServices: [serviceUUID])
     }
 
@@ -145,7 +151,7 @@ extension BluetoothConnector: CBCentralManagerDelegate {
         connectedPeripheral = nil
         remoteCharacteristic = nil
         guard active else { return }
-        statusChanged("Bluetooth: устройство отключено, продолжаем поиск", true)
+        statusChanged(L10n.text("bluetooth.disconnectedSearching"), true)
         central.scanForPeripherals(withServices: [serviceUUID])
     }
 }
@@ -153,7 +159,7 @@ extension BluetoothConnector: CBCentralManagerDelegate {
 extension BluetoothConnector: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
-            statusChanged("Bluetooth: сервис табло недоступен", true)
+            statusChanged(L10n.text("bluetooth.serviceUnavailable"), true)
             return
         }
         peripheral.services?
@@ -170,7 +176,7 @@ extension BluetoothConnector: CBPeripheralDelegate {
             error == nil,
             let characteristic = service.characteristics?.first(where: { $0.uuid == scoreUUID })
         else {
-            statusChanged("Bluetooth: характеристика счета недоступна", true)
+            statusChanged(L10n.text("bluetooth.characteristicUnavailable"), true)
             return
         }
         remoteCharacteristic = characteristic
@@ -192,7 +198,12 @@ extension BluetoothConnector: CBPeripheralDelegate {
         didWriteValueFor characteristic: CBCharacteristic,
         error: Error?
     ) {
-        statusChanged(error == nil ? "Bluetooth: счет синхронизирован" : "Bluetooth: счет не отправлен", true)
+        statusChanged(
+            error == nil
+                ? L10n.text("bluetooth.scoreSynced")
+                : L10n.text("bluetooth.scoreNotSent"),
+            true
+        )
     }
 }
 
@@ -212,9 +223,9 @@ extension BluetoothConnector: CBPeripheralManagerDelegate {
             localCharacteristic = characteristic
             peripheral.add(service)
         case .unauthorized:
-            statusChanged("Bluetooth: доступ запрещён", false)
+            statusChanged(L10n.text("bluetooth.denied"), false)
         case .poweredOff:
-            statusChanged("Bluetooth выключен", false)
+            statusChanged(L10n.text("bluetooth.poweredOff"), false)
         default:
             break
         }
@@ -264,7 +275,7 @@ extension BluetoothConnector: CBPeripheralManagerDelegate {
         central: CBCentral,
         didSubscribeTo characteristic: CBCharacteristic
     ) {
-        statusChanged("Bluetooth: iPhone с YPoints подключён", true)
+        statusChanged(L10n.text("bluetooth.phoneConnected"), true)
         notifySubscribers()
     }
 }

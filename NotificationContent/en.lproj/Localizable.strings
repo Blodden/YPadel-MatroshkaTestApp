@@ -1,0 +1,5 @@
+"score.accessibility" = "Match score";
+"notification.updatedPlain" = "Match status updated";
+"notification.detailsFormat" = "%@\nGames %@ • Sets %@";
+"notification.open" = "Open";
+"notification.hide" = "Hide";

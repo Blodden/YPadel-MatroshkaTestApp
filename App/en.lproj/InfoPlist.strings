@@ -1,0 +1,9 @@
+"NSBluetoothAlwaysUsageDescription" = "Bluetooth is needed to connect a nearby iPhone running YPoints and synchronize the match score.";
+"NSCameraUsageDescription" = "Camera access is needed to take a match photo and add it to the result card.";
+"NSContactsUsageDescription" = "Contacts access is needed to quickly add players to the match lineup.";
+"NSFaceIDUsageDescription" = "Face ID is needed to open your private match statistics and notes.";
+"NSLocationWhenInUseUsageDescription" = "Location access is needed to show nearby padel courts on the map.";
+"NSMicrophoneUsageDescription" = "Microphone access is needed to record a voice note for the match result.";
+"NSPhotoLibraryUsageDescription" = "Photo access is needed to show pictures taken on the match day and select one for the result card.";
+"NSPhotoLibraryAddUsageDescription" = "Access is needed to save match score cards to Photos.";
+"NSUserTrackingUsageDescription" = "YPoints uses your device identifier to identify the installation source and measure promotion effectiveness.";

@@ -128,7 +128,7 @@ private final class StartupViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isAccessibilityElement = true
-        imageView.accessibilityLabel = "YPoints запускается"
+        imageView.accessibilityLabel = L10n.text("startup.accessibility")
         view.addSubview(imageView)
 
         NSLayoutConstraint.activate([

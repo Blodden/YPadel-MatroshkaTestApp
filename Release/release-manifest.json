@@ -10,6 +10,74 @@
     "orientation": "portrait only",
     "minimumOS": "15.0"
   },
+  "localization": {
+    "supported": [
+      "en",
+      "ru"
+    ],
+    "developmentLanguage": "en",
+    "fallbackLanguage": "en",
+    "selection": "iOS system language; no in-app language selector",
+    "targets": [
+      "YPoints",
+      "YPointsWidget",
+      "YPointsNotificationService",
+      "YPointsNotificationContent"
+    ],
+    "approvedMatrix": "Design/localization-en.md",
+    "approvedEnglishMockup": "Design/localization-en-candidate.png",
+    "runtimeScreenshots": {
+      "ru": "Design/running-ru-localized.png",
+      "en": "Design/running-en-localized.png"
+    },
+    "appStorePrimaryLanguage": "en-US",
+    "appStoreProductPageLocalizations": [
+      "en-US",
+      "ru-RU"
+    ],
+    "purposeStrings": {
+      "NSBluetoothAlwaysUsageDescription": {
+        "ru": "Bluetooth нужен, чтобы подключить находящийся рядом iPhone с YPoints и синхронизировать счёт матча.",
+        "en": "Bluetooth is needed to connect a nearby iPhone running YPoints and synchronize the match score."
+      },
+      "NSCameraUsageDescription": {
+        "ru": "Камера нужна, чтобы сделать фотографию матча и добавить её к карточке результата.",
+        "en": "Camera access is needed to take a match photo and add it to the result card."
+      },
+      "NSContactsUsageDescription": {
+        "ru": "Контакты нужны, чтобы быстро добавить игроков в состав матча.",
+        "en": "Contacts access is needed to quickly add players to the match lineup."
+      },
+      "NSFaceIDUsageDescription": {
+        "ru": "Face ID нужен, чтобы открыть личную статистику и заметки о матчах.",
+        "en": "Face ID is needed to open your private match statistics and notes."
+      },
+      "NSLocationWhenInUseUsageDescription": {
+        "ru": "Геолокация нужна, чтобы показать ближайшие падел-корты на карте.",
+        "en": "Location access is needed to show nearby padel courts on the map."
+      },
+      "NSMicrophoneUsageDescription": {
+        "ru": "Микрофон нужен, чтобы записать голосовую заметку к результату матча.",
+        "en": "Microphone access is needed to record a voice note for the match result."
+      },
+      "NSPhotoLibraryUsageDescription": {
+        "ru": "Доступ к Фото нужен, чтобы показать снимки за день матча и выбрать изображение для карточки результата.",
+        "en": "Photo access is needed to show pictures taken on the match day and select one for the result card."
+      },
+      "NSPhotoLibraryAddUsageDescription": {
+        "ru": "Доступ нужен, чтобы сохранять карточки счёта матчей в Фото.",
+        "en": "Access is needed to save match score cards to Photos."
+      },
+      "NSUserTrackingUsageDescription": {
+        "ru": "Идентификатор устройства используется, чтобы определить источник установки и оценить эффективность продвижения YPoints.",
+        "en": "YPoints uses your device identifier to identify the installation source and measure promotion effectiveness."
+      },
+      "pushPrePermission": {
+        "ru": "Уведомления сообщат о приглашении, начале и результате матча.",
+        "en": "Notifications will let you know about match invitations, starts, and results."
+      }
+    }
+  },
   "scoring": {
     "mode": "FIP Advantage",
     "points": "0, 15, 30, 40, deuce and advantage",
@@ -225,6 +293,11 @@
     "debugBuild": "passed",
     "releaseBuildWithoutSigning": "passed",
     "simulatorLaunch": "passed",
+    "russianSimulatorLaunch": "passed",
+    "englishSimulatorLaunch": "passed",
+    "unsupportedLocaleFallback": "passed; French process locale resolved to English UI",
+    "localizedResourcesInAllTargets": "passed for ru and en",
+    "localizedPurposeStrings": "passed for ru and en in processed build product",
     "backendHealth": "passed",
     "backendSync": "passed",
     "cloudSyncEnabled": "passed for remote false and true states",
@@ -236,6 +309,15 @@
   "artifacts": {
     "approvedDesign": "Design/approved-att-attribution.png",
     "finalSimulatorScreenshot": "Design/running-dark-contrast.png",
+    "russianLocalizationScreenshot": "Design/running-ru-localized.png",
+    "englishLocalizationScreenshot": "Design/running-en-localized.png",
+    "englishAppStoreScreenshot": "Release/AppStore/screenshots/en-US/01-main-score.jpg",
+    "russianAppStoreScreenshot": "Release/AppStore/screenshots/ru-RU/01-main-score.jpg",
+    "englishAppStoreMetadata": "Release/AppStore/metadata/en-US.md",
+    "russianAppStoreMetadata": "Release/AppStore/metadata/ru-RU.md",
+    "bilingualPrivacyPolicyDraft": "Release/AppStore/legal/privacy-policy.md",
+    "bilingualSupportDraft": "Release/AppStore/legal/support.md",
+    "localizationMatrix": "Design/localization-en.md",
     "designSpecification": "Design/design.md",
     "appIcon": "App/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
   },
